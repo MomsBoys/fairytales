@@ -20,6 +20,22 @@
 
 @import url("fontawesome/fontawesome.css");
 
+
+/**
+ * Including Awesome Fonts
+ */
+
+@font-face {
+	font-family: CyrillicChancellor;
+	src: url("fonts/CyrillicChancellor.ttf");
+}
+
+@font-face {
+	font-family: Isabella-Decor;
+	src: url("fonts/Isabella-Decor.ttf");
+}
+
+
 /**
  *  1.0 - Reset
  *  Resetting and rebuilding styles
@@ -27,7 +43,7 @@
  * -----------------------------------------------------
  */
 * {
-	font-family: Georgia, sans-serif;
+	font-family: CyrillicChancellor, sans-serif;
 	font-size: 100%;
 	font-style: inherit;
 	font-weight: inherit;
@@ -305,7 +321,7 @@ iframe.wt-video {
 
 
 body {
-	font-family: Georgia, sans-serif;
+	font-family: CyrillicChancellor, sans-serif;
 	font-size: 16px;
 	line-height: 20px;
 	background: #fff;
@@ -430,12 +446,12 @@ a.responsive-menu-toggle {
 }
 
 #menu ul li a {
-	font-size: 18px;
+	font-size: 24px;
 	font-weight: 300;
 	line-height: 16px;
 	display: block;
 	padding: 18px 20px;
-	color: #333;
+	color: #484848;
 	text-align: center;
 	text-decoration: none;
 	-webkit-transition: border-bottom .05s ease;
@@ -462,6 +478,7 @@ a.responsive-menu-toggle {
 
 /* login button */
 #login {
+	font-size: 20px;
 	float: right;
 	margin-right: 20px;
 	padding: 5px 40px;
@@ -539,7 +556,7 @@ a.responsive-menu-toggle {
 
 #slider .slider-info h2 {
   font-family: fantasy;
-  font-size: 32px;
+  font-size: 36px;
   text-align: center;
   overflow: hidden;
 }
@@ -794,6 +811,7 @@ a.responsive-menu-toggle {
 	width: 50%;
 	float: left;
 	text-align: center;
+	font-size: 20px;
 }
 
 .cd-user-modal-container .cd-switcher li:first-child a {
@@ -841,6 +859,7 @@ a.responsive-menu-toggle {
 }
 
 .cd-form .fieldset.no-right-margin {
+	font-size: 20px;
 	margin-right: 0 !important;
 }
 
@@ -949,6 +968,7 @@ a.responsive-menu-toggle {
 	position: absolute;
 	right: 0;
 	top: 0;
+	text-decoration: none;
 	padding: 6px 15px;
 	margin-right: -50px;
 	border-left: 1px solid #d2d8d8;
@@ -965,6 +985,7 @@ a.responsive-menu-toggle {
 }
 
 .cd-form .signin-social {
+	font-size: 20px;
 	padding: 17px 24px 17px 50px;
 	text-decoration: none;
 	color: #fff;
@@ -978,7 +999,7 @@ a.responsive-menu-toggle {
 }
 
 .cd-form #signin-vk {
-	background: #527798 url(../images/vk-icon.png) no-repeat 2% 50%;
+	background: #436189 url(../images/vk-icon.png) no-repeat 2% 50%;
 	margin-top: -20px;
 }
 
@@ -1043,7 +1064,8 @@ a.responsive-menu-toggle {
 	}
 
 	.cd-form input.has-padding {
-		padding: 16px 20px 16px 50px;
+		padding: 16px 20px 12px 50px;
+		font-size: 18px;
 	}
 
 	.cd-form input[type=submit] {
@@ -1153,7 +1175,7 @@ a.responsive-menu-toggle {
 
 	a.responsive-menu-toggle {
 		font-size: 18px;
-		line-height: 33px;
+		line-height: 38px;
 		position: absolute;
 		top: 40px;
 		right: 60px;
@@ -1208,7 +1230,7 @@ a.responsive-menu-toggle {
 	}
 
 	#menu ul li a {
-		font-size: 18px;
+		font-size: 22px;
 		font-weight: normal !important;
 		padding: 15px 20px;
 		color: #fff;
@@ -1218,6 +1240,24 @@ a.responsive-menu-toggle {
 
 	#back-top {
 		margin-left: 660px;
+	}
+
+	#slider .slider-info {
+		height: 500px;
+	}
+
+	#slider .slider-info .is-slide .image {
+		width: 500px;
+	}
+}
+
+@media only screen and (min-width: 400px) and (max-width: 710px) {
+	#slider .slider-info {
+		height: 400px;
+	}
+
+	#slider .slider-info .is-slide .image {
+		width: 350px;
 	}
 }
 
@@ -1241,6 +1281,14 @@ a.responsive-menu-toggle {
 
 	a.responsive-menu-toggle {
 		right: 35px;
+	}
+
+	#slider .slider-info {
+		height: 400px;
+	}
+
+	#slider .slider-info .is-slide .image {
+		width: 300px;
 	}
 }
 
@@ -1287,5 +1335,13 @@ a.responsive-menu-toggle {
 	#login {
 		margin-top: 10px;
 		margin-right: 0;
+	}
+
+	#slider .slider-info {
+		height: 300px;
+	}
+
+	#slider .slider-info .is-slide .image {
+		width: 230px;
 	}
 }
