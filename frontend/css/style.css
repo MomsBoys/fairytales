@@ -1009,11 +1009,10 @@ a.responsive-menu-toggle {
 	left: -5px;
 	bottom: -35px;
 	background: rgba(215, 102, 102, 0.9);
-	padding: .8em;
 	z-index: 2;
 	color: #FFF;
-	font-size: 13px;
-	font-size: 0.8125rem;
+	font-size: 14px;
+    padding: 8px;
 	border-radius: 0.25em;
 	/* prevent click and touch events */
 	pointer-events: none;
