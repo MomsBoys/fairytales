@@ -1131,6 +1131,147 @@ a.responsive-menu-toggle {
 
 
 /**
+ *  Pagination
+ *
+ */
+
+#pagination {
+	width: 90%;
+	max-width: 768px;
+	margin: 2em auto 4em;
+	text-align: center;
+}
+
+#pagination ul {
+	list-style: none;
+	margin: 0;
+}
+
+#pagination li {
+	display: none;
+	margin: 0 .2em;
+}
+
+#pagination li.control-button {
+	display: inline-block;
+}
+
+#pagination a, #pagination span {
+	display: inline-block;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	padding: 10px 15px;
+	color: #2E4057;
+}
+
+#pagination .control-button {
+	background-color: #fff;
+}
+
+#pagination a {
+	font-family: "PT Sans", sans-serif;
+	text-decoration: none;
+	color: #2E4057;
+	border: 1px solid #e6e6e6;
+	border-radius: 0.25em;
+}
+
+#pagination .no-touch a:hover {
+	background-color: #f2f2f2;
+}
+
+#pagination a:active {
+	-webkit-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	-o-transform: scale(0.9);
+	transform: scale(0.9);
+}
+
+#pagination a.disabled {
+	color: rgba(46, 64, 87, 0.4);
+	pointer-events: none;
+}
+
+#pagination a.disabled::before,
+#pagination a.disabled::after {
+	opacity: .4;
+}
+
+#pagination .control-button:first-of-type a::before {
+	content: '\00ab  ';
+}
+
+#pagination .control-button:last-of-type a::after {
+	content: ' \00bb';
+}
+
+#pagination .current {
+	background-color: #5DA1B1;
+	border-color: #5DA1B1;
+	color: #fff;
+	pointer-events: none;
+}
+
+@media only screen and (min-width: 768px) {
+	#pagination li {
+		display: inline-block;
+	}
+}
+
+#pagination ul::after {
+	clear: both;
+	content: "";
+	display: table;
+}
+
+#pagination .control-button:first-of-type {
+	float: left;
+}
+
+#pagination .control-button:last-of-type {
+	float: right;
+}
+
+#pagination .control-button a {
+	position: relative;
+}
+
+#pagination .control-button:first-of-type a {
+	padding-left: 2.4em;
+}
+
+#pagination .control-button:last-of-type a {
+	padding-right: 2.4em;
+}
+
+#pagination .control-button:first-of-type a::before,
+#pagination .control-button:last-of-type a::after {
+	content: '';
+	position: absolute;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	top: 50%;
+	margin-top: -8px;
+	background: transparent url("../images/icon-arrow-pagination.svg") no-repeat center center;
+}
+
+#pagination .control-button:first-of-type a::before {
+	left: .8em;
+}
+
+#pagination .control-button:last-of-type a::after {
+	right: .8em;
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+/**
  *  2.0 - Media Queries
  *
  */
