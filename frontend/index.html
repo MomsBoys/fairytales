@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="js/homeslider.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 	<script type="text/javascript" src="js/navigation.js"></script>
+  	<link rel="stylesheet" type="text/css" media="all" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 </head>
 <body>
 	<div id="Wrapper">
@@ -36,12 +37,13 @@
 						<li><a href="library.html">Бібліотека</a></li>
 						<li><a href="popular.html">Популярні</a></li>
 						<li><a href="contact.html">Контакти</a></li>
-						<li class="menu-item-search"><a href="#search" class="">Пошук</a></li>
+						<li><a href="#" id="searchtoggl"><i class="fa fa-search fa-lg"></i></a></li>
 					</ul>
 				</nav><!-- #menu -->
 
 				<a href="#" class="responsive-menu-toggle"><i class="icon-reorder"></i></a>
 			</div><!-- .container -->
+
 		</div><!-- #Header -->
 
 		<p id="back-top">
@@ -124,6 +126,25 @@
 		<!-- /Login Area -->
 
 		<div id="Content">
+
+			<div class="container">
+				<div id="searchbar" class="clearfix">
+			        <form id="searchform" method="get" action="">
+				        
+				        <button type="submit" id="searchsubmit"><i class="fa fa-search fa-lg"></i></button>
+				        <input type="search" name="s" id="s" placeholder="пошук" autocomplete="off">
+
+			        	<div id="search-select">
+							<select name="select-category">
+								<option value="all-categories">загальний</option>
+								<option value="category1">по авторам</option>
+								<option value="category2">по тагам</option>
+								<option value="category3">по категоріям</option>
+							</select>
+						</div>
+			        </form>
+	    		</div>
+			</div>
 			<div id="slider">
 				<div class="slider-container">
 					<div class="page_container">
