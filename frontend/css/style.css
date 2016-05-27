@@ -529,6 +529,112 @@ a.responsive-menu-toggle {
 #Content {
 	overflow: hidden;
 	margin: 5px 0 15px;
+	background: #F7F7F7;
+}
+
+#Content .content {
+	width: 80%;
+	margin: 20px auto;
+}
+
+#Content h1.content-title {
+	margin-bottom: 12px;
+	margin-top: 32px;
+	padding-bottom: 5px;
+	text-align: center;
+	border-bottom: 2px solid #e6e6e6;
+}
+
+#Content h1.content-title a {
+	font-size: 42px;
+	text-decoration: none;
+}
+
+#Content .post {
+	background: #fff;
+	box-shadow: 0 0 10px rgba(220, 220, 220, 1);
+	margin: 20px 0;
+	text-align: left;
+	clear: both;
+	overflow: hidden;
+	position: relative;
+}
+
+#Content .post .post-image:hover {
+	opacity: .9;
+}
+
+.content img {
+	height: auto;
+	max-width: 100%;
+}
+
+#Content .post .post-image {
+	line-height: 0;
+	position: relative;
+	cursor: pointer;
+	width: 340px;
+	height: 240px;
+	float: left;
+	margin-right: 30px;
+}
+
+#Content .post-right {
+	margin: 20px 10px 20px 0;
+}
+
+.post-right .audio {
+	font-size: 22px;
+	display: inline-block;
+	color: #5DA1B1;
+	background: #e5e5e5;
+	padding: 10px 30px;
+	right: 24px;
+	top: 0;
+	position: absolute;
+	text-decoration: none;
+}
+
+.post-right .audio:hover {
+	opacity: 0.7;
+}
+
+.post-right .entry-title {
+	font-size: 36px;
+	line-height: 36px;
+	clear: none;
+	margin-bottom: 0;
+}
+
+.post-right .entry-title a {
+	text-decoration: none;
+}
+
+.post-right .entry-content {
+	margin-bottom: 0;
+}
+
+.post-right .entry-meta {
+	margin-bottom: 15px;
+}
+
+.post-right .entry-meta .date,
+.post-right .entry-meta .author {
+	margin-right: 10px;
+	font-size: 18px;
+}
+
+.post-right .entry-meta .date i,
+.post-right .entry-meta .author i {
+	font-size: 16px;
+	color: #536672;
+	padding-right: 6px;
+}
+
+.post-right .entry-content {
+	font-size: 22px;
+	line-height: 28px;
+	color: #565656;
 }
 
 /* -------------------
@@ -1389,6 +1495,16 @@ a.responsive-menu-toggle {
 	#slider .slider-info .is-slide .image {
 		width: 500px;
 	}
+
+	#Content .post .post-image {
+		width: 100%;
+		height: 260px;
+		margin-bottom: 10px;
+	}
+
+	#Content .post-right {
+		margin-left: 20px;
+	}
 }
 
 @media only screen and (min-width: 400px) and (max-width: 710px) {
@@ -1435,7 +1551,7 @@ a.responsive-menu-toggle {
 /* 2.6 - Mobile Portrait Size to Mobile Landscape Size */
 @media only screen and (max-width: 479px) {
 	.container {
-		width: 270px;
+		width: 100%;
 	}
 
 	#logo {
@@ -1483,5 +1599,9 @@ a.responsive-menu-toggle {
 
 	#slider .slider-info .is-slide .image {
 		width: 230px;
+	}
+
+	#Content .content {
+		width: 100%;
 	}
 }
