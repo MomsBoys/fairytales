@@ -43,7 +43,6 @@
  * -----------------------------------------------------
  */
 * {
-	font-family: CyrillicChancellor, sans-serif;
 	font-size: 100%;
 	font-style: inherit;
 	font-weight: inherit;
@@ -670,6 +669,7 @@ a.responsive-menu-toggle {
 #slider .slider-info a {
   color: #f3f3f3;
   text-decoration: none;
+  font-family: CyrillicChancellor, sans-serif;
 }
 
 #slider .slider-info .is-slide .image  {
@@ -677,7 +677,7 @@ a.responsive-menu-toggle {
 	width: 600px;
 	height: 390px !important;
 	margin: 10px auto 0;
-  overflow: hidden;
+	overflow: hidden;
 }
 
 #slider .is-bg-overflow {
@@ -866,6 +866,10 @@ a.responsive-menu-toggle {
 	-webkit-transition: opacity 0.3s, visibility 0.3s;
 	-moz-transition: opacity 0.3s, visibility 0.3s;
 	transition: opacity 0.3s, visibility 0.3s;
+}
+
+.cd-user-modal input {
+	font-family: CyrillicChancellor, sans-serif;
 }
 
 .cd-user-modal.is-visible {

@@ -6,15 +6,19 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Title of current page</title> <!-- Changable in different pages! -->
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" href="images/favicon.png" />
 	<link rel="apple-touch-icon" href="images/apple-icon-touch.png" />
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="js/midernizr.js"></script>
-	<script type="text/javascript" src="js/login.js"></script>
-	<script type="text/javascript" src="js/navigation.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/filter-style.css"> <!-- Resource style -->
+	<script src="js/jquery-2.1.1.js"></script>
+	<!-- <script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script> -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/filter-main.js"></script> <!-- Resource jQuery -->
 </head>
 <body>
 	<div id="Wrapper">
@@ -113,21 +117,139 @@
 					</form>
 				</div>
 
-				<a href="#0" class="cd-close-form">Close</a>
+				<a href="#0" class="cd-close-form">Закрити</a>
 			</div>
 		</div>
 		<!-- /Login Area -->
 
 		<div id="Content">
+            <div id="filter">
+				<main class="cd-main-content">
+                    <div class="cd-tab-filter-wrapper">
+                        <div class="cd-tab-filter">
+                            <ul class="cd-filters">
+                                <li class="placeholder"> 
+                                    <a data-type="all" href="#0">Останні додані</a> <!-- selected option on mobile -->
+                                </li> 
+                                <li class="filter"><a class="selected" href="#0" data-type="all">Останні додані</a></li>
+                                <li class="filter" data-filter=".color-1"><a href="#0" data-type="color-1">Популярні</a></li>
+                                <li class="filter" data-filter=".color-2"><a href="#0" data-type="color-2">Останні прочитані</a></li>
+                                <li class="filter" data-filter=".color-3"><a href="#0" data-type="color-3">Улюблені</a></li>
+                            </ul> <!-- cd-filters -->
+                        </div> <!-- cd-tab-filter -->
+                    </div> <!-- cd-tab-filter-wrapper -->
+
+                    <div class="cd-filter">
+                        <form>
+                            <div class="cd-filter-block">
+                                <h4>Види казок</h4>
+
+                                <ul class="cd-filter-content cd-filters list">
+                                    <li>
+                                        <input class="filter" data-filter=".check1" type="checkbox" id="checkbox1">
+                                        <label class="checkbox-label" for="checkbox1">Українські народні</label>
+                                    </li>
+
+                                    <li>
+                                        <input class="filter" data-filter=".check2" type="checkbox" id="checkbox2">
+                                        <label class="checkbox-label" for="checkbox2">Українські авторські</label>
+                                    </li>
+
+                                    <li>
+                                        <input class="filter" data-filter=".check3" type="checkbox" id="checkbox3">
+                                        <label class="checkbox-label" for="checkbox3">Зарубіжні народні</label>
+                                    </li>
+                                    <li>
+                                        <input class="filter" data-filter=".check4" type="checkbox" id="checkbox4">
+                                        <label class="checkbox-label" for="checkbox4">Зарубіжні авторські</label>
+                                    </li>
+                                </ul> <!-- cd-filter-content -->
+                            </div> <!-- cd-filter-block -->
+
+                            <div class="cd-filter-block">
+                                <h4>Типи казок</h4>
+
+                                <ul class="cd-filter-content cd-filters list">
+                                    <li>
+                                        <input class="filter" data-filter=".check1" type="checkbox" id="checkbox11">
+                                        <label class="checkbox-label" for="checkbox11">Побутові</label>
+                                    </li>
+
+                                    <li>
+                                        <input class="filter" data-filter=".check2" type="checkbox" id="checkbox12">
+                                        <label class="checkbox-label" for="checkbox12">Про тварин</label>
+                                    </li>
+
+                                    <li>
+                                        <input class="filter" data-filter=".check3" type="checkbox" id="checkbox13">
+                                        <label class="checkbox-label" for="checkbox13">Чарівні</label>
+                                    </li>
+                                    <li>
+                                        <input class="filter" data-filter=".check4" type="checkbox" id="checkbox14">
+                                        <label class="checkbox-label" for="checkbox14">Новелістичні</label>
+                                    </li>
+                                    <li>
+                                        <input class="filter" data-filter=".check4" type="checkbox" id="checkbox15">
+                                        <label class="checkbox-label" for="checkbox15">Анекдотичні</label>
+                                    </li>
+                                    <li>
+                                        <input class="filter" data-filter=".check4" type="checkbox" id="checkbox16">
+                                        <label class="checkbox-label" for="checkbox16">Небилиці</label>
+                                    </li>
+                                </ul> <!-- cd-filter-content -->
+                            </div> <!-- cd-filter-block -->
+                        </form>
+
+                        <a href="#0" class="cd-close">Закрити</a>
+                    </div> <!-- cd-filter -->
+
+                    <a href="#0" class="cd-filter-trigger">Фільтри</a>
+                </main> <!-- cd-main-content -->
+			</div><!-- #filter -->
+
 			<div class="container">
 				<section id="primary">
 					<div class="content">
-					
-					</div><!-- .content -->
+						<article class="post">
+							<a href="#">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
 
-					<div id="filter">
-					
-					</div><!-- #filter -->
+							<div class="post-right">
+								<a href="#" class="audio">Audio</a>
+
+								<h2 class="entry-title">
+									<a href="#">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>15 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+
+						<article class="post">
+							<a href="#">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
+
+							<div class="post-right">
+								<h2 class="entry-title">
+									<a href="#">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>15 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+					</div><!-- .content -->
 				</section><!-- #primary -->
 
 				<div id="pagination">
