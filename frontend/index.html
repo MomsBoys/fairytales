@@ -12,7 +12,7 @@
 	<link rel="shortcut icon" href="images/favicon.png" />
 	<link rel="apple-touch-icon" href="images/apple-icon-touch.png" />
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="js/midernizr.js"></script>
+	<script type="text/javascript" src="js/modernizr.js"></script>
 	<script type="text/javascript" src="js/homeslider.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 	<script type="text/javascript" src="js/navigation.js"></script>
@@ -35,7 +35,6 @@
 					<ul class="menu">
 						<li class="current-menu-item"><a href="index.html">Головна</a></li>
 						<li><a href="library.html">Бібліотека</a></li>
-						<li><a href="popular.html">Популярні</a></li>
 						<li><a href="contact.html">Контакти</a></li>
 						<li><a href="#" id="searchtoggl"><i class="fa fa-search fa-lg"></i></a></li>
 					</ul>
@@ -45,10 +44,6 @@
 			</div><!-- .container -->
 
 		</div><!-- #Header -->
-
-		<p id="back-top">
-			<a href="#top"><span></span></a>
-		</p><!-- #back-top -->
 
 		<!-- Login Area -->
 		<div class="cd-user-modal">
@@ -69,8 +64,8 @@
 						<p class="fieldset">
 							<label class="image-replace cd-password" for="signin-password">Пароль</label>
 							<input class="full-width has-padding has-border" id="signin-password" type="text" placeholder="Пароль">
-							<a href="#0" class="hide-password">Сховати</a>
 							<span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+							<a href="#0" class="hide-password">Сховати</a>
 						</p>
 
 						<p class="fieldset no-right-margin">
@@ -91,7 +86,7 @@
 					<form class="cd-form">
 						<p class="fieldset">
 							<label class="image-replace cd-username" for="signup-firstname">Ім'я</label>
-							<input class="full-width has-padding has-border" id="signup-fisrtname" type="text" placeholder="Ваше ім'я">
+							<input class="full-width has-padding has-border" id="signup-firstname" type="text" placeholder="Ваше ім'я">
 							<span class="cd-error-message">Заповніть будь ласка поле з іменем.</span>
 						</p>
 
@@ -110,8 +105,8 @@
 						<p class="fieldset">
 							<label class="image-replace cd-password" for="signup-password">Пароль</label>
 							<input class="full-width has-padding has-border" id="signup-password" type="text" placeholder="Пароль">
-							<a href="#0" class="hide-password">Сховати</a>
 							<span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+							<a href="#0" class="hide-password">Сховати</a>
 						</p>
 
 						<p class="fieldset no-right-margin">
@@ -173,7 +168,7 @@
 							<div class="slide">
 								<h2><a href="#">Назва казки №4</a></h2>
 								<div class="image">
-									<img src="http://dailynewsdig.com/wp-content/uploads/2013/09/fairytale-castle-pictures-3.jpg" alt="Slide 4" />
+									<img src="http://uplissa.org/wp-content/uploads/2016/02/103088.jpg" alt="Slide 4" />
 								</div>
 							</div>
 
@@ -189,9 +184,54 @@
 			</div><!-- #slider -->
 
 			<div class="container">
-				<p id="back-top">
-					<a href="#top"><span></span></a>
-				</p><!-- #back-top -->
+				<section id="primary">
+					<div class="content">
+						<h1 class="content-title">
+							<a href="#">Останні додані</a>
+						</h1>
+
+						<article class="post">
+							<a href="#">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
+
+							<div class="post-right">
+								<a href="#" class="audio">Audio</a>
+
+								<h2 class="entry-title">
+									<a href="#">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>15 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+
+						<article class="post">
+							<a href="#">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
+
+							<div class="post-right">
+								<h2 class="entry-title">
+									<a href="#">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>15 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+
+					</div><!-- .content -->
+				</section><!-- #primary -->
 			</div>
 		</div><!-- #Content -->
 

@@ -68,38 +68,106 @@ jQuery(document).ready(function($){
 		tabSignup.addClass('selected');
 	}
 
-	// REMOVE THIS - it's just to show error messages 
-	formLogin.find('input[type="submit"]').on('click', function(event){
+	var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+	function validateEmail(email) {
+		return EMAIL_REGEX.test(email);
+	}
+
+	function validatePassword(password) {
+		return password.length >= 8;
+	}
+
+	formLogin.find('input[type="submit"]').on('click', function(event) {
 		event.preventDefault();
-		formLogin.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
-	});
-	formSignup.find('input[type="submit"]').on('click', function(event){
-		event.preventDefault();
-		formSignup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+
+		var emailInput = formLogin.find('input[type="email"]');
+		var passwordInput = formLogin.find('#signin-password');
+
+		var isValidEmail = validateEmail(emailInput.val());
+		defineErrorMessage(emailInput, isValidEmail);
+
+		if (!isValidEmail) {
+			return;
+		}
+
+		var isValidPassword = validatePassword(passwordInput.val());
+		defineErrorMessage(passwordInput, isValidPassword);
+
+		if (!isValidPassword) {
+			return;
+		}
 	});
 
-	// // IE9 placeholder fallback
-	// if(!Modernizr.input.placeholder){
-	// 	$('[placeholder]').focus(function() {
-	// 		var input = $(this);
-	// 		if (input.val() == input.attr('placeholder')) {
-	// 			input.val('');
-	// 	  	}
-	// 	}).blur(function() {
-	// 	 	var input = $(this);
-	// 	  	if (input.val() == '' || input.val() == input.attr('placeholder')) {
-	// 			input.val(input.attr('placeholder'));
-	// 	  	}
-	// 	}).blur();
-	// 	$('[placeholder]').parents('form').submit(function() {
-	// 	  	$(this).find('[placeholder]').each(function() {
-	// 			var input = $(this);
-	// 			if (input.val() == input.attr('placeholder')) {
-	// 		 		input.val('');
-	// 			}
-	// 	  	})
-	// 	});
-	// }
+	formSignup.find('input[type="submit"]').on('click', function(event) {
+		event.preventDefault();
+
+		var emailInput = formSignup.find('input[type="email"]');
+		var firstNameInput = formSignup.find('#signup-firstname');
+		var lastNameInput = formSignup.find('#signup-lastname');
+		var passwordInput = formSignup.find('#signup-password');
+
+		var isValidFirstName = firstNameInput.val().length;
+		defineErrorMessage(firstNameInput, isValidFirstName);
+
+		if (!isValidFirstName) {
+			return;
+		}
+
+		var isValidLastName = lastNameInput.val().length;
+		defineErrorMessage(lastNameInput, isValidLastName);
+
+		if (!isValidLastName) {
+			return;
+		}
+
+		var isValidEmail = validateEmail(emailInput.val());
+		defineErrorMessage(emailInput, isValidEmail);
+
+		if (!isValidEmail) {
+			return;
+		}
+
+		var isValidPassword = validatePassword(passwordInput.val());
+		defineErrorMessage(passwordInput, isValidPassword);
+
+		if (!isValidPassword) {
+			return;
+		}
+
+	});
+
+	function defineErrorMessage(formInput, isValid) {
+		if (isValid) {
+			formInput.removeClass('has-error').next('span').removeClass('is-visible');
+		} else {
+			formInput.addClass('has-error').next('span').addClass('is-visible');
+			return;
+		}
+	}
+
+	// IE9 placeholder fallback
+	if(!Modernizr.input.placeholder){
+		$('[placeholder]').focus(function() {
+			var input = $(this);
+			if (input.val() == input.attr('placeholder')) {
+				input.val('');
+		  	}
+		}).blur(function() {
+		 	var input = $(this);
+		  	if (input.val() == '' || input.val() == input.attr('placeholder')) {
+				input.val(input.attr('placeholder'));
+		  	}
+		}).blur();
+		$('[placeholder]').parents('form').submit(function() {
+		  	$(this).find('[placeholder]').each(function() {
+				var input = $(this);
+				if (input.val() == input.attr('placeholder')) {
+			 		input.val('');
+				}
+		  	})
+		});
+	}
 });
 
 jQuery.fn.putCursorAtEnd = function() {
