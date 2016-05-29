@@ -528,7 +528,7 @@ a.responsive-menu-toggle {
 	height: 40px;
 	display: block;
 	margin-bottom: 7px;
-	background: #ddd url(../images/up-arrow.png) no-repeat center center;
+	background: #ddd url(../images/uparrow.png) no-repeat center center;
 	-webkit-transition: 1s;
 	-moz-transition: 1s;
 	transition: 1s;
@@ -1658,6 +1658,7 @@ a.responsive-menu-toggle {
 
 	.contact-wrap {
 		width: 100%;
+		padding: 0 0px 0 20px;
 	}
 }
 
