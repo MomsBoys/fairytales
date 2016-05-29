@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="js/modernizr.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 	<script type="text/javascript" src="js/navigation.js"></script>
+	<script type="text/javascript" src="js/contact_validation.js"></script>
 </head>
 <body>
 	<div id="Wrapper">
@@ -121,9 +122,7 @@
 			<div class="container">
 				<section id="primary">
 					<div class="content contact contact-page">
-						<h1 class="content-title">
-							<a href="#">Контакти</a>
-						</h1>
+						<h1 class="page-title">Контакти</h1>
 
 						<div class="contact-wrap">
 							<div class="contact-form">
@@ -131,8 +130,8 @@
 									<div class="row">
 										<div class="row-half">
 											<div class="field">
-												<label for="sender_name">Ім'я<span class="required">обов'язково</span></label>
-												<input type="text" class="text name_field requiredField" name="sender_name" id="sender_name" placeholder="Ваше імя" value="">
+												<label for="sender_name">Ім'я</label>
+												<input type="text" class="text name_field" name="sender_name" id="sender_name" placeholder="Ваше імя" value="">
 											</div>
 										</div>
 										<div class="row-half right">
@@ -165,7 +164,11 @@
 
 					</div><!-- .content -->
 				</section><!-- #primary -->
-			</div>
+
+				<p id="back-top">
+					<a href="#top"><span></span></a>
+				</p><!-- #back-top -->
+			</div><!-- .container -->
 		</div><!-- #Content -->
 
 	</div><!-- #Wrapper -->
