@@ -478,8 +478,9 @@ a.responsive-menu-toggle {
 /* login button */
 #login {
 	font-size: 20px;
-	float: right;
-	margin-right: 20px;
+	position: absolute;
+	right: 0;
+	margin-right: 120px;
 	padding: 5px 40px;
 	background-color: #f3f3f3;
 	color: #5DA1B1;
