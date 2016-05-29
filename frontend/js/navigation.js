@@ -56,9 +56,4 @@ $(document).ready(function() {
 			return false;
 		});
 	});
-
-	$("#slider-info").immersive_slider({
-		animation: "slide",
-		cssBlur: true
-	});
 });
