@@ -6,16 +6,17 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width" />
-	<title>Title of current page</title> <!-- Changable in different pages! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Пошук</title> <!-- Changable in different pages! -->
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="shortcut icon" href="images/favicon.png" />
 	<link rel="apple-touch-icon" href="images/apple-icon-touch.png" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/filter-style.css"> <!-- Resource style -->
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="js/modernizr.js"></script>
-	<script type="text/javascript" src="js/homeslider.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 	<script type="text/javascript" src="js/navigation.js"></script>
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
 </head>
 <body>
 	<div id="Wrapper">
@@ -32,10 +33,10 @@
 
 				<nav id="menu">
 					<ul class="menu">
-						<li class="current-menu-item"><a href="index.html">Головна</a></li>
+						<li><a href="index.html">Головна</a></li>
 						<li><a href="library.html">Бібліотека</a></li>
 						<li><a href="contact.html">Контакти</a></li>
-						<li class="menu-item-search"><a href="search.html" class="">Пошук</a></li>
+						<li class="menu-item-search current-menu-item"><a href="#search" class="">Пошук</a></li>
 					</ul>
 				</nav><!-- #menu -->
 
@@ -113,62 +114,16 @@
 					</form>
 				</div>
 
-				<a href="#0" class="cd-close-form">Close</a>
+				<a href="#0" class="cd-close-form">Закрити</a>
 			</div>
 		</div>
 		<!-- /Login Area -->
 
 		<div id="Content">
-			<div id="slider">
-				<div class="slider-container">
-					<div class="page_container">
-						<div id="slider-info" class="slider-info">
-							<div class="slide">
-								<h2><a href="#">Назва казки №1</a></h2>
-								<div class="image">
-									<img src="http://cdn.tinybuddha.com/wp-content/uploads/2015/04/Fairy-Tale.png" alt="Slide 1" />
-								</div>
-							</div>
-
-							<div class="slide" data-blurred="images/slide2.jpg">
-								<h2><a href="#">Назва казки №2</a></h2>
-								<div class="image">
-									<img src="http://uplissa.org/wp-content/uploads/2016/02/103088.jpg" alt="Slide 2" />
-								</div>
-							</div>
-
-							<div class="slide">
-								<h2><a href="#">Назва казки №3</a></h2>
-								<div class="image">
-									<img src="https://thelovehawk.files.wordpress.com/2013/11/fairy-tale.jpg" alt="Slide 3" />
-								</div>
-							</div>
-
-							<div class="slide">
-								<h2><a href="#">Назва казки №4</a></h2>
-								<div class="image">
-									<img src="http://uplissa.org/wp-content/uploads/2016/02/103088.jpg" alt="Slide 4" />
-								</div>
-							</div>
-
-							<div class="is-nav">
-								<ul class="slider-direction-nav">
-									<li><a href="#" class="is-prev">Previous</a></li>
-									<li><a href="#" class="is-next">Next</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div><!-- #slider -->
-
 			<div class="container">
 				<section id="primary">
 					<div class="content">
-						<h1 class="content-title">
-							<a href="library.html">Останні додані</a>
-						</h1>
-
+						<h1 class="content-title">Результат пошуку для "казка"</h1>
 						<article class="post">
 							<a href="#">
 								<img width="305" src="images/article-1.jpg" class="post-image" />
@@ -215,12 +170,14 @@
 							</a>
 
 							<div class="post-right">
+								<a href="#" class="audio">Audio</a>
+
 								<h2 class="entry-title">
 									<a href="#">Назва казки</a>
 								</h2>
 
 								<div class="entry-meta">
-									<span class="date"><i class="icon-calendar"></i>14 травня, 2016</span>
+									<span class="date"><i class="icon-calendar"></i>15 травня, 2016</span>
 									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
 								</div> 
 
@@ -234,6 +191,8 @@
 							</a>
 
 							<div class="post-right">
+								<a href="#" class="audio">Audio</a>
+
 								<h2 class="entry-title">
 									<a href="#">Назва казки</a>
 								</h2>
@@ -253,34 +212,42 @@
 							</a>
 
 							<div class="post-right">
+								<a href="#" class="audio">Audio</a>
+
 								<h2 class="entry-title">
 									<a href="#">Назва казки</a>
 								</h2>
 
 								<div class="entry-meta">
-									<span class="date"><i class="icon-calendar"></i>13 травня, 2016</span>
+									<span class="date"><i class="icon-calendar"></i>12 травня, 2016</span>
 									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
 								</div> 
 
 								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
 							</div><!-- .post-right -->
 						</article><!-- .post -->
-
 					</div><!-- .content -->
 				</section><!-- #primary -->
+
+				<div id="pagination">
+					<ul>
+						<li class="control-button"><a href="#" class="disabled">Назад</a></li>
+						<li><a href="#0" class="current">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><span>...</span></li>
+						<li><a href="#">12</a></li>
+						<li class="control-button"><a href="#">Вперед</a></li>
+					</ul>
+				</div><!-- #pagination -->
 
 				<p id="back-top">
 					<a href="#top"><span></span></a>
 				</p><!-- #back-top -->
 			</div><!-- .container -->
 		</div><!-- #Content -->
-	</div><!-- #Wrapper -->
 
-	<script type="text/javascript">
-		$("#slider-info").immersive_slider({
-			animation: "slide",
-			cssBlur: true
-		});
-	</script>
+	</div><!-- #Wrapper -->
 </body>
 </html>
