@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html id="ie6"><![endif]-->
+<!--[if IE 7]><html id="ie7"><![endif]-->
+<!--[if IE 8]><html id="ie8"><![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" />
+	<title>Контакти</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="shortcut icon" href="images/favicon.png" />
+	<link rel="apple-touch-icon" href="images/apple-icon-touch.png" />
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/modernizr.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script>
+</head>
+<body>
+	<div id="Wrapper">
+		
+		<div id="Header" role="banner">
+			<div class="container">
+				<div id="logo">
+					<a href="index.html" title="Mom's Stories">
+						<img src="images/logo.png" alt="Mom's Stories" />
+					</a>
+				</div><!-- #logo -->
+
+				<a href="#0" class="cd-signin" id="login">Вхід</a>
+
+				<nav id="menu">
+					<ul class="menu">
+						<li><a href="index.html">Головна</a></li>
+						<li><a href="library.html">Бібліотека</a></li>
+						<li class="current-menu-item"><a href="contact.html">Контакти</a></li>
+						<li class="menu-item-search"><a href="#search" class="">Пошук</a></li>
+					</ul>
+				</nav><!-- #menu -->
+
+				<a href="#" class="responsive-menu-toggle"><i class="icon-reorder"></i></a>
+			</div><!-- .container -->
+		</div><!-- #Header -->
+
+		<!-- Login Area -->
+		<div class="cd-user-modal">
+			<div class="cd-user-modal-container">
+				<ul class="cd-switcher">
+					<li><a href="#0" class="is-selected">Увійти</a></li>
+					<li><a href="#1">Зареєструватися</a></li>
+				</ul>
+
+				<div id="cd-login">
+					<form action="#" class="cd-form">
+						<p class="fieldset">
+							<label class="image-replace cd-email" for="signin-email">E-mail</label>
+							<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="Електронна пошта">
+							<span class="cd-error-message">Введено невірну електронну пошту!</span>
+						</p>
+
+						<p class="fieldset">
+							<label class="image-replace cd-password" for="signin-password">Пароль</label>
+							<input class="full-width has-padding has-border" id="signin-password" type="text" placeholder="Пароль">
+							<span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+							<a href="#0" class="hide-password">Сховати</a>
+						</p>
+
+						<p class="fieldset no-right-margin">
+							<input class="full-width" type="submit" value="Авторизуватися">
+						</p>
+
+						<p class="fieldset" style="margin-bottom:30px;">
+							<a class="full-width has-padding has-border signin-social" id="signin-facebook" href="#">Увійти через Facebook</a>
+						</p>
+
+						<p class="fieldset">
+							<a class="full-width has-padding has-border signin-social" id="signin-vk" href="#">Увійти через VK</a>
+						</p>
+					</form>
+				</div>
+
+				<div id="cd-signup">
+					<form class="cd-form">
+						<p class="fieldset">
+							<label class="image-replace cd-username" for="signup-firstname">Ім'я</label>
+							<input class="full-width has-padding has-border" id="signup-firstname" type="text" placeholder="Ваше ім'я">
+							<span class="cd-error-message">Заповніть будь ласка поле з іменем.</span>
+						</p>
+
+						<p class="fieldset">
+							<label class="image-replace cd-username" for="signup-lastname">Прізвище</label>
+							<input class="full-width has-padding has-border" id="signup-lastname" type="text" placeholder="Ваше прізвище">
+							<span class="cd-error-message">Заповніть будь ласка поле з прізвищем.</span>
+						</p>
+
+						<p class="fieldset">
+							<label class="image-replace cd-email" for="signup-email">E-mail</label>
+							<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="Електронна пошта">
+							<span class="cd-error-message">Введено невірну електронну пошту!</span>
+						</p>
+
+						<p class="fieldset">
+							<label class="image-replace cd-password" for="signup-password">Пароль</label>
+							<input class="full-width has-padding has-border" id="signup-password" type="text" placeholder="Пароль">
+							<span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+							<a href="#0" class="hide-password">Сховати</a>
+						</p>
+
+						<p class="fieldset no-right-margin">
+							<input class="full-width has-padding" type="submit" value="Створити профіль">
+						</p>
+					</form>
+				</div>
+
+				<a href="#0" class="cd-close-form">Close</a>
+			</div>
+		</div>
+		<!-- /Login Area -->
+
+		<div id="Content">
+			<div class="container">
+				<section id="primary">
+					<div class="content contact contact-page">
+						<h1 class="content-title">
+							<a href="#">Контакти</a>
+						</h1>
+
+						<div class="contact-wrap">
+							<div class="contact-form">
+								<form id="rev_contact_form" method="post">
+									<div class="row">
+										<div class="row-half">
+											<div class="field">
+												<label for="sender_name">Ім'я<span class="required">обов'язково</span></label>
+												<input type="text" class="text name_field requiredField" name="sender_name" id="sender_name" placeholder="Ваше імя" value="">
+											</div>
+										</div>
+										<div class="row-half right">
+											<div class="field">
+												<label for="sender_email">Електронна пошта<span class="required">обов'язково</span></label>
+												<input type="text" class="text requiredField email" name="sender_email" id="sender_email" placeholder="Для контакту з Вами" value="">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="field message-field">
+											<label for="message_title">Заголовок повідомлення<span class="required">обов'язково</span></label>
+											<input type="text" class="text title_field requiredField" name="message_title" id="message_title" placeholder="Те, про що хочете запитати" value="">
+										</div>
+									</div>
+									<div class="row">
+										<div class="field textarea-field">
+											<label for="message_text">Напишіть Ваше повідомлення нижче<span class="required">обов'язково</span></label>
+											<textarea class="textarea message_field requiredField" name="message_text" id="message_text" placeholder="Ваше запитання тут"></textarea>
+										</div>
+									</div>
+									<div class="row">
+										<div class="field">
+											<input type="button" id="form_submit" name="rev_submit" value="Відправити повідомлення" class="button">
+										</div>
+									</div>
+								</form>
+							</div><!-- .contact-form -->
+						</div><!-- .contact-wrap -->
+
+					</div><!-- .content -->
+				</section><!-- #primary -->
+			</div>
+		</div><!-- #Content -->
+
+	</div><!-- #Wrapper -->
+</body>
+</html>
