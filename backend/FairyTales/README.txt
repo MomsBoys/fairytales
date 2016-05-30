@@ -1,0 +1,1 @@
+ƒл€ роботи потр≥бно буде зм≥нити connectionString в web.config ≥ app.config на св≥й. ƒетал≥ напишу в д≥алог.
