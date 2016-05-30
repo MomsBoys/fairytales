@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="shortcut icon" href="images/favicon.png"/>
+    <link rel="apple-touch-icon" href="images/apple-icon-touch.png"/>
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/modernizr.js"></script>
+    <script type="text/javascript" src="js/homeslider.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+<div id="Wrapper">
+
+    <div id="Header" role="banner">
+        <div class="container">
+            <div id="logo">
+                <a href="index.html" title="Mom's Stories">
+                    <img src="~/images/logo.png" alt="Mom's Stories"/>
+                </a>
+            </div><!-- #logo -->
+            <section id="login">
+                @Html.Partial("_LoginPartial")
+            </section>
+            
+        
+            <nav id="menu">
+                <ul class="menu">
+                    <li class="current-menu-item"><a href="index.html">Головна</a></li>
+                    <li><a href="library.html">Бібліотека</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                    <li class="menu-item-search"><a href="#search" class="">Пошук</a></li>
+                </ul>
+            </nav><!-- #menu -->
+
+            <a href="#" class="responsive-menu-toggle"><i class="icon-reorder"></i></a>
+        </div><!-- .container -->
+    </div><!-- #Header -->
+    <!-- Login Area -->
+    <div class="cd-user-modal">
+        <div class="cd-user-modal-container">
+            <ul class="cd-switcher">
+                <li><a href="#0" class="is-selected">Увійти</a></li>
+                <li><a href="#1">Зареєструватися</a></li>
+            </ul>
+
+            <div id="cd-login">
+                <form action="/Account/Login" method="post" novalidate="novalidate" class="cd-form">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <p class="fieldset">
+                        <label class="image-replace cd-email" for="signin-email">E-mail</label>
+                        <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="Електронна пошта" name="UserName">
+                        <span class="cd-error-message">Введено невірну електронну пошту!</span>
+                    </p>
+
+                    <p class="fieldset">
+                        <label class="image-replace cd-password" for="signin-password">Пароль</label>
+                        <input class="full-width has-padding has-border" id="signin-password" type="text" placeholder="Пароль" name="Password">
+                        <span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+                        <a href="#0" class="hide-password">Сховати</a>
+                    </p>
+
+                    <p class="fieldset no-right-margin">
+                        <input class="full-width" type="submit" value="Авторизуватися">
+                    </p>
+
+                    <p class="fieldset" style="margin-bottom: 30px;">
+                        <a class="full-width has-padding has-border signin-social" id="signin-facebook" href="#">Увійти через Facebook</a>
+                    </p>
+
+                    <p class="fieldset">
+                        <a class="full-width has-padding has-border signin-social" id="signin-vk" href="#">Увійти через VK</a>
+                    </p>
+                </form>
+            </div>
+
+            <div id="cd-signup">
+                <form action="/Account/Register" method="post" novalidate="novalidate" class="cd-form">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    <p class="fieldset">
+                        <label class="image-replace cd-username" for="signup-firstname">Ім'я</label>
+                        <input class="full-width has-padding has-border" id="signup-firstname" type="text" placeholder="Ваше ім'я" name="FirstName">
+                        <span class="cd-error-message">Заповніть будь ласка поле з іменем.</span>
+                    </p>
+
+                    <p class="fieldset">
+                        <label class="image-replace cd-username" for="signup-lastname">Прізвище</label>
+                        <input class="full-width has-padding has-border" id="signup-lastname" type="text" placeholder="Ваше прізвище" name="SecondName">
+                        <span class=" cd-error-message">Заповніть будь ласка поле з прізвищем.</span>
+                    </p>
+
+                    <p class="fieldset">
+                        <label class="image-replace cd-email" for="signup-email">E-mail</label>
+                        <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="Електронна пошта" name="UserName">
+                        <span class="cd-error-message">Введено невірну електронну пошту!</span>
+                    </p>
+
+                    <p class="fieldset">
+                        <label class="image-replace cd-password" for="signup-password">Пароль</label>
+                        <input class="full-width has-padding has-border" id="signup-password" type="text" placeholder="Пароль" name="Password">
+                        <span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+                        <a href="#0" class="hide-password">Сховати</a>
+                    </p>
+
+                    <p class="fieldset no-right-margin">
+                        <input class="full-width has-padding" type="submit" value="Створити профіль">
+                    </p>
+                </form>
+            </div>
+
+            <a href="#0" class="cd-close-form">Close</a>
+        </div>
+    </div>
+    <!-- /Login Area -->
+</div>
+
+<div >
+    @RenderBody()
+    <hr />
+    
+    <footer></footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+</html>
