@@ -13,8 +13,36 @@ namespace FairyTales.Controllers
     {
         // GET: Library
         public ActionResult Index()
-        { 
+        {
+            int i = Request.Form.AllKeys.Count();
+            ViewBag.Categories = DBManager.GetCategories();
+            ViewBag.Types = DBManager.GetTypes();
             return View(DBManager.GetShortTales(null, null));   
+        }
+         
+        [HttpPost]
+        public ActionResult Filter()
+        {
+            List<int> categories = null, types = null;
+
+            if (Request.Form.AllKeys.Count() != 0)
+            {
+                categories = new List<int>();
+                types = new List<int>();
+                foreach (var key in Request.Form.AllKeys)
+                {
+                    if (key.Contains("cKey"))
+                    { 
+                        categories.Add(int.Parse(key.Replace("cKey", "")));
+                    }
+                    if (key.Contains("tKey"))
+                    {
+                        types.Add(int.Parse(key.Replace("tKey", "")));
+                    }
+                }
+
+            }
+            return PartialView(DBManager.GetShortTales(categories, types));
         }
     }
 }

@@ -12,23 +12,26 @@ namespace FairyTales.Models
     { 
         private static String _rootPath = "http://localhost:1599/Content/Data";
          
-        public static List<Tale> GetShortTales(List<Category> categories, List<Type> types)
+        public static List<Tale> GetShortTales(List<int> categories, List<int> types)
         {
             DBFairytaleEntities context = new DBFairytaleEntities();
             List<Tale> a = context.Tales.Select(v => v).ToList();
             List<Tale> result = new List<Tale>();
-
+            
             foreach (var item in a)
             {
-                item.Cover = $"{_rootPath}/{item.Name}/{item.Cover}";
-                item.Text = $"{_rootPath}/{item.Name}/{item.Text}";
-                if ((categories == null || categories.Any(c => c.Category_ID == item.Category_ID))
-                    && (types == null || types.Any(c => c.Type_ID == item.Type_ID)))
+                if ((categories == null || categories.Count == 0 || categories.Any(c => c == item.Category_ID))
+                    && (types == null || types.Count == 0 || types.Any(c => c == item.Type_ID)))
                 {
                     result.Add(item);        
                 }
             }
-           // a = a.OrderBy(v => v.Name).Reverse().ToList();
+            foreach (var item in result)
+            {
+                item.Cover = $"{_rootPath}/{item.Name}/{item.Cover}";
+                item.Text = $"{_rootPath}/{item.Name}/{item.Text}";
+            }
+            // a = a.OrderBy(v => v.Name).Reverse().ToList();
             return result;
         }
         
