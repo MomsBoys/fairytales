@@ -492,11 +492,6 @@ a.responsive-menu-toggle {
 }
 
 /* login button */
-#logoutForm {
-    display: inline;
-    margin-left: 10px;
-}
-
 #login {
 	font-size: 20px;
 	float: right;
@@ -505,6 +500,11 @@ a.responsive-menu-toggle {
 	background-color: #f3f3f3;
 	color: #5DA1B1;
 	text-decoration: none;
+}
+
+#logoutForm {
+    display: inline;
+    margin-left: 10px;
 }
 
 /* back-to top button */

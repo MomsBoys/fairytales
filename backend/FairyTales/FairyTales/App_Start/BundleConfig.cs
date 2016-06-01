@@ -22,7 +22,9 @@ namespace FairyTales
                         "~/Scripts/modernizr.js",
                         "~/Scripts/homeslider.js",
                         "~/Scripts/login.js",
-                        "~/Scripts/navigation.js"
+                        "~/Scripts/navigation.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js",
+                        "~/Scripts/"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(

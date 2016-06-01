@@ -94,12 +94,15 @@ jQuery(document).ready(function($){
 
 		defineErrorMessage(passwordInput, false, "HELLO");
 
-		// var isValidPassword = validatePassword(passwordInput.val());
-		// defineErrorMessage(passwordInput, isValidPassword);
 
-		// if (!isValidPassword) {
-		// 	return;
-		// }
+		var isValidPassword = validatePassword(passwordInput.val());
+		defineErrorMessage(passwordInput, isValidPassword);
+
+		if (!isValidPassword) {
+		    event.preventDefault();
+		    return;
+		}
+
 	});
 
 	formSignup.find('input[type="submit"]').on('click', function(event) {

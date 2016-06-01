@@ -1,19 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using FairyTales.Controllers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Mom's stories</title>
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="shortcut icon" href="images/favicon.png"/>
-    <link rel="apple-touch-icon" href="images/apple-icon-touch.png"/>
-    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="js/modernizr.js"></script>
-    <script type="text/javascript" src="js/homeslider.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
-    <script type="text/javascript" src="js/navigation.js"></script>
+    <link rel="shortcut icon" href="~/images/favicon.png"/>
+    <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png"/>
     @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -27,17 +23,17 @@
                     <img src="~/images/logo.png" alt="Mom's Stories"/>
                 </a>
             </div><!-- #logo -->
-            <section id="login">
+            
                 @Html.Partial("_LoginPartial")
-            </section>
+            
             
         
             <nav id="menu">
                 <ul class="menu">
-                    <li class="current-menu-item"><a href="index.html">Головна</a></li>
-                    <li><a href="library.html">Бібліотека</a></li>
-                    <li><a href="contact.html">Контакти</a></li>
-                    <li class="menu-item-search"><a href="#search" class="">Пошук</a></li>
+                    <li class="current-menu-item"><a href="/">Головна</a></li>
+                    <li><a href="/Library">Бібліотека </a></li>
+                    <li><a href="/Contact">Контакти</a></li>
+                    <li class="menu-item-search"><a href="#" class="">Пошук</a></li>
                 </ul>
             </nav><!-- #menu -->
 
@@ -53,9 +49,10 @@
             </ul>
 
             <div id="cd-login">
-                <form action="/Account/Login" method="post" novalidate="novalidate" class="cd-form">
+                <form action="/Account/Login" method="post" novalidate="novalidate" class="cd-form" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results-auth">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
+                    <div id="results-auth"></div>
                     <p class="fieldset">
                         <label class="image-replace cd-email" for="signin-email">E-mail</label>
                         <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="Електронна пошта" name="UserName">
@@ -81,12 +78,17 @@
                         <a class="full-width has-padding has-border signin-social" id="signin-vk" href="#">Увійти через VK</a>
                     </p>
                 </form>
+                <script src="//ulogin.ru/js/ulogin.js"></script>
+                <div id="uLogin" data-ulogin="display=small;fields=first_name,last_name;providers=vkontakte,facebook;
+                         redirect_uri=http%3A%2F%2Flocalhost%3A1599%2FUserSocial%2FLogin"></div>
+                @*<div class="ulogin-button-vkontakte" data-uloginbutton="vkontakte" title="VK" background: url(&quot;https://ulogin.ru/img/small.png?version=1.5.00&quot;) 0px -19px / 16px no-repeat;"></div>*@
             </div>
 
             <div id="cd-signup">
-                <form action="/Account/Register" method="post" novalidate="novalidate" class="cd-form">
+                <form action="/Account/Register" method="post" novalidate="novalidate" class="cd-form" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results-reg" >
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary()
+                    <div id="results-reg"></div>
                     <p class="fieldset">
                         <label class="image-replace cd-username" for="signup-firstname">Ім'я</label>
                         <input class="full-width has-padding has-border" id="signup-firstname" type="text" placeholder="Ваше ім'я" name="FirstName">
@@ -122,15 +124,9 @@
         </div>
     </div>
     <!-- /Login Area -->
-</div>
 
-<div >
     @RenderBody()
-    <hr />
-    
-    <footer></footer>
 </div>
-
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)

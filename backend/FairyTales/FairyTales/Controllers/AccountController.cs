@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -31,7 +32,6 @@ namespace FairyTales.Controllers
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
 
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -48,23 +48,23 @@ namespace FairyTales.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            ViewBag.Hello = "hello)";
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    var cookie = new HttpCookie("first_name", user.FirstName);
+                    Response.SetCookie(cookie);
+                    return JavaScript("location.reload(true)");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    return PartialView("_ErrorPartial", "Невірний email або пароль.");
                 }
             }
-
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return JavaScript("location.reload(true)");
         }
 
         //
@@ -95,18 +95,24 @@ namespace FairyTales.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    var cookie = new HttpCookie("first_name", user.FirstName);
+                    Response.SetCookie(cookie);
+                    return JavaScript("location.reload(true)");
                 }
                 else
                 {
-                    AddErrors(result);
+                    return PartialView("_ErrorPartial", "Користувач з введеним email вже існує. Введіть інший email.");
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return JavaScript("location.reload(true)");
         }
 
+        public ActionResult Redirect()
+        {
+            return RedirectToAction("Index", "Home");
+        }
         //
         // POST: /Account/Disassociate
         [HttpPost]
