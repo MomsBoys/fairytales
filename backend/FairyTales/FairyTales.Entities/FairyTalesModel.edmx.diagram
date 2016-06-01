@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="DBFairytaleModel.AspNetUser" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFairytaleModel.Author" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFairytaleModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBFairytaleModel.sysdiagram" Width="1.5" PointX="10.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFairytaleModel.Tag" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFairytaleModel.Tale" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBFairytaleModel.Tale_Tag" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />

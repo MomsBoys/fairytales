@@ -2,20 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-  
-    <meta charset="UTF-8">
+    <title>@ViewBag.Title - Mom's Stories</title>
+   
     <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="shortcut icon" href="images/favicon.png"/>
-    <link rel="apple-touch-icon" href="images/apple-icon-touch.png"/>
-    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="js/modernizr.js"></script>
-    <script type="text/javascript" src="js/homeslider.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
-    <script type="text/javascript" src="js/navigation.js"></script>
+    <link rel="shortcut icon" href="~/images/favicon.png"/>
+    <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png"/>
+    <script type="text/javascript" src="~/Scripts/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/modernizr.js"></script>
+    <script type="text/javascript" src="~/Scripts/homeslider.js"></script>
+    <script type="text/javascript" src="~/Scripts/login.js"></script>
+    <script type="text/javascript" src="~/Scripts/navigation.js"></script>
     @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
 <div id="Wrapper">
@@ -35,7 +35,7 @@
             <nav id="menu">
                 <ul class="menu">
                     <li class="current-menu-item"><a href="index.html">Головна</a></li>
-                    <li><a href="library.html">Бібліотека</a></li>
+                    <li><a href="Library">Бібліотека</a></li>
                     <li><a href="contact.html">Контакти</a></li>
                     <li class="menu-item-search"><a href="#search" class="">Пошук</a></li>
                 </ul>
@@ -122,10 +122,9 @@
         </div>
     </div>
     <!-- /Login Area -->
-</div>
 
-<div >
     @RenderBody()
+
     <hr />
     
     <footer></footer>
@@ -133,6 +132,6 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+
 </body>
 </html>
