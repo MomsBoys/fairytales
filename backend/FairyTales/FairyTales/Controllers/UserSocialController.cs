@@ -21,13 +21,7 @@ namespace FairyTales.Controllers
 
     public class UserSocialController : Controller
     {
-        private DBFairytaleEntities db = new DBFairytaleEntities();
-
-        // GET: UserSocial
-        public ActionResult Index()
-        {
-            return View(db.AspNetUsers.ToList());
-        }
+      // GET: UserSocial
 
         public UserSocialController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
@@ -78,6 +72,8 @@ namespace FairyTales.Controllers
             if (user != null)
             {
                 await SignInAsync(user, false);
+                var cookie = new HttpCookie("first_name", user.FirstName);
+                Response.SetCookie(cookie);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -92,6 +88,8 @@ namespace FairyTales.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(userAU, isPersistent: false);
+                    var cookie = new HttpCookie("first_name", userAU.FirstName);
+                    Response.SetCookie(cookie);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -127,109 +125,5 @@ namespace FairyTales.Controllers
             }
         }
 
-
-        // GET: UserSocial/Details/
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUser);
-        }
-
-        // GET: UserSocial/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserSocial/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserName,PasswordHash,SecurityStamp,FirstName,SecondName,Discriminator")] AspNetUser aspNetUser)
-        {
-            if (ModelState.IsValid)
-            {
-                db.AspNetUsers.Add(aspNetUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(aspNetUser);
-        }
-
-        // GET: UserSocial/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUser);
-        }
-
-        // POST: UserSocial/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserName,PasswordHash,SecurityStamp,FirstName,SecondName,Discriminator")] AspNetUser aspNetUser)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(aspNetUser).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(aspNetUser);
-        }
-
-        // GET: UserSocial/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUser);
-        }
-
-        // POST: UserSocial/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            db.AspNetUsers.Remove(aspNetUser);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
