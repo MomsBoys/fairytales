@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da79f83f-434f-4a8e-9ae6-507d60a8a787" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/css/style.css" afterPath="$PROJECT_DIR$/frontend/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/images/cd-icons.svg" afterPath="$PROJECT_DIR$/frontend/images/cd-icons.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/index.html" afterPath="$PROJECT_DIR$/frontend/index.html" />
     </list>
     <ignored path="fairytales.iws" />
@@ -29,8 +29,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
+            <state relative-caret-position="1156">
+              <caret line="87" column="50" selection-start-line="87" selection-start-column="50" selection-end-line="87" selection-end-column="50" />
               <folding>
                 <element signature="n#style#0;n#p#3;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -41,8 +41,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1931" column="17" selection-start-line="1931" selection-start-column="13" selection-end-line="1931" selection-end-column="17" />
+            <state relative-caret-position="475">
+              <caret line="2753" column="1" selection-start-line="2753" selection-start-column="1" selection-end-line="2753" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -51,8 +51,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Downloads/advanced-search-form/advanced-search-form/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+            <state relative-caret-position="221">
+              <caret line="19" column="82" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -61,8 +61,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Downloads/advanced-search-form/advanced-search-form/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="804" column="39" selection-start-line="804" selection-start-column="39" selection-end-line="804" selection-end-column="39" />
+            <state relative-caret-position="367">
+              <caret line="716" column="16" selection-start-line="715" selection-start-column="4" selection-end-line="716" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -79,8 +79,8 @@
         <option value="$PROJECT_DIR$/frontend/js/login.js" />
         <option value="$PROJECT_DIR$/frontend/css/search-style.css" />
         <option value="$PROJECT_DIR$/frontend/images/cd-icons.svg" />
-        <option value="$PROJECT_DIR$/frontend/css/style.css" />
         <option value="$USER_HOME$/Downloads/advanced-search-form/advanced-search-form/index.html" />
+        <option value="$PROJECT_DIR$/frontend/css/style.css" />
         <option value="$PROJECT_DIR$/frontend/index.html" />
       </list>
     </option>
@@ -260,12 +260,12 @@
       <updated>1464533090273</updated>
       <workItem from="1464533091559" duration="39000" />
       <workItem from="1464534674595" duration="18467000" />
-      <workItem from="1464800629376" duration="10751000" />
+      <workItem from="1464800629376" duration="14475000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29257000" />
+    <option name="totallyTimeSpent" value="32981000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -431,34 +431,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/advanced-search-form/advanced-search-form/css/style.css">
+    <entry file="file://$USER_HOME$/Downloads/advanced-search-form/advanced-search-form/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="804" column="39" selection-start-line="804" selection-start-column="39" selection-end-line="804" selection-end-column="39" />
+        <state relative-caret-position="221">
+          <caret line="19" column="82" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="82" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/advanced-search-form/advanced-search-form/index.html">
+    <entry file="file://$USER_HOME$/Downloads/advanced-search-form/advanced-search-form/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        <state relative-caret-position="367">
+          <caret line="716" column="16" selection-start-line="715" selection-start-column="4" selection-end-line="716" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1931" column="17" selection-start-line="1931" selection-start-column="13" selection-end-line="1931" selection-end-column="17" />
+        <state relative-caret-position="475">
+          <caret line="2753" column="1" selection-start-line="2753" selection-start-column="1" selection-end-line="2753" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
+        <state relative-caret-position="1156">
+          <caret line="87" column="50" selection-start-line="87" selection-start-column="50" selection-end-line="87" selection-end-column="50" />
           <folding>
             <element signature="n#style#0;n#p#3;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>

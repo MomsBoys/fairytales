@@ -439,6 +439,7 @@ html * {
 	z-index: 30;
 	float: right;
 	margin-top: 5px;
+	padding-right: 60px;
     clear: both;
 }
 
@@ -2433,6 +2434,13 @@ Search Form
 		-o-transform: translateY(-50%) scale(1);
 		transform: translateY(-50%) scale(1);
 	}
+	.cd-main-search.is-visible .search {
+		-webkit-transform: translateY(-50%) scale(1);
+		-moz-transform: translateY(-50%) scale(1);
+		-ms-transform: translateY(-50%) scale(1);
+		-o-transform: translateY(-50%) scale(1);
+		transform: translateY(-50%) scale(1);
+	}
 	.animate-search .cd-main-search.is-visible {
 		/* trigger search form animation if <header> has the .animate-search class */
 		-webkit-animation: cd-slide-in 0.3s;
@@ -2631,11 +2639,14 @@ Search Form
 @media only screen and (min-width: 1024px) {
 	.cd-search-trigger {
 		display: block;
-		position: relative;
-		z-index: 3;
+		position: absolute;
+		right: 0;
+		z-index: 50;
+		height: 40px;
+		width: 40px;
+		margin-top: 5px;
 		margin-left: .5em;
 		margin-right: .5em;
-		float: right;
 		-webkit-transition: -webkit-transform 0.3s;
 		-moz-transition: -moz-transform 0.3s;
 		transition: transform 0.3s;
@@ -2681,11 +2692,11 @@ Search Form
 		background-color: #df8bb0;
 	}
 	.cd-search-trigger.search-form-visible {
-		-webkit-transform: translateX(-46px) translateY(-20px);
-		-moz-transform: translateX(-46px) translateY(-20px);
-		-ms-transform: translateX(-46px) translateY(-20px);
-		-o-transform: translateX(-46px) translateY(-20px);
-		transform: translateX(-46px) translateY(-20px);
+		-webkit-transform: translateX(-20px) translateY(-10px);
+		-moz-transform: translateX(-20px) translateY(-10px);
+		-ms-transform: translateX(-20px) translateY(-10px);
+		-o-transform: translateX(-20px) translateY(-10px);
+		transform: translateX(-20px) translateY(-10px);
 	}
 	.cd-search-trigger.search-form-visible::before {
 		-webkit-transform: translateX(-50%) translateY(-50%) scale(1);
