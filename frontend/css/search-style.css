@@ -1,4 +1,4 @@
-/* -------------------------------- 
+/* --------------------------------
 
 Primary style
 
@@ -16,11 +16,6 @@ body {
   font-family: "Open Sans", sans-serif;
   color: #333545;
   background-color: #ffffff;
-}
-
-a {
-  color: #dd85ac;
-  text-decoration: none;
 }
 
 img {
@@ -76,7 +71,7 @@ select {
   pointer-events: none;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Patterns - reusable parts of our design
 
@@ -89,7 +84,7 @@ Patterns - reusable parts of our design
   white-space: nowrap;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Header
 
@@ -316,7 +311,7 @@ Header
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Search Form
 
@@ -772,7 +767,7 @@ Search Form
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Content cover layer
 
@@ -803,67 +798,6 @@ Content cover layer
   }
 }
 
-/* -------------------------------- 
-
-Page main content
-
--------------------------------- */
-.cd-main-content {
-  display: table;
-  width: 100%;
-  height: calc(100vh - 50px);
-  position: relative;
-  z-index: 2;
-  background-color: #40508e;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-transition: -webkit-transform 0.3s;
-  -moz-transition: -moz-transform 0.3s;
-  transition: transform 0.3s;
-}
-.cd-main-content .content-center {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
-.cd-main-content .content-center h1 {
-  color: #ffffff;
-  font-size: 2.4rem;
-  margin-bottom: .6em;
-}
-.cd-main-content .cd-download-btn {
-  background: #dd85ac;
-  color: #ffffff;
-  display: inline-block;
-  padding: 1.4em 1.6em;
-  border-radius: 50em;
-  font-size: 1.4rem;
-  font-weight: bold;
-  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.1);
-}
-.cd-main-content.nav-is-visible {
-  -webkit-transform: translateX(-260px);
-  -moz-transform: translateX(-260px);
-  -ms-transform: translateX(-260px);
-  -o-transform: translateX(-260px);
-  transform: translateX(-260px);
-}
-@media only screen and (min-width: 1024px) {
-  .cd-main-content {
-    height: calc(100vh - 80px);
-  }
-  .cd-main-content .content-center h1 {
-    font-size: 3.6rem;
-  }
-  .cd-main-content.nav-is-visible {
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
-  }
-}
-
 #main-nav li a {
   font-size: 24px;
   font-weight: 300;
@@ -885,7 +819,7 @@ Page main content
   border-bottom: 3px solid #5DA1B1;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 JavaScript Disabled
 
