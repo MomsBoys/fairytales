@@ -503,11 +503,11 @@ a.responsive-menu-toggle {
 	color: #5DA1B1;
 	text-decoration: none;
 }
+
 #logoutForm {
     display: inline;
     margin-left: 10px;
 }
-
 
 /* back-to top button */
 #back-top {
@@ -1299,7 +1299,6 @@ a.responsive-menu-toggle {
 #cd-login.is-selected, #cd-signup.is-selected, #cd-reset-password.is-selected {
 	display: block;
 }
-
 
 /**
  *  Pagination

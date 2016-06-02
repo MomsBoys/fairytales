@@ -53,8 +53,6 @@ namespace FairyTales.Models
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-
-
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "First Name")]
@@ -70,7 +68,5 @@ namespace FairyTales.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
-
     }
 }

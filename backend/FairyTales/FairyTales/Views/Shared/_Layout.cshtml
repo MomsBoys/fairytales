@@ -4,13 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Mom's stories</title>
-  
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="shortcut icon" href="~/images/favicon.png"/>
     <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png"/>
-    @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -24,8 +21,6 @@
                 </a>
             </div><!-- #logo -->
             @Html.Partial("_LoginPartial")
-
-
 
             <nav id="menu">
                 <ul class="menu">
@@ -169,6 +164,7 @@
         <!-- /Login Area -->
         @RenderBody()
     </div>
+
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)

@@ -86,15 +86,7 @@ jQuery(document).ready(function($){
 		defineErrorMessage(emailInput, isValidEmail);
 
 		if (!isValidEmail) {
-			event.preventDefault();
-			return;
-		}
-
-		var isValidPassword = validatePassword(passwordInput.val());
-		defineErrorMessage(passwordInput, isValidPassword);
-
-		if (!isValidPassword) {
-			event.preventDefault();
+		    event.preventDefault();
 			return;
 		}
 	});
@@ -136,6 +128,7 @@ jQuery(document).ready(function($){
 			event.preventDefault();
 			return;
 		}
+
 	});
 
 	function defineErrorMessage(formInput, isValid) {

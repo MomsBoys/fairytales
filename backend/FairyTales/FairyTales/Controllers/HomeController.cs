@@ -15,7 +15,8 @@ namespace FairyTales.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
-            return View();
+            MainPageData mpData = DBManager.MainPagePopulateTales();
+            return View(mpData);
         }
 	}
 }

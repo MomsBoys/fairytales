@@ -49,12 +49,14 @@ namespace FairyTales.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             string errorMessage;
+
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
+
                     var cookie = new HttpCookie("first_name", user.FirstName);
                     Response.SetCookie(cookie);
                     return JavaScript("location.reload(true)");
@@ -65,6 +67,7 @@ namespace FairyTales.Controllers
                     return PartialView("_ErrorPartial", errorMessage);
                 }
             }
+
             // If we got this far, something failed, redisplay form
             errorMessage = "Некоректний email або пароль.";
             return PartialView("_ErrorPartial", errorMessage);
@@ -86,6 +89,7 @@ namespace FairyTales.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             string errorMessage = string.Empty;
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser()
@@ -94,19 +98,24 @@ namespace FairyTales.Controllers
                     FirstName = model.FirstName,
                     SecondName = model.SecondName
                 };
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
+
                     var cookie = new HttpCookie("first_name", user.FirstName);
                     Response.SetCookie(cookie);
                     return JavaScript("location.reload(true)");
                 }
+
                 errorMessage = "Користувач з введеним email вже існує. Введіть інший email.";
                 return PartialView("_ErrorPartial", errorMessage);
-
             }
+
             errorMessage = "Пароль повинен містити мінімум 6 символів.";
+            
             // If we got this far, something failed, redisplay form
             return PartialView("_ErrorPartial", errorMessage);
         }
@@ -115,6 +124,7 @@ namespace FairyTales.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
         //
         // POST: /Account/Disassociate
         [HttpPost]
