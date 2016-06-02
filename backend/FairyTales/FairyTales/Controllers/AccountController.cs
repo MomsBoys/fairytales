@@ -48,6 +48,7 @@ namespace FairyTales.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            string errorMessage;
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
@@ -60,11 +61,13 @@ namespace FairyTales.Controllers
                 }
                 else
                 {
-                    return PartialView("_ErrorPartial", "Невірний email або пароль.");
+                    errorMessage = "Невірний email або пароль.";
+                    return PartialView("_ErrorPartial", errorMessage);
                 }
             }
             // If we got this far, something failed, redisplay form
-            return JavaScript("location.reload(true)");
+            errorMessage = "Некоректний email або пароль.";
+            return PartialView("_ErrorPartial", errorMessage);
         }
 
         //
@@ -82,7 +85,7 @@ namespace FairyTales.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            
+            string errorMessage;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser()
@@ -101,12 +104,13 @@ namespace FairyTales.Controllers
                 }
                 else
                 {
-                    return PartialView("_ErrorPartial", "Користувач з введеним email вже існує. Введіть інший email.");
+                    errorMessage = "Користувач з введеним email вже існує. Введіть інший email.";
+                    return PartialView("_ErrorPartial", errorMessage);
                 }
             }
-
+            errorMessage = "Некоректно введені дані.";
             // If we got this far, something failed, redisplay form
-            return JavaScript("location.reload(true)");
+            return PartialView("_ErrorPartial", errorMessage);
         }
 
         public ActionResult Redirect()
