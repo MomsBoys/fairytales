@@ -11,25 +11,23 @@ namespace FairyTales.Models
 {
     public class DBManager
     {
-        private static String _rootPath = "http://localhost:1599/Content/FairyTales";
-
-
-
+        private static String _rootPath = "http://localhost:1599/Content/Data";
+        
         public static MainPageData MainPagePopulateTales( )
         {
             DBFairytaleEntities context = new DBFairytaleEntities();
             
-
-            List<Tale> popular = context.Tales.Select(v => v).OrderByDescending(tale => tale.LikeCount).Take(4).ToList();
             List<Tale> latest = context.Tales.Select(v => v).OrderByDescending(tale => tale.Date).Take(5).ToList();
 
             foreach (var item in latest)
             {
-                string readText = File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data/text/" + item.Text), Encoding.Default);
+                string readText = File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data/" + item.Name + "/" + item.Text), Encoding.Default);
                 readText = readText.Remove(210, readText.Length - 210);
                 readText += "...";
                 item.Text = readText;
             }
+
+            List<Tale> popular = context.Tales.Select(v => v).OrderByDescending(tale => tale.LikeCount).Take(4).ToList();
             
             MainPageData data = new MainPageData() ;
             data.PopularIn(popular);
@@ -37,8 +35,6 @@ namespace FairyTales.Models
 
             return data;
         }
-
-
 
         public static List<Tale> GetShortTales(List<int> categories, List<int> types)
         {

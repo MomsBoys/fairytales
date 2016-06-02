@@ -21,6 +21,7 @@ namespace FairyTales.Entities
         }
     
         public int Tale_ID { get; set; }
+        public string Path { get; set; }
         public string Name { get; set; }
         public Nullable<int> Author_ID { get; set; }
         public string Text { get; set; }

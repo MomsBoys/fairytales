@@ -85,9 +85,6 @@
       <DependentUpon>FairyTalesModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>FairyTalesModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Tag.cs">
       <DependentUpon>FairyTalesModel.tt</DependentUpon>
     </Compile>
