@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using FairyTales.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FairyTales.Controllers
 {
@@ -15,8 +16,8 @@ namespace FairyTales.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                fairyTale.IsUserLiked = DbManager.IsUserLikedTaleWithId(fairyTale.Id, User.Identity.Name);
-                fairyTale.IsUserFavorited = DbManager.IsUserFavoritedTaleWithId(fairyTale.Id, User.Identity.Name);
+                fairyTale.IsUserLiked = DbManager.IsUserLikedTaleWithId(fairyTale.Id, User.Identity.GetUserId());
+                fairyTale.IsUserFavorited = DbManager.IsUserFavoritedTaleWithId(fairyTale.Id, User.Identity.GetUserId());
             }
 
             return View(fairyTale);

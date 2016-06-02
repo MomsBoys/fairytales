@@ -10,16 +10,16 @@ namespace FairyTales.Controllers
         // GET: Library
         public ActionResult LastAdded()
         {
-            ViewBag.Categories = DBManager.GetCategories();
-            ViewBag.Types = DBManager.GetTypes();
-            return View(DBManager.GetNewShortTales(null, null));   
+            ViewBag.Categories = DbManager.GetCategories();
+            ViewBag.Types = DbManager.GetTypes();
+            return View(DbManager.GetNewShortTales(null, null));   
         }
          
         public ActionResult Popular()
         {
-            ViewBag.Categories = DBManager.GetCategories();
-            ViewBag.Types = DBManager.GetTypes();
-            return View(DBManager.GetPopularShortTales(null, null));   
+            ViewBag.Categories = DbManager.GetCategories();
+            ViewBag.Types = DbManager.GetTypes();
+            return View(DbManager.GetPopularShortTales(null, null));   
         }
          
         [HttpPost]
@@ -46,14 +46,14 @@ namespace FairyTales.Controllers
 
             if (Request.Form["type"] == "popular")
             {
-                return PartialView(DBManager.GetPopularShortTales(categories, types));
+                return PartialView(DbManager.GetPopularShortTales(categories, types));
             }
             if (Request.Form["type"] == "lastadded")
             {
-                return PartialView(DBManager.GetNewShortTales(categories, types));
+                return PartialView(DbManager.GetNewShortTales(categories, types));
             }
 
-            return PartialView(DBManager.GetShortTales(categories, types));
+            return PartialView(DbManager.GetShortTales(categories, types));
         }
     }
 }

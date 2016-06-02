@@ -307,9 +307,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPartial.cshtml" />
     <Content Include="Views\Shared\_LoginSocial.cshtml" />
-    <Content Include="Views\Library\Index.cshtml" />
     <Content Include="Views\Library\ShortTaleView.cshtml" />
     <Content Include="Views\FairyTale\Index.cshtml" />
+    <Content Include="Views\Library\Filter.cshtml" />
+    <Content Include="Views\Library\LastAdded.cshtml" />
+    <Content Include="Views\Library\Popular.cshtml" />
+    <Content Include="Views\Library\_ShortTaleView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

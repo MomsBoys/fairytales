@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web;
 using FairyTales.Entities;
 using Type = FairyTales.Entities.Type;
-using System.Web.Mvc;
 
 namespace FairyTales.Models
 {
-<<<<<<< HEAD
-    public class DBManager
+    public static class DbManager
     {
         public const string RootPath = @"http://localhost:1599/Content/Data";
         
@@ -92,22 +89,40 @@ namespace FairyTales.Models
             return new FairyTale(fairyTale);
         }
 
-        public static bool IsUserLikedTaleWithId(int id, string email)
+        public static bool IsUserLikedTaleWithId(int id, string userId)
         {
-            var currentUser = CurrentUser(email);
-            return currentUser != null && currentUser.User_Tale.First(userTale => userTale.Tale_ID == id).IsLiked;
+            var currentUser = CurrentUser(userId);
+
+            if (currentUser == null)
+                return false;
+
+            var userTale = currentUser.User_Tale.FirstOrDefault(inUserTale => inUserTale.Tale_ID == id);
+
+            if (userTale == null)
+                return false;
+
+            return userTale.IsLiked;
         }
 
-        public static bool IsUserFavoritedTaleWithId(int id, string email)
+        public static bool IsUserFavoritedTaleWithId(int id, string userId)
         {
-            var currentUser = CurrentUser(email);
-            return currentUser != null && currentUser.User_Tale.First(userTale => userTale.Tale_ID == id).IsFavorite;
+            var currentUser = CurrentUser(userId);
+
+            if (currentUser == null)
+                return false;
+
+            var userTale = currentUser.User_Tale.FirstOrDefault(inUserTale => inUserTale.Tale_ID == id);
+
+            if (userTale == null)
+                return false;
+
+            return userTale.IsFavorite;
         }
 
-        public static AspNetUser CurrentUser(string email)
+        public static AspNetUser CurrentUser(string userId)
         {
             var users = new DBFairytaleEntities().AspNetUsers;
-            return users.FirstOrDefault(user => user.UserName.Equals(email));
+            return users.FirstOrDefault(user => user.Id.Equals(userId));
         }
 
         public static Author GetAuthorByTale(int id)

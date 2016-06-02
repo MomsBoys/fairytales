@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using FairyTales.Entities;
+using System.Text;
 
 namespace FairyTales.Models
 {
@@ -8,7 +10,13 @@ namespace FairyTales.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Text { get; set; }
+
+        private string _text;
+        public string Text
+        {
+            get { return File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data/" + Name + "/" + _text), Encoding.Default); ; }
+            set { _text = value; }
+        }
         
         private string _cover;
         public string Cover
@@ -38,19 +46,9 @@ namespace FairyTales.Models
             Path = tale.Path;
         }
 
-        private bool _isUserLiked;
-        public bool IsUserLiked
-        {
-            get { return _isUserLiked; }
-            set { _isUserLiked = value; }
-        }
+        public bool IsUserLiked { get; set; }
 
-        private bool _isUserFavorited;
-        public bool IsUserFavorited
-        {
-            get { return _isUserFavorited; }
-            set { _isUserLiked = value; }
-        }
+        public bool IsUserFavorited { get; set; }
 
         public DateTime Date { get; set; }
         public string Path { get; set; }
