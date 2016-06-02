@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Головна";
+}
+@model MainPageData
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" /> 
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="apple-touch-icon" href="images/apple-icon-touch.png" />
+    <script type="text/javascript" src="Scripts/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="Scripts/modernizr.js"></script>
+    <script type="text/javascript" src="Scripts/homeslider.js"></script>
+    <script type="text/javascript" src="Scripts/login.js"></script>
+    <script type="text/javascript" src="Scripts/navigation.js"></script>
+</head>
+<body>
+    <div id="Wrapper"> 
+        <div id="Content">
+            <div id="slider">
+                <div class="slider-container">
+                    <div class="page_container">
+                        <div id="slider-info" class="slider-info">
+                            @foreach (var tale in MainPageData.PopularTales)
+                            {
+                                <div class="slide">
+                                    <h2>
+                                        <a href="article.html">@tale.Name</a>
+                                    </h2>
+                                    <div class="image">
+                                        <img src="~/Content/FairyTales/img/@tale.Cover" alt="Slide 1" />
+                                    </div>
+                                </div>
+                            } 
+                            <div class="is-nav">
+                                <ul class="slider-direction-nav">
+                                    <li><a href="#" class="is-prev">Previous</a></li>
+                                    <li><a href="#" class="is-next">Next</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- #slider -->
+            <div class="container"> 
+                <section id="primary">
+                    <div class="content">
+                        <h1 class="content-title">
+                            <a href="library.html">Останні додані</a>
+                        </h1>
+                    @foreach (var tale in MainPageData.LatestTales)
+                    {
+                        <article class="post">
+                            <a href="article.html">
+                                <img width="305" src="~/Content/FairyTales/img/@tale.Cover" class="post-image" />
+                            </a>
+                            <div class="post-right">
+                                @if (tale.Audio != null)
+                                {<a href="#" class="audio">Audio</a> } 
+                                <h2 class="entry-title">
+                                    <a href="article.html">@tale.Name</a>
+                                </h2>
+                                <div class="entry-meta">
+                                    <span class="date"><i class="icon-calendar"></i>@tale.Date.ToShortDateString()</span>
+                                    @if (tale.Author_ID != null)
+                                    {
+                                        <span class="author"><i class="icon-user"></i><a href="#">@tale.Author.FirstName @tale.Author.LastName</a></span>}
+                                    else
+                                    {<span class="author"><i class="icon-user"></i><a href="#">Народна</a></span>
+                                    }
+                                </div>
+                                <div class="entry-content">@tale.Text</div>
+                            </div><!-- .post-right -->
+                        </article><!-- .post -->
+                    } 
+                    </div><!-- .content -->
+                </section><!-- #primary -->
+                <p id="back-top">
+                    <a href="#top"><span></span></a>
+                </p><!-- #back-top -->
+            </div><!-- .container -->
+        </div><!-- #Content -->
+    </div><!-- #Wrapper -->
+    <script type="text/javascript">
+		$("#slider-info").immersive_slider({
+			animation: "slide",
+			cssBlur: true
+		});
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FairyTales", "FairyTales\FairyTales.csproj", "{9C9DEFF1-E396-47A8-9D1E-454A56FCB5AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FairyTales.Entities", "FairyTales.Entities\FairyTales.Entities.csproj", "{19DF59C4-2822-41B8-977D-8785F9493F76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C9DEFF1-E396-47A8-9D1E-454A56FCB5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9DEFF1-E396-47A8-9D1E-454A56FCB5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9DEFF1-E396-47A8-9D1E-454A56FCB5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9DEFF1-E396-47A8-9D1E-454A56FCB5AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DF59C4-2822-41B8-977D-8785F9493F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DF59C4-2822-41B8-977D-8785F9493F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DF59C4-2822-41B8-977D-8785F9493F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DF59C4-2822-41B8-977D-8785F9493F76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
