@@ -50,12 +50,16 @@ namespace FairyTales.Models
                     result.Add(item);
                 }
             }
+
             foreach (var item in result)
             {
                 item.Cover = $"{_rootPath}/{item.Name}/{item.Cover}";
-                item.Text = $"{_rootPath}/{item.Name}/{item.Text}"; 
+                string readText = File.ReadAllText($"{System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data")}/{item.Name}/{item.Text}", Encoding.Default);
+                readText = readText.Remove(210, readText.Length - 210);
+                readText += "...";
+                item.Text = readText;
             }
-            // a = a.OrderBy(v => v.Name).Reverse().ToList();
+
             return result;
         }
 
@@ -63,6 +67,16 @@ namespace FairyTales.Models
         {
             DBFairytaleEntities context = new DBFairytaleEntities();
             return context.Categories.Select(v => v).ToList();
+        }
+
+        public static List<Tale> GetNewShortTales(List<int> categories, List<int> types)
+        {
+            return GetShortTales(categories, types).OrderByDescending(c=>c.Date).ToList();
+        }
+
+        public static List<Tale> GetPopularShortTales(List<int> categories, List<int> types)
+        {
+            return GetShortTales(categories, types).OrderByDescending(c=>c.LikeCount).ToList();
         }
 
         public static List<Type> GetTypes()

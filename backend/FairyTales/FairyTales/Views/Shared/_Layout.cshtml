@@ -3,12 +3,13 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - Mom's stories</title>
+    <title>@ViewBag.Title - Mom's Stories</title>
     <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="shortcut icon" href="~/images/favicon.png"/>
     <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png"/>
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
 <div id="Wrapper">
@@ -20,13 +21,14 @@
                     <img src="~/images/logo.png" alt="Mom's Stories" />
                 </a>
             </div><!-- #logo -->
+
             @Html.Partial("_LoginPartial")
 
             <nav id="menu">
                 <ul class="menu">
                     <li class="current-menu-item"><a href="/">Головна</a></li>
-                    <li><a href="/Library">Бібліотека </a></li>
-                    <li><a href="/Contact">Контакти</a></li>
+                    <li><a href="/library/lastadded">Бібліотека</a></li>
+                    <li><a href="/contact">Контакти</a></li>
                 </ul>
                 <a href="#search" class="cd-search-trigger cd-text-replace"></a>
             </nav><!-- #menu -->
@@ -34,6 +36,7 @@
             <a href="#" class="responsive-menu-toggle"><i class="icon-reorder"></i></a>
         </div><!-- .container -->
     </div><!-- #Header -->
+
     <div id="search" class="cd-main-search">
         <form>
             <input type="search" placeholder="Пошук...">
@@ -74,7 +77,7 @@
         </div> <!-- .cd-search-suggestions -->
         <a href="#0" class="close cd-text-replace">Close Form</a>
     </div> <!-- .cd-main-search -->
-    <!--</div>&lt;!&ndash; #Header &ndash;&gt;-->
+
         <!-- Login Area -->
         <div class="cd-user-modal">
             <div class="cd-user-modal-container">
@@ -162,11 +165,12 @@
             </div>
         </div>
         <!-- /Login Area -->
+        
         @RenderBody()
-    </div>
+</div>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+
 </body>
 </html>

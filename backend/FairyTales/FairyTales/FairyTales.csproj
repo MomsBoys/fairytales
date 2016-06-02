@@ -164,6 +164,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\UserSocialController.cs" />
     <Compile Include="Global.asax.cs">
@@ -231,8 +232,10 @@
     <Content Include="images\slider-next.png" />
     <Content Include="images\slider-prev.png" />
     <Content Include="images\up-arrow.png" />
+    <Content Include="images\uparrow.png" />
     <Content Include="images\vk-icon.jpg" />
     <Content Include="images\vk-icon.png" />
+    <Content Include="Scripts\audioplayer.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="css\fontawesome\fontawesome-ie7.less" />
@@ -245,7 +248,12 @@
     <Content Include="css\fontawesome\fontawesome.scss" />
     <Content Include="css\fonts\CyrillicChancellor.ttf" />
     <Content Include="css\fonts\Isabella-Decor.ttf" />
+    <Content Include="images\cd-icon-filter.sketch" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\contact_validation.js" />
+    <Content Include="Scripts\filter-main.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\homeslider.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -254,6 +262,7 @@
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.mixitup.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -294,6 +303,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPartial.cshtml" />
     <Content Include="Views\Shared\_LoginSocial.cshtml" />
+    <Content Include="Views\Library\Index.cshtml" />
+    <Content Include="Views\Library\ShortTaleView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
