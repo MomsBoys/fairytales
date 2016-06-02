@@ -75,12 +75,10 @@ jQuery(document).ready(function($){
 	}
 
 	function validatePassword(password) {
-		return password.length >= 8;
+		return password.length > 0;
 	}
 
 	formLogin.find('input[type="submit"]').on('click', function(event) {
-		
-
 		var emailInput = formLogin.find('input[type="email"]');
 		var passwordInput = formLogin.find('#signin-password');
 
@@ -88,23 +86,20 @@ jQuery(document).ready(function($){
 		defineErrorMessage(emailInput, isValidEmail);
 
 		if (!isValidEmail) {
-		    event.preventDefault();
+			event.preventDefault();
 			return;
 		}
 
-		defineErrorMessage(passwordInput, false, "HELLO");
+		var isValidPassword = validatePassword(passwordInput.val());
+		defineErrorMessage(passwordInput, isValidPassword);
 
-		// var isValidPassword = validatePassword(passwordInput.val());
-		// defineErrorMessage(passwordInput, isValidPassword);
-
-		// if (!isValidPassword) {
-		// 	return;
-		// }
+		if (!isValidPassword) {
+			event.preventDefault();
+			return;
+		}
 	});
 
 	formSignup.find('input[type="submit"]').on('click', function(event) {
-		// 
-
 		var emailInput = formSignup.find('input[type="email"]');
 		var firstNameInput = formSignup.find('#signup-firstname');
 		var lastNameInput = formSignup.find('#signup-lastname');
@@ -141,16 +136,9 @@ jQuery(document).ready(function($){
 			event.preventDefault();
 			return;
 		}
-
 	});
 
-	function defineErrorMessage(formInput, isValid, message = '') {
-		console.log(formInput.next('span'));
-
-		if (message.length > 0) {
-			formInput.next('span').innerHTML = message;
-		}
-
+	function defineErrorMessage(formInput, isValid) {
 		if (isValid) {
 			formInput.removeClass('has-error').next('span').removeClass('is-visible');
 		} else {

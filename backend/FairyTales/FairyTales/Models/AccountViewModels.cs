@@ -31,6 +31,7 @@ namespace FairyTales.Models
     public class LoginViewModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
@@ -48,6 +49,7 @@ namespace FairyTales.Models
     public class RegisterViewModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 

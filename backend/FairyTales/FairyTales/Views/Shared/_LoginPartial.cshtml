@@ -1,20 +1,22 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    <text>
-        Привіт, @User.Identity.GetUserName()!
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    <div id="login">
+    
+        Привіт,
+        @if (Request.Cookies["first_name"] != null)
+        {
+            @Request.Cookies["first_name"].Value
+        }!
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm"}))
         {
             @Html.AntiForgeryToken()
             <a href="javascript:document.getElementById('logoutForm').submit()">Вихід</a>
         }
-    </text>
+    
+    </div>
 }
 else
 {
     <a href="#0" class="cd-signin" id="login">Вхід</a>
-    @*<ul>
-            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-        </ul>*@
 }
