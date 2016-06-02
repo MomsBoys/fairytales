@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FairyTales.Entities;
 
 namespace FairyTales.Models
@@ -55,5 +56,7 @@ namespace FairyTales.Models
         public string Path { get; set; }
 
         public Author Author => DbManager.GetAuthorByTale(Id);
+
+        public List<Tag> Tags => DbManager.GetTagsByTale(Id);
     }
 }

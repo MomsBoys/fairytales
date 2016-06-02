@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using FairyTales.Entities;
 using Type = FairyTales.Entities.Type;
@@ -73,6 +74,13 @@ namespace FairyTales.Models
         {
             var tales = new DBFairytaleEntities().Tales;
             return tales.FirstOrDefault(tale => tale.Tale_ID == id)?.Author;
+        }
+
+        public static List<Tag> GetTagsByTale(int id)
+        {
+            var dbModel = new DBFairytaleEntities();
+            var tale = dbModel.Tales.First(inTale => inTale.Tale_ID == id);
+            return tale.Tale_Tag.ToList().Select(taleTag => dbModel.Tags.First(tag => tag.Tag_ID == taleTag.Tag_ID)).ToList();
         }
     }
 }
