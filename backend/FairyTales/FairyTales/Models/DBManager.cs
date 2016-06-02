@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using FairyTales.Entities;
 using Type = FairyTales.Entities.Type;
+using System.Web.Mvc;
 
 namespace FairyTales.Models
 {
-    public class DBManager
-    { 
-        private static String _rootPath = "http://localhost:1599/Content/Data";
-         
+    public static class DbManager
+    {
+        public const string RootPath = @"http://localhost:1599/Content/Data";
+
         public static List<Tale> GetShortTales(List<int> categories, List<int> types)
         {
             DBFairytaleEntities context = new DBFairytaleEntities();
@@ -28,13 +26,13 @@ namespace FairyTales.Models
             }
             foreach (var item in result)
             {
-                item.Cover = $"{_rootPath}/{item.Name}/{item.Cover}";
-                item.Text = $"{_rootPath}/{item.Name}/{item.Text}";
+                item.Cover = $"{RootPath}/{item.Name}/{item.Cover}";
+                item.Text = $"{RootPath}/{item.Name}/{item.Text}";
             }
             // a = a.OrderBy(v => v.Name).Reverse().ToList();
             return result;
         }
-        
+
         public static List<Category> GetCategories()
         {
             DBFairytaleEntities context = new DBFairytaleEntities();
@@ -46,6 +44,35 @@ namespace FairyTales.Models
             DBFairytaleEntities context = new DBFairytaleEntities();
             return context.Types.Select(v => v).ToList(); 
         }
-        
+
+        public static FairyTale GetTaleByPath(string path)
+        {
+            var fairyTale = new DBFairytaleEntities().Tales.FirstOrDefault(tale => tale.Path.Equals(path));
+            return new FairyTale(fairyTale);
+        }
+
+        public static bool IsUserLikedTaleWithId(int id, string email)
+        {
+            var currentUser = CurrentUser(email);
+            return currentUser != null && currentUser.User_Tale.First(userTale => userTale.Tale_ID == id).IsLiked;
+        }
+
+        public static bool IsUserFavoritedTaleWithId(int id, string email)
+        {
+            var currentUser = CurrentUser(email);
+            return currentUser != null && currentUser.User_Tale.First(userTale => userTale.Tale_ID == id).IsFavorite;
+        }
+
+        public static AspNetUser CurrentUser(string email)
+        {
+            var users = new DBFairytaleEntities().AspNetUsers;
+            return users.FirstOrDefault(user => user.UserName.Equals(email));
+        }
+
+        public static Author GetAuthorByTale(int id)
+        {
+            var tales = new DBFairytaleEntities().Tales;
+            return tales.FirstOrDefault(tale => tale.Tale_ID == id)?.Author;
+        }
     }
 }

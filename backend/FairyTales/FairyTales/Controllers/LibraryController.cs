@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Web;
 using System.Web.Mvc;
-using FairyTales.Entities;
 using FairyTales.Models;
 
 namespace FairyTales.Controllers
@@ -15,9 +11,9 @@ namespace FairyTales.Controllers
         public ActionResult Index()
         {
             int i = Request.Form.AllKeys.Count();
-            ViewBag.Categories = DBManager.GetCategories();
-            ViewBag.Types = DBManager.GetTypes();
-            return View(DBManager.GetShortTales(null, null));   
+            ViewBag.Categories = DbManager.GetCategories();
+            ViewBag.Types = DbManager.GetTypes();
+            return View(DbManager.GetShortTales(null, null));   
         }
          
         [HttpPost]
@@ -42,7 +38,7 @@ namespace FairyTales.Controllers
                 }
 
             }
-            return PartialView(DBManager.GetShortTales(categories, types));
+            return PartialView(DbManager.GetShortTales(categories, types));
         }
     }
 }

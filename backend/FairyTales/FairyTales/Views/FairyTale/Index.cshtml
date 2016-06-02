@@ -1,0 +1,55 @@
+﻿@model FairyTales.Models.FairyTale
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div id="Content">
+    <div class="container">
+        <section id="primary">
+            <div class="content">
+                <article class="post article">
+                    <img width="305" src="@Model.Cover" class="post-image" />
+
+                    <div class="post-right">
+                        <div class="article-top">
+                            @{
+                                var likesCount = new HtmlString(string.Format(" ({0})", @Model.LikeCount));
+                            }
+                            <a href="#" class="article-like@{if (@Model.IsUserLiked){@Html.Raw(" is-selected")}}">Подобається@{if (!@Model.LikeCount.Equals(0)){@Html.Raw(likesCount)}}</a>
+                            <a href="#" class="article-favorite@{if (@Model.IsUserFavorited){@Html.Raw(" is-selected")}} ">В улюблені</a>
+                        </div>
+
+                        <h2 class="entry-title">@Model.Name</h2>
+
+                        <div class="entry-meta">
+                            <span class="date"><i class="icon-calendar"></i>@Model.Date.ToShortDateString()</span>
+                            @if (Model.Author != null)
+                            {
+                                <span class="author"><i class="icon-user"></i><a href="#">@string.Format("{0} {1}", @Model.Author.FirstName, @Model.Author.LastName)</a></span>
+                            }
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.Audio))
+                        {
+                            <div class="player">
+                                <audio preload="auto" controls>
+                                    <source src="@Model.Audio">
+                                </audio>
+                                <script src="../../Scripts/jquery-1.10.2.js"></script>
+                                <script src="../../Scripts/audioplayer.js"></script>
+                                <script>$(function() { $('audio').audioPlayer(); });</script>
+                            </div>
+                        }
+
+                        <div class="entry-content">@Html.Raw(@Model.Text)</div>
+                    </div><!-- .post-right -->
+                </article><!-- .post -->
+            </div><!-- .content -->
+        </section><!-- #primary -->
+
+        <p id="back-top">
+            <a href="#top"><span></span></a>
+        </p><!-- #back-top -->
+    </div><!-- .container -->
+</div><!-- #Content -->
