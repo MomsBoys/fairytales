@@ -32,7 +32,6 @@ namespace FairyTales.Entities
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Tale> Tales { get; set; }
         public virtual DbSet<Tale_Tag> Tale_Tag { get; set; }
