@@ -73,13 +73,22 @@
                         <input class="full-width" type="submit" value="Авторизуватися">
                     </p>
 
-                    <p class="fieldset" style="margin-bottom: 30px;">
+                    <!--
+                   <p class="fieldset" style="margin-bottom: 30px;">
                         <a class="full-width has-padding has-border signin-social" id="signin-facebook" href="#">Увійти через Facebook</a>
                     </p>
 
                     <p class="fieldset">
                         <a class="full-width has-padding has-border signin-social" id="signin-vk" href="#">Увійти через VK</a>
                     </p>
+                    -->
+
+                    <!-- uLogin - авторизація через соц мережі -->
+                    <script src="//ulogin.ru/js/ulogin.js"></script>
+                    <div id="uLogin" data-ulogin="display=panel;fields=first_name,last_name;
+                         providers=vkontakte,facebook,google;
+                         redirect_uri=http%3A%2F%2Flocalhost%3A1599%2FUserSocial%2FLogin"></div>
+                
                 </form>
             </div>
 
