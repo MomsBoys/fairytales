@@ -73,13 +73,13 @@ namespace FairyTales.Controllers
 
             }
              
-            if (id == 2)
-            {
-                return PartialView(DBManager.GetNewShortTales(categories, types));
-            }
-            if (id == 1)
+            if (Request.Form["type"] == "popular")
             {
                 return PartialView(DBManager.GetPopularShortTales(categories, types));
+            }
+            if (Request.Form["type"] == "lastadded")
+            {
+                return PartialView(DBManager.GetNewShortTales(categories, types));
             }
 
             return PartialView(DBManager.GetShortTales(categories, types));

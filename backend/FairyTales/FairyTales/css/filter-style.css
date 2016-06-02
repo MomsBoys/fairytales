@@ -649,3 +649,19 @@ xcustom form elements
     margin: 0;
     list-style: none;
 }
+
+#filter #filter-submit {
+     margin-top: 20px;
+     padding: 10px;
+     background: #268679;
+     color: #f3f3f3;
+     border: none;
+     position: absolute;
+     box-shadow: 0px 0px 10px rgba(20, 20, 20, 0.5);
+     left: 25%;
+     cursor: pointer;
+ }
+ 
+ #filter #filter-submit:hover {
+    opacity: 0.8;
+  }
