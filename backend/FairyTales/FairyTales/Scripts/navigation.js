@@ -2,17 +2,10 @@ $(document).ready(function () {
     /* Add class current-menu-item to tags */
     var pgurl = window.location.pathname;
 
-    /* Check if current page is homepage */
-    $("#menu ul li.menu-item-home a").each(function () {
-        if ($(this).attr("href") == '/index.php') {
-            $(this).parent().addClass("current-menu-item");
-        }
-    });
-
     /* Check if current page is category page level 1 */
     $("#menu ul li a").each(function () {
-        if ($(this).attr("href") == pgurl || $(this).attr("href") == '') {
-            $('#menu ul li').removeClass("current-menu-item");
+        if ($(this).attr("href") === pgurl || $(this).attr("href") === "") {
+            $("#menu ul li").removeClass("current-menu-item");
             $(this).parent().addClass("current-menu-item");
         }
     });
