@@ -25,7 +25,7 @@ namespace FairyTales.Models
 
             foreach (var item in latest)
             {
-                string readText = File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/FairyTales/text/" + item.Text), Encoding.Default);
+                string readText = File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data/text/" + item.Text), Encoding.Default);
                 readText = readText.Remove(210, readText.Length - 210);
                 readText += "...";
                 item.Text = readText;

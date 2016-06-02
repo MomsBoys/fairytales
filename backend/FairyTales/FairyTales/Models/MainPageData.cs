@@ -8,14 +8,9 @@ namespace FairyTales
 {
     public class MainPageData
     {
-        public static List<Tale> PopularTales;
-        public static List<Tale> LatestTales;
-
-        static  MainPageData()
-        {
-            PopularTales = new List<Tale>();
-            LatestTales = new List<Tale>(); 
-        }
+        public  List<Tale> PopularTales;
+        public  List<Tale> LatestTales;
+ 
 
         public void LatestIn(List<Tale> latest)
         {

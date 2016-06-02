@@ -22,14 +22,14 @@
                 <div class="slider-container">
                     <div class="page_container">
                         <div id="slider-info" class="slider-info">
-                            @foreach (var tale in MainPageData.PopularTales)
+                            @foreach (var tale in Model.PopularTales)
                             {
                                 <div class="slide">
                                     <h2>
                                         <a href="article.html">@tale.Name</a>
                                     </h2>
                                     <div class="image">
-                                        <img src="~/Content/FairyTales/img/@tale.Cover" alt="Slide 1" />
+                                        <img src="~/Content/Data/img/@tale.Cover" alt="Slide 1" />
                                     </div>
                                 </div>
                             } 
@@ -49,11 +49,11 @@
                         <h1 class="content-title">
                             <a href="library.html">Останні додані</a>
                         </h1>
-                    @foreach (var tale in MainPageData.LatestTales)
+                    @foreach (var tale in Model.LatestTales)
                     {
                         <article class="post">
                             <a href="article.html">
-                                <img width="305" src="~/Content/FairyTales/img/@tale.Cover" class="post-image" />
+                                <img width="305" src="~/Content/Data/img/@tale.Cover" class="post-image" />
                             </a>
                             <div class="post-right">
                                 @if (tale.Audio != null)

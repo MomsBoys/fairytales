@@ -165,7 +165,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\MainPageData.cs" />
+    <Compile Include="Models\MainPageData.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DBManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -175,42 +175,6 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\FairyTales\audio\1.mp3" />
-    <Content Include="Content\FairyTales\audio\10.mp3" />
-    <Content Include="Content\FairyTales\audio\11.mp3" />
-    <Content Include="Content\FairyTales\audio\12.mp3" />
-    <Content Include="Content\FairyTales\audio\2.mp3" />
-    <Content Include="Content\FairyTales\audio\3.mp3" />
-    <Content Include="Content\FairyTales\audio\4.mp3" />
-    <Content Include="Content\FairyTales\audio\5.mp3" />
-    <Content Include="Content\FairyTales\audio\6.mp3" />
-    <Content Include="Content\FairyTales\audio\7.mp3" />
-    <Content Include="Content\FairyTales\audio\8.mp3" />
-    <Content Include="Content\FairyTales\audio\9.mp3" />
-    <Content Include="Content\FairyTales\img\1.jpg" />
-    <Content Include="Content\FairyTales\img\10.jpg" />
-    <Content Include="Content\FairyTales\img\11.jpg" />
-    <Content Include="Content\FairyTales\img\12.jpg" />
-    <Content Include="Content\FairyTales\img\2.jpg" />
-    <Content Include="Content\FairyTales\img\3.jpg" />
-    <Content Include="Content\FairyTales\img\4.jpg" />
-    <Content Include="Content\FairyTales\img\5.jpg" />
-    <Content Include="Content\FairyTales\img\6.jpg" />
-    <Content Include="Content\FairyTales\img\7.jpg" />
-    <Content Include="Content\FairyTales\img\8.jpg" />
-    <Content Include="Content\FairyTales\img\9.jpg" />
-    <Content Include="Content\FairyTales\text\1.txt" />
-    <Content Include="Content\FairyTales\text\10.txt" />
-    <Content Include="Content\FairyTales\text\11.txt" />
-    <Content Include="Content\FairyTales\text\12.txt" />
-    <Content Include="Content\FairyTales\text\2.txt" />
-    <Content Include="Content\FairyTales\text\3.txt" />
-    <Content Include="Content\FairyTales\text\4.txt" />
-    <Content Include="Content\FairyTales\text\5.txt" />
-    <Content Include="Content\FairyTales\text\6.txt" />
-    <Content Include="Content\FairyTales\text\7.txt" />
-    <Content Include="Content\FairyTales\text\8.txt" />
-    <Content Include="Content\FairyTales\text\9.txt" />
     <Content Include="Content\style.css" />
     <Content Include="css\filter-reset.css" />
     <Content Include="css\filter-style.css" />
@@ -319,7 +283,9 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
