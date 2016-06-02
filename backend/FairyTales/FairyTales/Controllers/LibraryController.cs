@@ -12,16 +12,46 @@ namespace FairyTales.Controllers
     public class LibraryController : Controller
     {
         // GET: Library
-        public ActionResult Index()
+        public ActionResult LastAdded()
         {
-            int i = Request.Form.AllKeys.Count();
+            string a = "";
+            List<String> L = new List<string>();
+            
+            if (Request.Cookies["hyi"] == null)
+            {
+                Response.SetCookie(new HttpCookie("hyi", "0"));
+            }
+            else
+            {
+                a = Request.Cookies["hyi"].Value;
+            }
+            
+            Response.Cookies["hyi"].Value = a + "1";
             ViewBag.Categories = DBManager.GetCategories();
             ViewBag.Types = DBManager.GetTypes();
-            return View(DBManager.GetShortTales(null, null));   
+            return View(DBManager.GetNewShortTales(null, null));   
+        }
+         
+        public ActionResult Popular()
+        {
+            string a = "";
+            if (Request.Cookies["hyi"] == null)
+            {
+                Response.SetCookie(new HttpCookie("hyi", "0"));
+            }
+            else
+            {
+                a = Request.Cookies["hyi"].Value;
+            }
+              
+            Response.Cookies["hyi"].Value = a + "1";
+            ViewBag.Categories = DBManager.GetCategories();
+            ViewBag.Types = DBManager.GetTypes();
+            return View(DBManager.GetPopularShortTales(null, null));   
         }
          
         [HttpPost]
-        public ActionResult Filter()
+        public ActionResult Filter(int? id)
         {
             List<int> categories = null, types = null;
 
@@ -42,6 +72,16 @@ namespace FairyTales.Controllers
                 }
 
             }
+             
+            if (id == 2)
+            {
+                return PartialView(DBManager.GetNewShortTales(categories, types));
+            }
+            if (id == 1)
+            {
+                return PartialView(DBManager.GetPopularShortTales(categories, types));
+            }
+
             return PartialView(DBManager.GetShortTales(categories, types));
         }
     }

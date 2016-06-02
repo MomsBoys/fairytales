@@ -60,15 +60,7 @@ jQuery(document).ready(function($){
 			scrollTop = $(window).scrollTop();
 		( scrollTop >= offsetTop ) ? $('.cd-main-content').addClass('is-fixed') : $('.cd-main-content').removeClass('is-fixed');
 	}
-
-	/************************************
-		MitItUp filter settings
-		More details: 
-		https://mixitup.kunkalabs.com/
-		or:
-		http://codepen.io/patrickkunka/
-	*************************************/
-
+      
 	buttonFilter.init();
 	$('.cd-gallery ul').mixItUp({
 	    controls: {
@@ -122,11 +114,7 @@ jQuery(document).ready(function($){
 	  	}, 200 );
 	});
 });
-
-/*****************************************************
-	MixItUp - Define a single object literal 
-	to contain all filter custom functionality
-*****************************************************/
+ 
 var buttonFilter = {
   	// Declare any variables we will need as properties of the object
   	$filters: null,
