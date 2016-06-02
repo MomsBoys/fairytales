@@ -85,7 +85,7 @@ namespace FairyTales.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            string errorMessage;
+            string errorMessage = string.Empty;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser()
@@ -102,13 +102,11 @@ namespace FairyTales.Controllers
                     Response.SetCookie(cookie);
                     return JavaScript("location.reload(true)");
                 }
-                else
-                {
-                    errorMessage = "Користувач з введеним email вже існує. Введіть інший email.";
-                    return PartialView("_ErrorPartial", errorMessage);
-                }
+                errorMessage = "Користувач з введеним email вже існує. Введіть інший email.";
+                return PartialView("_ErrorPartial", errorMessage);
+
             }
-            errorMessage = "Некоректно введені дані.";
+            errorMessage = "Пароль повинен містити мінімум 6 символів.";
             // If we got this far, something failed, redisplay form
             return PartialView("_ErrorPartial", errorMessage);
         }

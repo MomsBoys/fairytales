@@ -18,6 +18,8 @@ namespace FairyTales
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*",
+                         "~/Scripts/search.js",
+                        "~/Scripts/jquery-2.1.4.js",
                         "~/Scripts/jquery-1.11.0.min.js",
                         "~/Scripts/modernizr.js",
                         "~/Scripts/homeslider.js",
