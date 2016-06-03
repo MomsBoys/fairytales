@@ -20,8 +20,12 @@
             {
                 <span class="author"><i class="icon-user"></i><a href="#">@String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName)</a></span>
             }
+            else
+            {
+                <span class="author"><i class="icon-user"></i><a href="#">Народна</a></span>
+            }
         </div>
 
-        <div class="entry-content">@Html.Raw(@Model.Text)</div>
+        <div class="entry-content">@Html.Raw(@Model.ShortDescription ?? "")</div>
     </div><!-- .post-right -->
 </article><!-- .post -->

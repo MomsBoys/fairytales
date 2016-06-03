@@ -28,6 +28,10 @@
                             {
                                 <span class="author"><i class="icon-user"></i><a href="#">@string.Format("{0} {1}", @Model.Author.FirstName, @Model.Author.LastName)</a></span>
                             }
+                            else
+                            {
+                                <span class="author"><i class="icon-user"></i><a href="#">Народна</a></span>
+                            }
                         </div>
 
                         @if (!string.IsNullOrWhiteSpace(Model.Audio))

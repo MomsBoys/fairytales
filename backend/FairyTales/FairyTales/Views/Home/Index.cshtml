@@ -43,7 +43,7 @@
                         </a>
                         <div class="post-right">
                             @if (tale.Audio != null)
-                            {<a href="#" class="audio">Audio</a> } 
+                            {<a href="#" class="audio">Аудіо</a> } 
                             <h2 class="entry-title">
                                 <a href="/tales/@tale.Path">@tale.Name</a>
                             </h2>
@@ -56,7 +56,7 @@
                                 {<span class="author"><i class="icon-user"></i><a href="#">Народна</a></span>
                                 }
                             </div>
-                            <div class="entry-content">@tale.Text</div>
+                            <div class="entry-content">@Html.Raw(tale.ShortDescription ?? "")</div>
                         </div><!-- .post-right -->
                     </article><!-- .post -->
                 } 
