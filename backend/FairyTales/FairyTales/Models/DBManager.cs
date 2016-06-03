@@ -5,7 +5,7 @@ using System.Text;
 using FairyTales.Entities;
 using Type = FairyTales.Entities.Type;
 
-namespace FairyTales
+namespace FairyTales.Models
 {
     public static class DbManager
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FairyTales.Entities;
 
-namespace FairyTales
+namespace FairyTales.Models
 {
     public class MainPageData
     {

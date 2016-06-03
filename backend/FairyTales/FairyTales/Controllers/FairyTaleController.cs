@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using FairyTales.Models;
 using Microsoft.AspNet.Identity;
 
 namespace FairyTales.Controllers

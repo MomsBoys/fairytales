@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.IO;
+using FairyTales.Models;
 using Newtonsoft.Json.Linq;
 
 namespace FairyTales.Controllers
