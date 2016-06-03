@@ -5,7 +5,7 @@ using System.Text;
 using FairyTales.Entities;
 using Type = FairyTales.Entities.Type;
 
-namespace FairyTales.Models
+namespace FairyTales
 {
     public static class DbManager
     {
@@ -13,34 +13,23 @@ namespace FairyTales.Models
         
         public static MainPageData MainPagePopulateTales( )
         {
-            DBFairytaleEntities context = new DBFairytaleEntities();
-            
-            List<Tale> latest = context.Tales.Select(v => v).OrderByDescending(tale => tale.Date).Take(5).ToList();
+            var latest = GetRecentShortTales(5);
+            var popular = GetPopularShortTales(4);
 
-            foreach (var item in latest)
+            return new MainPageData
             {
-                string readText = File.ReadAllText(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data/" + item.Name + "/" + item.Text), Encoding.Default);
-                readText = readText.Remove(210, readText.Length - 210);
-                readText += "...";
-                item.Text = readText;
-            }
-
-            List<Tale> popular = context.Tales.Select(v => v).OrderByDescending(tale => tale.LikeCount).Take(4).ToList();
-            
-            MainPageData data = new MainPageData() ;
-            data.PopularIn(popular);
-            data.LatestIn(latest);
-
-            return data;
+                LatestTales = latest,
+                PopularTales = popular
+            };
         }
 
         public static List<Tale> GetShortTales(List<int> categories, List<int> types)
         {
-            DBFairytaleEntities context = new DBFairytaleEntities();
-            List<Tale> a = context.Tales.Select(v => v).ToList();
-            List<Tale> result = new List<Tale>();
+            var context = new DBFairytaleEntities();
+            var tales = context.Tales.Select(v => v).ToList();
+            var result = new List<Tale>();
 
-            foreach (var item in a)
+            foreach (var item in tales)
             {
                 if ((categories == null || categories.Count == 0 || categories.Any(c => c == item.Category_ID))
                     && (types == null || types.Count == 0 || types.Any(c => c == item.Type_ID)))
@@ -51,8 +40,8 @@ namespace FairyTales.Models
 
             foreach (var item in result)
             {
-                item.Cover = $"{RootPath}/{item.Name}/{item.Cover}";
-                string readText = File.ReadAllText($"{System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data")}/{item.Name}/{item.Text}", Encoding.Default);
+                item.Cover = string.Format("{0}/{1}/{2}", RootPath, item.Name, item.Cover);
+                var readText = File.ReadAllText(string.Format("{0}/{1}/{2}", System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data"), item.Name, item.Text), Encoding.Default);
                 readText = readText.Remove(210, readText.Length - 210);
                 readText += "...";
                 item.Text = readText;
@@ -63,8 +52,18 @@ namespace FairyTales.Models
 
         public static List<Category> GetCategories()
         {
-            DBFairytaleEntities context = new DBFairytaleEntities();
+            var context = new DBFairytaleEntities();
             return context.Categories.Select(v => v).ToList();
+        }
+
+        public static List<Tale> GetPopularShortTales(int talesCount)
+        {
+            return GetShortTales(null, null).OrderByDescending(c => c.LikeCount).Take(talesCount).ToList();
+        }
+
+        public static List<Tale> GetRecentShortTales(int talesCount)
+        {
+            return GetShortTales(null, null).OrderByDescending(c => c.Date).Take(talesCount).ToList();
         }
 
         public static List<Tale> GetNewShortTales(List<int> categories, List<int> types)
@@ -79,8 +78,13 @@ namespace FairyTales.Models
 
         public static List<Type> GetTypes()
         {
-            DBFairytaleEntities context = new DBFairytaleEntities();
+            var context = new DBFairytaleEntities();
             return context.Types.Select(v => v).ToList();
+        }
+
+        public static bool ValidatePathByPath(string path)
+        {
+            return new DBFairytaleEntities().Tales.Count(tale => tale.Path.Equals(path)) != 0;
         }
 
         public static FairyTale GetTaleByPath(string path)
@@ -98,10 +102,7 @@ namespace FairyTales.Models
 
             var userTale = currentUser.User_Tale.FirstOrDefault(inUserTale => inUserTale.Tale_ID == id);
 
-            if (userTale == null)
-                return false;
-
-            return userTale.IsLiked;
+            return userTale != null && userTale.IsLiked;
         }
 
         public static bool IsUserFavoritedTaleWithId(int id, string userId)
@@ -113,10 +114,7 @@ namespace FairyTales.Models
 
             var userTale = currentUser.User_Tale.FirstOrDefault(inUserTale => inUserTale.Tale_ID == id);
 
-            if (userTale == null)
-                return false;
-
-            return userTale.IsFavorite;
+            return userTale != null && userTale.IsFavorite;
         }
 
         public static AspNetUser CurrentUser(string userId)

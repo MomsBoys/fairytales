@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using FairyTales.Models;
 
 namespace FairyTales.Controllers
 {
@@ -9,7 +8,7 @@ namespace FairyTales.Controllers
         // GET: /Home/
         public ActionResult Index()
         {
-            MainPageData mpData = DbManager.MainPagePopulateTales();
+            var mpData = DbManager.MainPagePopulateTales();
             return View(mpData);
         }
 	}

@@ -79,6 +79,7 @@
     <EntitySetMapping Name="Tales">
       <EntityTypeMapping TypeName="DBFairytaleModel.Tale">
         <MappingFragment StoreEntitySet="Tale">
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
           <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />

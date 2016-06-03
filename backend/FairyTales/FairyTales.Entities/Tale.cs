@@ -31,6 +31,7 @@ namespace FairyTales.Entities
         public int Type_ID { get; set; }
         public int LikeCount { get; set; }
         public System.DateTime Date { get; set; }
+        public string ShortDescription { get; set; }
     
         public virtual Author Author { get; set; }
         public virtual Category Category { get; set; }

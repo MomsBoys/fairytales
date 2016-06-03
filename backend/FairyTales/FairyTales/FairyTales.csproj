@@ -168,7 +168,6 @@
     <Compile Include="Controllers\FairyTaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
-    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\UserSocialController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -290,9 +289,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Main\About.cshtml" />
-    <Content Include="Views\Main\Contact.cshtml" />
-    <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
@@ -306,13 +302,12 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPartial.cshtml" />
-    <Content Include="Views\Shared\_LoginSocial.cshtml" />
-    <Content Include="Views\Library\ShortTaleView.cshtml" />
     <Content Include="Views\FairyTale\Index.cshtml" />
     <Content Include="Views\Library\Filter.cshtml" />
     <Content Include="Views\Library\LastAdded.cshtml" />
     <Content Include="Views\Library\Popular.cshtml" />
-    <Content Include="Views\Library\_ShortTaleView.cshtml" />
+    <Content Include="Views\Shared\_ShortTaleView.cshtml" />
+    <Content Include="Views\Shared\_FoundError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

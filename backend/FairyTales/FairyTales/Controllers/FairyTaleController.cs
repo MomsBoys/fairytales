@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using FairyTales.Models;
 using Microsoft.AspNet.Identity;
 
 namespace FairyTales.Controllers
@@ -9,8 +8,8 @@ namespace FairyTales.Controllers
         // GET: FairyTale
         public ActionResult Index(string path)
         {
-            if (string.IsNullOrEmpty(path))
-                return HttpNotFound();
+            if (string.IsNullOrEmpty(path) || !DbManager.ValidatePathByPath(path))
+                return PartialView("Error");
 
             var fairyTale = DbManager.GetTaleByPath(path);
 

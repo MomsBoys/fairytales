@@ -15,14 +15,14 @@
                                     <a href="/tales/@tale.Path">@tale.Name</a>
                                 </h2>
                                 <div class="image">
-                                    <img src="@string.Format("http://localhost:1599/Content/Data/{0}/{1}", @tale.Name, @tale.Cover)" alt ="Slide 1" />
+                                    <img src="@tale.Cover" alt ="@tale.Name" />
                                 </div>
                             </div>
                         } 
                         <div class="is-nav">
                             <ul class="slider-direction-nav">
-                                <li><a href="#" class="is-prev">Previous</a></li>
-                                <li><a href="#" class="is-next">Next</a></li>
+                                <li><a href="#" class="is-prev">Назад</a></li>
+                                <li><a href="#" class="is-next">Вперед</a></li>
                             </ul>
                         </div>
                     </div>
@@ -37,28 +37,7 @@
                     </h1>
                 @foreach (var tale in Model.LatestTales)
                 {
-                    <article class="post">
-                        <a href="/tales/@tale.Path">
-                            <img width="305" src="@string.Format("http://localhost:1599/Content/Data/{0}/{1}", @tale.Name, @tale.Cover)" class="post-image"/>
-                        </a>
-                        <div class="post-right">
-                            @if (tale.Audio != null)
-                            {<a href="#" class="audio">Аудіо</a> } 
-                            <h2 class="entry-title">
-                                <a href="/tales/@tale.Path">@tale.Name</a>
-                            </h2>
-                            <div class="entry-meta">
-                                <span class="date"><i class="icon-calendar"></i>@tale.Date.ToShortDateString()</span>
-                                @if (tale.Author_ID != null)
-                                {
-                                    <span class="author"><i class="icon-user"></i><a href="#">@tale.Author.FirstName @tale.Author.LastName</a></span>}
-                                else
-                                {<span class="author"><i class="icon-user"></i><a href="#">Народна</a></span>
-                                }
-                            </div>
-                            <div class="entry-content">@Html.Raw(tale.ShortDescription ?? "")</div>
-                        </div><!-- .post-right -->
-                    </article><!-- .post -->
+                    @Html.Partial("_ShortTaleView", tale)
                 } 
                 </div><!-- .content -->
             </section><!-- #primary -->

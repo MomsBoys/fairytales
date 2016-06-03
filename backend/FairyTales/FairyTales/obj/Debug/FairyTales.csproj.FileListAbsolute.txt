@@ -198,6 +198,8 @@ C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\System.We
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\System.Web.WebPages.Razor.dll
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\WebGrease.dll
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\FairyTales.Entities.pdb
+C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\EntityFramework.xml
+C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\EntityFramework.SqlServer.xml
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\System.Web.Helpers.xml
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\System.Web.Mvc.xml
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\System.Web.Optimization.xml
@@ -206,8 +208,6 @@ C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\System.We
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\System.Web.WebPages.Razor.xml
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\Newtonsoft.Json.xml
-C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\EntityFramework.xml
-C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\EntityFramework.SqlServer.xml
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\Microsoft.AspNet.Identity.EntityFramework.xml

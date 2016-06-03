@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FairyTales.Models
+namespace FairyTales
 {
     public class ExternalLoginConfirmationViewModel
     {

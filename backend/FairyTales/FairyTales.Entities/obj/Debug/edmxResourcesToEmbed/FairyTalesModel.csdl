@@ -149,6 +149,7 @@
     <Property Name="Type_ID" Type="Int32" Nullable="false" />
     <Property Name="LikeCount" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ShortDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Author" Relationship="DBFairytaleModel.FK_Tale_Author" FromRole="Tale" ToRole="Author" />
     <NavigationProperty Name="Category" Relationship="DBFairytaleModel.FK_Tale_Category" FromRole="Tale" ToRole="Category" />
     <NavigationProperty Name="User_Tale" Relationship="DBFairytaleModel.FK_Readed_Tale_Tale" FromRole="Tale" ToRole="User_Tale" />

@@ -93,6 +93,7 @@
     <Property Name="Type_ID" Type="int" Nullable="false" />
     <Property Name="LikeCount" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="ShortDescription" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="Tale_Tag">
     <Key>
