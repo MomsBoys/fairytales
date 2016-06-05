@@ -22,8 +22,8 @@
 <body>
 	<div id="Wrapper">
 		
-		<div id="Header" role="banner" class="cd-main-header animate-search">
-			<div class="container">
+		<div id="Header" role="banner">
+			<div class="container cd-main-header animate-search">
 				<div id="logo">
 					<a href="index.html" title="Mom's Stories">
 						<img src="images/logo.png" alt="Mom's Stories" />
@@ -32,23 +32,24 @@
 
 				<a href="#0" class="cd-signin" id="login">Вхід</a>
 
-				<nav id="menu">
-					<ul class="menu">
+				<nav id="menu" class="cd-main-nav-wrapper">
+					<a href="#search" class="cd-search-trigger cd-text-replace">Пошук</a>
+
+					<ul class="menu cd-main-nav">
 						<li class="current-menu-item"><a href="index.html">Головна</a></li>
 						<li><a href="library.html">Бібліотека</a></li>
 						<li><a href="contact.html">Контакти</a></li>
 					</ul>
-
-					<a href="#search" class="cd-search-trigger cd-text-replace"></a>
 				</nav><!-- #menu -->
 
-				<a href="#" class="responsive-menu-toggle"><i class="icon-reorder"></i></a>
+				<a href="#" class="responsive-menu-toggle cd-nav-trigger"><i class="icon-reorder"></i></a>
+				<!--<a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>-->
 			</div><!-- .container -->
 		</div><!-- #Header -->
 
 		<div id="search" class="cd-main-search">
 			<form>
-				<input type="search" placeholder="Пошук...">
+				<input type="text" placeholder="Пошук...">
 
 				<div class="cd-select">
 					<select name="select-category">
@@ -87,8 +88,9 @@
 
 			</div> <!-- .cd-search-suggestions -->
 
-			<a href="#0" class="search cd-text-replace">Search</a>
-			<a href="#0" class="close cd-text-replace">Close Form</a>
+			<a href="#0" class="search cd-text-replace">Пошук</a>
+			<a href="#0" class="close cd-text-replace">Закрити</a>
+
 		</div> <!-- .cd-main-search -->
 		<!--</div>&lt;!&ndash; #Header &ndash;&gt;-->
 
@@ -167,7 +169,7 @@
 		</div>
 		<!-- /Login Area -->
 
-		<div id="Content">
+		<div id="Content" class="cd-main-content">
 			<div id="slider">
 				<div class="slider-container">
 					<div class="page_container">
@@ -323,7 +325,10 @@
 				</p><!-- #back-top -->
 			</div><!-- .container -->
 		</div><!-- #Content -->
+
 	</div><!-- #Wrapper -->
+
+	<div class="cd-cover-layer"></div> <!-- cover main content when search form is open -->
 
 	<script type="text/javascript">
 		$("#slider-info").immersive_slider({

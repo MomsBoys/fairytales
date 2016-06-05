@@ -2232,6 +2232,25 @@ a.responsive-menu-toggle {
 	}
 }
 
+.cd-main-header::before {
+	/* never visible - this is used in jQuery to check the current MQ */
+	display: none;
+	content: 'mobile';
+}
+@media only screen and (min-width: 1024px) {
+
+	.cd-main-header.nav-is-visible {
+		-webkit-transform: translateX(0);
+		-moz-transform: translateX(0);
+		-ms-transform: translateX(0);
+		-o-transform: translateX(0);
+		transform: translateX(0);
+	}
+	.cd-main-header::before {
+		content: 'desktop';
+	}
+}
+
 /* --------------------------------
 
 Patterns - reusable parts of our design
@@ -2250,6 +2269,27 @@ Patterns - reusable parts of our design
 Search Form
 
 -------------------------------- */
+.cd-main-nav input[type="text"] {
+	display: block;
+	font-size: 1.6rem;
+	padding: 0 2em 0 1em;
+	line-height: 50px;
+	color: #ffffff;
+	border-bottom: 1px solid #333545;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	-moz-transition: -moz-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+.cd-main-nav input[type="text"] {
+	background-color: #292a37;
+	-webkit-transition: background-color 0.3s;
+	-moz-transition: background-color 0.3s;
+	transition: background-color 0.3s;
+}
+.cd-main-nav input[type="text"]:focus {
+	background-color: #333545;
+}
+
 .cd-main-search .cd-select {
 	/* hide select element on small devices */
 	display: none;
@@ -2258,23 +2298,24 @@ Search Form
 	/* 'X' icon to close search form - hidden on small devices */
 	display: none;
 }
-.cd-main-search input[type="search"] {
+.cd-main-search input[type="text"] {
+	border: none;
 	width: 100%;
 	color: #ffffff;
 }
-.cd-main-search input[type="search"]:focus {
+.cd-main-search input[type="text"]:focus {
 	outline: none;
 }
-.cd-main-search input[type="search"]::-webkit-input-placeholder {
+.cd-main-search input[type="text"]::-webkit-input-placeholder {
 	color: #5c5d6a;
 }
-.cd-main-search input[type="search"]::-moz-placeholder {
+.cd-main-search input[type="text"]::-moz-placeholder {
 	color: #5c5d6a;
 }
-.cd-main-search input[type="search"]:-moz-placeholder {
+.cd-main-search input[type="text"]:-moz-placeholder {
 	color: #5c5d6a;
 }
-.cd-main-search input[type="search"]:-ms-input-placeholder {
+.cd-main-search input[type="text"]:-ms-input-placeholder {
 	color: #5c5d6a;
 }
 @media only screen and (min-width: 1024px) {
@@ -2299,13 +2340,13 @@ Search Form
 		/* 116px (margin right) takes into account the space occupied by the a.cd-search-trigger and a.close */
 		margin: 0 calc(5% + 116px) 0 calc(5% + 170px);
 	}
-	.cd-main-search input[type="search"] {
+	.cd-main-search input[type="text"] {
 		font-size: 2.4rem;
 		height: 100%;
-		margin-left: 250px;
 		background-color: transparent;
 		/* don't overlap <select> element */
 		padding-right: 170px;
+		padding-left: 250px;
 	}
 	.cd-main-search .cd-select {
 		display: inline-block;
@@ -2743,6 +2784,10 @@ input[type="search"] {
 	margin-top: 0;
 }
 
+input[type="search"]:hover {
+
+}
+
 select {
 	background-color: transparent;
 	cursor: pointer;
@@ -2773,4 +2818,35 @@ select {
 
 .cd-search-suggestions h4 {
 	padding: 0;
+}
+
+/* --------------------------------
+
+Content cover layer
+
+-------------------------------- */
+.cd-cover-layer {
+	/* cover main content when search form is open - hidden on smal devices */
+	display: none;
+}
+@media only screen and (min-width: 1024px) {
+	.cd-cover-layer {
+		display: block;
+		position: fixed;
+		z-index: 3;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		opacity: 0;
+		visibility: hidden;
+		-webkit-transition: opacity 0.3s, visibility 0.3s;
+		-moz-transition: opacity 0.3s, visibility 0.3s;
+		transition: opacity 0.3s, visibility 0.3s;
+	}
+	.cd-cover-layer.search-form-visible {
+		opacity: 1;
+		visibility: visible;
+	}
 }
