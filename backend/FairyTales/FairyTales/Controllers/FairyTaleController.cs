@@ -16,6 +16,7 @@ namespace FairyTales.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
+                DbManager.AddFairyTaleToReadList(fairyTale.Id, User.Identity.GetUserId());
                 fairyTale.IsUserLiked = DbManager.IsUserLikedTaleWithId(fairyTale.Id, User.Identity.GetUserId());
                 fairyTale.IsUserFavorited = DbManager.IsUserFavoritedTaleWithId(fairyTale.Id, User.Identity.GetUserId());
             }

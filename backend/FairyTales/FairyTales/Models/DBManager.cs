@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -134,6 +135,38 @@ namespace FairyTales.Models
             var dbModel = new DBFairytaleEntities();
             var tale = dbModel.Tales.First(inTale => inTale.Tale_ID == id);
             return tale.Tale_Tag.ToList().Select(taleTag => dbModel.Tags.First(tag => tag.Tag_ID == taleTag.Tag_ID)).ToList();
+        }
+
+        public static void AddFairyTaleToReadList(int fairyTaleId, string userId)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isUserTaleExists =
+                    dbContext.User_Tale.Any(
+                        innerUserTale => innerUserTale.Tale_ID == fairyTaleId && innerUserTale.User_ID.Equals(userId));
+
+                if (isUserTaleExists)
+                    return;
+
+                var userTale = new User_Tale
+                {
+                    Tale_ID = fairyTaleId,
+                    User_ID = userId,
+                    Date = DateTime.Now,
+                    IsReaded = true,
+                    IsLiked = false,
+                    IsFavorite = false
+                };
+
+                dbContext.User_Tale.Add(userTale);
+                dbContext.SaveChanges();
+            }
+            catch
+            {
+                Console.WriteLine(@"AddFairyTaleToReadList-Exception");
+            }
         }
     }
 }
