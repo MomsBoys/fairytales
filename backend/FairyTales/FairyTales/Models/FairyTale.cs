@@ -30,7 +30,7 @@ namespace FairyTales.Models
             }
             set { _text = value; }
         }
-
+        
         private string _cover;
         public string Cover
         {
@@ -48,7 +48,7 @@ namespace FairyTales.Models
         public Author Author { get; set; }
         public Type Type { get; set; }
         public Category Category { get; set; }
-
+        
         public List<Tag> Tags
         {
             get { return DbManager.GetTagsByTale(Id); }

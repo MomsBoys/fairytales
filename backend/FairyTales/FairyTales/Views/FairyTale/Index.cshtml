@@ -13,7 +13,34 @@
 
                     <div class="post-right">
                         <div class="article-top">
-                            <a href="#" class="article-favorite@{if (@Model.IsUserFavorite){@Html.Raw(" is-selected")}} ">В улюблені</a>
+                            <form action="/tales/@Model.Path/favorite" data-ajax="true" method="POST" id="favorite-form">
+                                <input style="visibility: hidden" value="is-selected" name="user-favorite"/>
+                                <input type="submit" value="В улюблені" class="article-favorite@{if (@Model.IsUserFavorite)
+                                                                                               {@Html.Raw(" is-selected")
+                                                                                               }}"/>
+                            </form>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $("input.article-favorite").on("click", function () {
+                                        $(this).removeAttr("style");
+
+                                        if ($(this).hasClass("is-selected")) {
+                                            $(this).css({
+                                                background: "#E5E5E5",
+                                                color: "#5DA1B1"
+                                            });
+                                            $(this).removeClass("is-selected");
+                                        } else {
+                                            $(this).css({
+                                                background: "#5DA1B1",
+                                                color: "#FFF"
+                                            });
+                                            $(this).addClass("is-selected");
+                                        }
+                                    });
+                                });
+                            </script>
                         </div>
 
                         <h2 class="entry-title">@Model.Name</h2>

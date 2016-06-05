@@ -46,6 +46,25 @@ namespace FairyTales.Models
             return result;
         }
 
+        public static void PopulateUserLikesAndFavorites(ref List<FairyTale> tales, string userId)
+        {
+            var currentUser = CurrentUser(userId);
+
+            if (currentUser == null)
+                return;
+            
+            foreach (var tale in tales)
+            {
+                var userTale = currentUser.User_Tale.FirstOrDefault(innerUserTale => innerUserTale.Tale_ID == tale.Id);
+
+                if (userTale != null)
+                {
+                    tale.IsUserLiked = userTale.IsLiked;
+                    tale.IsUserFavorite = userTale.IsFavorite;
+                }
+            }
+        }
+
         public static List<Category> GetCategories()
         {
             var context = new DBFairytaleEntities();
@@ -136,6 +155,28 @@ namespace FairyTales.Models
             catch
             {
                 Console.WriteLine(@"AddFairyTaleToReadList-Exception");
+            }
+        }
+
+        public static void AddFairyTaleToFavorites(int fairyTaleId, string userId)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var userTale =
+                    dbContext.User_Tale.FirstOrDefault(
+                        innerUserTale => innerUserTale.Tale_ID == fairyTaleId && innerUserTale.User_ID.Equals(userId));
+
+                if (userTale == null)
+                    return;
+
+                userTale.IsFavorite = !userTale.IsFavorite;
+                dbContext.SaveChanges();
+            }
+            catch
+            {
+                Console.WriteLine(@"AddFairyTaleToFavorites-Exception");
             }
         }
 

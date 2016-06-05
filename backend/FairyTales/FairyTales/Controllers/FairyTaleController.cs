@@ -23,5 +23,18 @@ namespace FairyTales.Controllers
 
             return View(fairyTale);
         }
+
+        // POST: Add Tale To Favorites List
+        [HttpPost]
+        public void FavoriteAction(string path)
+        {
+            if (string.IsNullOrEmpty(path) || !DbManager.ValidateTaleByPath(path))
+                return;
+
+            var fairyTale = DbManager.GetTaleByPath(path);
+
+            if (User.Identity.IsAuthenticated)
+                DbManager.AddFairyTaleToFavorites(fairyTale.Id, User.Identity.GetUserId());
+        }
     }
 }

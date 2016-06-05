@@ -616,6 +616,7 @@ a.responsive-menu-toggle {
 	top: 0;
 	position: absolute;
 	text-decoration: none;
+    cursor: default;
 }
 
 .post-right .audio:hover {
@@ -663,6 +664,7 @@ a.responsive-menu-toggle {
     text-decoration: none;
 }
 
+.post-right .article-favorite,
 .post-right .entry-meta .like,
 .post-right .entry-meta .like i {
     -moz-transition: all .2s ease-in-out;
@@ -717,24 +719,26 @@ a.responsive-menu-toggle {
 .article .article-top {
 	display: inline-block;
 	right: 24px;
-	top: 11px;
+	top: 0;
 	position: absolute;
 }
 
-.article .article-top a {
+.article .article-top input[type=submit] {
 	font-size: 22px;
 	color: #5DA1B1;
 	background: #E5E5E5;
 	padding: 10px 20px;
-	text-decoration: none;
+    font-family: CyrillicChancellor, sans-serif;
+    cursor: pointer;
+    outline: none;
 }
 
-.article .article-top a.is-selected {
+.article .article-top input[type=submit].is-selected {
 	background: #5DA1B1;
 	color: #FFF;
 }
 
-.article .article-top a:hover {
+.article .article-top input[type=submit]:hover {
 	opacity: 0.8;
 }
 
