@@ -49,4 +49,43 @@ $(document).ready(function () {
             return false;
         });
     });
+
+    $("a.like:has(.fa-thumbs-up)").css({
+        background: "#5DA1B1",
+        color: "#FFF"
+    });
+
+    $("a.like:has(.fa-thumbs-up)").mouseover(function () {
+        likeButtonOver(this, false);
+    }).mouseout(function () {
+        likeButtonOver(this, true);
+    });
+
+    $("a.like:has(.fa-thumbs-o-up)").mouseover(function () {
+        likeButtonOver(this, true);
+    }).mouseout(function () {
+        likeButtonOver(this, false);
+    });
+
+    function likeButtonOver(likeButton, isOver) {
+        if (isOver) {
+            $(likeButton).css({
+                background: "#5DA1B1",
+                color: "#FFF"
+            });
+
+            $(likeButton).children().css({
+                color: "#FFF"
+            });
+        } else {
+            $(likeButton).css({
+                background: "#F3F3F3",
+                color: "#5DA1B1"
+            });
+
+            $(likeButton).children().css({
+                color: "#536672"
+            });
+        }
+    }
 });

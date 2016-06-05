@@ -13,25 +13,27 @@
 
                     <div class="post-right">
                         <div class="article-top">
-                            @{
-                                var likesCount = new HtmlString(string.Format(" ({0})", @Model.LikeCount));
-                            }
-                            <a href="#" class="article-like@{if (@Model.IsUserLiked){@Html.Raw(" is-selected")}}">Подобається@{if (!@Model.LikeCount.Equals(0)){@Html.Raw(likesCount)}}</a>
-                            <a href="#" class="article-favorite@{if (@Model.IsUserFavorited){@Html.Raw(" is-selected")}} ">В улюблені</a>
+                            <a href="#" class="article-favorite@{if (@Model.IsUserFavorite){@Html.Raw(" is-selected")}} ">В улюблені</a>
                         </div>
 
                         <h2 class="entry-title">@Model.Name</h2>
 
                         <div class="entry-meta">
-                            <span class="date"><i class="icon-calendar"></i>@Model.Date.ToShortDateString()</span>
+                            @{
+                                var likesCount = new HtmlString(string.Format(" ({0})", @Model.LikesCount));
+                            }
+                            <span class="date"><i class="fa fa-calendar"></i>@Model.Date.ToShortDateString()</span>
                             @if (Model.Author != null)
                             {
-                                <span class="author"><i class="icon-user"></i><a href="#">@string.Format("{0} {1}", @Model.Author.FirstName, @Model.Author.LastName)</a></span>
+                                <span class="author"><i class="fa fa-user"></i><a href="#">@string.Format("{0} {1}", @Model.Author.FirstName, @Model.Author.LastName)</a></span>
                             }
                             else
                             {
-                                <span class="author"><i class="icon-user"></i><a href="#">Народна</a></span>
+                                <span class="author"><i class="fa fa-user"></i><a href="#">Народна</a></span>
                             }
+                            <a href="#" class="like"><i class="fa @(@Model.IsUserLiked ? Html.Raw("fa-thumbs-up") : Html.Raw("fa-thumbs-o-up"))"></i>Подобається@{if (!@Model.LikesCount.Equals(0))
+                                                                                                                                                                {@Html.Raw(likesCount)
+                                                                                                                                                                }}</a>
                         </div>
 
                         @if (!string.IsNullOrWhiteSpace(Model.Audio))

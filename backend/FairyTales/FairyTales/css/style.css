@@ -19,7 +19,7 @@
  * Including CSS files and shortcodes
  */
 
-@import url("fontawesome/fontawesome.css");
+@import url("fontawesome/css/font-awesome.css");
 
 
 /**
@@ -329,7 +329,7 @@ body {
 }
 
 a {
-	color: #399DDA;
+	color: #5DA1B1;
 	text-decoration: none;
 }
 
@@ -642,16 +642,36 @@ a.responsive-menu-toggle {
 }
 
 .post-right .entry-meta .date,
-.post-right .entry-meta .author {
+.post-right .entry-meta .author,
+.post-right .entry-meta .like {
 	margin-right: 10px;
 	font-size: 18px;
 }
 
 .post-right .entry-meta .date i,
-.post-right .entry-meta .author i {
+.post-right .entry-meta .author i,
+.post-right .entry-meta .like i {
 	font-size: 16px;
 	color: #536672;
 	padding-right: 6px;
+}
+
+.post-right .entry-meta .like {
+    color: #5DA1B1;
+    background: #f3f3f3;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+
+.post-right .entry-meta .like:hover {
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.post-right .entry-meta .like i.fa-thumbs-up {
+    color: #FFF;
 }
 
 .post-right .entry-content,
