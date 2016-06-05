@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="80c6118bb26141cdbe0e94be72d1e9c6" Name="Diagram1">
+        <EntityTypeShape EntityType="DBFairytaleModel.C__MigrationHistory" Width="1.5" PointX="10.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.AspNetRole" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.AspNetUserClaim" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.AspNetUserLogin" Width="1.5" PointX="8.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.AspNetUser" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Author" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.sysdiagram" Width="1.5" PointX="10.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Tag" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Tale" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Tale_Tag" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Type" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBFairytaleModel.User_Tale" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="DBFairytaleModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.FK_User_Tale_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Author" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Tag_Tag" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Readed_Tale_Tale" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Tag_Tale" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="DBFairytaleModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
