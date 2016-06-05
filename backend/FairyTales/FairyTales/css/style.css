@@ -742,7 +742,7 @@ a.responsive-menu-toggle {
 	opacity: 0.8;
 }
 
-.article .entry-title {
+.article .entry-title.top-space {
 	margin-top: 55px;
 }
 
