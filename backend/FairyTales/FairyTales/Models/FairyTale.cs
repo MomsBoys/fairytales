@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using FairyTales.Entities;
+using System.Collections.Generic;
+using Type = FairyTales.Entities.Type;
 
 namespace FairyTales.Models
 {
@@ -10,6 +11,12 @@ namespace FairyTales.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string ShortDescription { get; set; }
+        public int LikesCount { get; set; }
+        public bool IsUserLiked { get; set; }
+        public bool IsUserFavorite { get; set; }
+        public DateTime Date { get; set; }
+        public string Path { get; set; }
 
         private string _text;
         public string Text
@@ -23,7 +30,7 @@ namespace FairyTales.Models
             }
             set { _text = value; }
         }
-        
+
         private string _cover;
         public string Cover
         {
@@ -38,35 +45,29 @@ namespace FairyTales.Models
             set { _audio = value; }
         }
 
-        public int LikesCount { get; set; }
+        public Author Author { get; set; }
+        public Type Type { get; set; }
+        public Category Category { get; set; }
+
+        public List<Tag> Tags
+        {
+            get { return DbManager.GetTagsByTale(Id); }
+        }
 
         public FairyTale(Tale tale)
         {
             Id = tale.Tale_ID;
             Name = tale.Name;
             Text = tale.Text;
+            ShortDescription = tale.ShortDescription;
             Cover = tale.Cover;
             Audio = tale.Audio;
             LikesCount = tale.LikeCount;
             Date = tale.Date;
             Path = tale.Path;
-        }
-
-        public bool IsUserLiked { get; set; }
-
-        public bool IsUserFavorite { get; set; }
-
-        public DateTime Date { get; set; }
-        public string Path { get; set; }
-
-        public Author Author
-        {
-            get { return DbManager.GetAuthorByTale(Id); }
-        }
-
-        public List<Tag> Tags
-        {
-            get { return DbManager.GetTagsByTale(Id); }
+            Author = tale.Author;
+            Type = tale.Type;
+            Category = tale.Category;
         }
     }
 }

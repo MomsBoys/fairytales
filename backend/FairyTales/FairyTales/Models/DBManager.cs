@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using FairyTales.Entities;
 using Type = FairyTales.Entities.Type;
 
@@ -23,35 +21,26 @@ namespace FairyTales.Models
         {
             var latest = GetRecentShortTales(5);
             var popular = GetPopularShortTales(4);
-
+            
             return new MainPageData
             {
                 LatestTales = latest,
                 PopularTales = popular
             };
         }
-        public static List<Tale> GetShortTales(List<int> categories, List<int> types)
+        public static List<FairyTale> GetShortTales(List<int> categories, List<int> types)
         {
             var context = new DBFairytaleEntities();
             var tales = context.Tales.Select(v => v).ToList();
-            var result = new List<Tale>();
+            var result = new List<FairyTale>();
 
             foreach (var item in tales)
             {
                 if ((categories == null || categories.Count == 0 || categories.Any(c => c == item.Category_ID))
                     && (types == null || types.Count == 0 || types.Any(c => c == item.Type_ID)))
                 {
-                    result.Add(item);
+                    result.Add(new FairyTale(item));
                 }
-            }
-
-            foreach (var item in result)
-            {
-                item.Cover = string.Format("{0}/{1}/{2}", RootPath, item.Name, item.Cover);
-                var readText = File.ReadAllText(string.Format("{0}/{1}/{2}", System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data"), item.Name, item.Text), Encoding.Default);
-                readText = readText.Remove(210, readText.Length - 210);
-                readText += "...";
-                item.Text = readText;
             }
 
             return result;
@@ -63,30 +52,29 @@ namespace FairyTales.Models
             return context.Categories.Select(v => v).ToList();
         }
 
-        public static List<Tale> GetPopularShortTales(int talesCount)
+        public static List<FairyTale> GetPopularShortTales(int talesCount)
         {
-            return GetShortTales(null, null).OrderByDescending(c => c.LikeCount).Take(talesCount).ToList();
+            return GetShortTales(null, null).OrderByDescending(c => c.LikesCount).Take(talesCount).ToList();
         }
 
-        public static List<Tale> GetRecentShortTales(int talesCount)
+        public static List<FairyTale> GetRecentShortTales(int talesCount)
         {
             return GetShortTales(null, null).OrderByDescending(c => c.Date).Take(talesCount).ToList();
         }
 
-        public static List<Tale> GetNewShortTales(List<int> categories, List<int> types)
+        public static List<FairyTale> GetNewShortTales(List<int> categories, List<int> types)
         {
             return GetShortTales(categories, types).OrderByDescending(c => c.Date).ToList();
         }
 
-        public static List<Tale> GetPopularShortTales(List<int> categories, List<int> types)
+        public static List<FairyTale> GetPopularShortTales(List<int> categories, List<int> types)
         {
-            return GetShortTales(categories, types).OrderByDescending(c => c.LikeCount).ToList();
+            return GetShortTales(categories, types).OrderByDescending(c => c.LikesCount).ToList();
         }
 
         public static List<Type> GetTypes()
         {
-            var context = new DBFairytaleEntities();
-            return context.Types.Select(v => v).ToList();
+            return new DBFairytaleEntities().Types.Select(v => v).ToList();
         }
         #endregion // Tales Library Functionality
 

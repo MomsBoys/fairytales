@@ -223,5 +223,3 @@ C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\Microsoft
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\obj\Debug\FairyTales.csprojResolveAssemblyReference.cache
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\obj\Debug\FairyTales.dll
 C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\obj\Debug\FairyTales.pdb
-C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\AutoMapper.dll
-C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales\bin\AutoMapper.xml
