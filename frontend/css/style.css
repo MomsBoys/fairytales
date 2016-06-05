@@ -422,6 +422,7 @@ html * {
 	float: left;
 	overflow: hidden;
 	margin-top: 30px;
+	margin-left: -2%;
 	z-index: 50;
 	position: absolute;
 }
@@ -2398,6 +2399,27 @@ Search Form
 		-moz-transition: -moz-transform 0.3s;
 		transition: transform 0.3s;
 	}
+
+	.cd-main-search .search {
+		/* 'X' icon - used to close the search form */
+		display: inline-block;
+		position: absolute;
+		right: 9%;
+		top: 50%;
+		height: 40px;
+		width: 40px;
+		background: #dd85ac url("../images/search.png") no-repeat center;
+		border-radius: 50%;
+		-webkit-transform: translateY(-50%) scale(0);
+		-moz-transform: translateY(-50%) scale(0);
+		-ms-transform: translateY(-50%) scale(0);
+		-o-transform: translateY(-50%) scale(0);
+		transform: translateY(-50%) scale(0);
+		-webkit-transition: -webkit-transform 0.3s;
+		-moz-transition: -moz-transform 0.3s;
+		transition: transform 0.3s;
+	}
+	
 	.cd-main-search .close::before, .cd-main-search .close::after {
 		/* used to create the 'X' icon in css */
 		content: '';
