@@ -31,7 +31,7 @@
                             {
                                 <span class="author"><i class="fa fa-user"></i><a href="#">Народна</a></span>
                             }
-                            <a href="#" class="like"><i class="fa @(@Model.IsUserLiked ? Html.Raw("fa-thumbs-up") : Html.Raw("fa-thumbs-o-up"))"></i>Подобається@{if (!@Model.LikesCount.Equals(0))
+                            <a href="#" class="like@{if (@Model.IsUserLiked){@Html.Raw(" is-selected")}}"><i class="fa fa-thumbs-up"></i>Подобається@{if (!@Model.LikesCount.Equals(0))
                                                                                                                                                                 {@Html.Raw(likesCount)
                                                                                                                                                                 }}</a>
                         </div>

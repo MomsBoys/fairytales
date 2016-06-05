@@ -13,7 +13,7 @@ $(document).ready(function () {
     /* Add menu toggle */
     jQuery(".responsive-menu-toggle").click(function () {
         jQuery(this).toggleClass("active");
-        jQuery("#Header #menu").stop(true, true).slideToggle(200)
+        jQuery("#Header #menu").stop(true, true).slideToggle(200);
     });
 
     /* Display back-to-top button */
@@ -25,15 +25,15 @@ $(document).ready(function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() > 160) {
                 // $('#back-top').fadeIn();
-                if ($('#back-top').position().top == '-60') {
-                    $('#back-top').animate({
+                if ($("#back-top").position().top === "-60") {
+                    $("#back-top").animate({
                         opacity: 1,
                         top: "60px"
                     }, 800);
                 }
             } else {
-                if ($('#back-top').position().top == '60') {
-                    $('#back-top').animate({
+                if ($("#back-top").position().top === "60") {
+                    $("#back-top").animate({
                         opacity: 0,
                         top: "-60px"
                     }, 800);
@@ -42,29 +42,24 @@ $(document).ready(function () {
         });
 
         // scroll body to 0px on click
-        $('#back-top a').click(function () {
-            $('body,html').animate({
+        $("#back-top a").click(function () {
+            $("body,html").animate({
                 scrollTop: 0
             }, 800);
             return false;
         });
     });
 
-    $("a.like:has(.fa-thumbs-up)").css({
-        background: "#5DA1B1",
-        color: "#FFF"
-    });
+    $("a.like").on("click", function () {
+        $(this).removeAttr("style");
 
-    $("a.like:has(.fa-thumbs-up)").mouseover(function () {
-        likeButtonOver(this, false);
-    }).mouseout(function () {
-        likeButtonOver(this, true);
-    });
-
-    $("a.like:has(.fa-thumbs-o-up)").mouseover(function () {
-        likeButtonOver(this, true);
-    }).mouseout(function () {
-        likeButtonOver(this, false);
+        if ($(this).hasClass("is-selected")) {
+            likeButtonOver(this, false);
+            $(this).removeClass("is-selected");
+        } else {
+            likeButtonOver(this, true);
+            $(this).addClass("is-selected");
+        }
     });
 
     function likeButtonOver(likeButton, isOver) {

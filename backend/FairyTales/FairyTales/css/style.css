@@ -663,15 +663,39 @@ a.responsive-menu-toggle {
     text-decoration: none;
 }
 
-.post-right .entry-meta .like:hover {
+.post-right .entry-meta .like,
+.post-right .entry-meta .like i {
     -moz-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
 
-.post-right .entry-meta .like i.fa-thumbs-up {
+.post-right .entry-meta .like.is-selected {
+    background: #5DA1B1;
     color: #FFF;
+}
+
+.post-right .entry-meta .like.is-selected i {
+    color: #FFF;
+}
+
+.post-right .entry-meta .like:not(.is-selected):hover {
+    background: #5DA1B1;
+    color: #FFF;
+}
+
+.post-right .entry-meta .like:not(.is-selected):hover i {
+    color: #FFF;
+}
+
+.post-right .entry-meta .like.is-selected:hover {
+    background: #F3F3F3;
+    color: #5DA1B1;
+}
+
+.post-right .entry-meta .like.is-selected:hover i {
+    color: #536672;
 }
 
 .post-right .entry-content,
