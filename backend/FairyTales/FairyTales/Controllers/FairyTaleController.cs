@@ -9,7 +9,7 @@ namespace FairyTales.Controllers
         // GET: FairyTale
         public ActionResult Index(string path)
         {
-            if (string.IsNullOrEmpty(path) || !DbManager.ValidatePathByPath(path))
+            if (string.IsNullOrEmpty(path) || !DbManager.ValidateTaleByPath(path))
                 return PartialView("Error");
 
             var fairyTale = DbManager.GetTaleByPath(path);
@@ -18,7 +18,7 @@ namespace FairyTales.Controllers
             {
                 DbManager.AddFairyTaleToReadList(fairyTale.Id, User.Identity.GetUserId());
                 fairyTale.IsUserLiked = DbManager.IsUserLikedTaleWithId(fairyTale.Id, User.Identity.GetUserId());
-                fairyTale.IsUserFavorited = DbManager.IsUserFavoritedTaleWithId(fairyTale.Id, User.Identity.GetUserId());
+                fairyTale.IsUserFavorite = DbManager.IsUserFavoriteTaleWithId(fairyTale.Id, User.Identity.GetUserId());
             }
 
             return View(fairyTale);

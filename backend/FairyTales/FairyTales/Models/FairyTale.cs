@@ -38,7 +38,7 @@ namespace FairyTales.Models
             set { _audio = value; }
         }
 
-        public int LikeCount { get; set; }
+        public int LikesCount { get; set; }
 
         public FairyTale(Tale tale)
         {
@@ -47,14 +47,14 @@ namespace FairyTales.Models
             Text = tale.Text;
             Cover = tale.Cover;
             Audio = tale.Audio;
-            LikeCount = tale.LikeCount;
+            LikesCount = tale.LikeCount;
             Date = tale.Date;
             Path = tale.Path;
         }
 
         public bool IsUserLiked { get; set; }
 
-        public bool IsUserFavorited { get; set; }
+        public bool IsUserFavorite { get; set; }
 
         public DateTime Date { get; set; }
         public string Path { get; set; }

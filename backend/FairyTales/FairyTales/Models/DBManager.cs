@@ -11,8 +11,15 @@ namespace FairyTales.Models
     public static class DbManager
     {
         public const string RootPath = @"http://localhost:1599/Content/Data";
-        
-        public static MainPageData MainPagePopulateTales( )
+
+        public static AspNetUser CurrentUser(string userId)
+        {
+            var users = new DBFairytaleEntities().AspNetUsers;
+            return users.FirstOrDefault(user => user.Id.Equals(userId));
+        }
+
+        #region Tales Library Functionality
+        public static MainPageData MainPagePopulateTales()
         {
             var latest = GetRecentShortTales(5);
             var popular = GetPopularShortTales(4);
@@ -23,7 +30,6 @@ namespace FairyTales.Models
                 PopularTales = popular
             };
         }
-
         public static List<Tale> GetShortTales(List<int> categories, List<int> types)
         {
             var context = new DBFairytaleEntities();
@@ -69,12 +75,12 @@ namespace FairyTales.Models
 
         public static List<Tale> GetNewShortTales(List<int> categories, List<int> types)
         {
-            return GetShortTales(categories, types).OrderByDescending(c=>c.Date).ToList();
+            return GetShortTales(categories, types).OrderByDescending(c => c.Date).ToList();
         }
 
         public static List<Tale> GetPopularShortTales(List<int> categories, List<int> types)
         {
-            return GetShortTales(categories, types).OrderByDescending(c=>c.LikeCount).ToList();
+            return GetShortTales(categories, types).OrderByDescending(c => c.LikeCount).ToList();
         }
 
         public static List<Type> GetTypes()
@@ -82,10 +88,12 @@ namespace FairyTales.Models
             var context = new DBFairytaleEntities();
             return context.Types.Select(v => v).ToList();
         }
+        #endregion // Tales Library Functionality
 
-        public static bool ValidatePathByPath(string path)
+        #region Tale Functionality
+        public static bool ValidateTaleByPath(string path)
         {
-            return new DBFairytaleEntities().Tales.Count(tale => tale.Path.Equals(path)) != 0;
+            return new DBFairytaleEntities().Tales.Any(tale => tale.Path.Equals(path));
         }
 
         public static FairyTale GetTaleByPath(string path)
@@ -94,40 +102,14 @@ namespace FairyTales.Models
             return new FairyTale(fairyTale);
         }
 
-        public static bool IsUserLikedTaleWithId(int id, string userId)
+        public static Author GetAuthorByTale(int taleId)
         {
-            var currentUser = CurrentUser(userId);
+            var tale = new DBFairytaleEntities().Tales.FirstOrDefault(innerTale => innerTale.Tale_ID == taleId);
 
-            if (currentUser == null)
-                return false;
+            if (tale == null)
+                return null;
 
-            var userTale = currentUser.User_Tale.FirstOrDefault(inUserTale => inUserTale.Tale_ID == id);
-
-            return userTale != null && userTale.IsLiked;
-        }
-
-        public static bool IsUserFavoritedTaleWithId(int id, string userId)
-        {
-            var currentUser = CurrentUser(userId);
-
-            if (currentUser == null)
-                return false;
-
-            var userTale = currentUser.User_Tale.FirstOrDefault(inUserTale => inUserTale.Tale_ID == id);
-
-            return userTale != null && userTale.IsFavorite;
-        }
-
-        public static AspNetUser CurrentUser(string userId)
-        {
-            var users = new DBFairytaleEntities().AspNetUsers;
-            return users.FirstOrDefault(user => user.Id.Equals(userId));
-        }
-
-        public static Author GetAuthorByTale(int id)
-        {
-            var tales = new DBFairytaleEntities().Tales;
-            return tales.FirstOrDefault(tale => tale.Tale_ID == id)?.Author;
+            return tale.Author;
         }
 
         public static List<Tag> GetTagsByTale(int id)
@@ -168,5 +150,28 @@ namespace FairyTales.Models
                 Console.WriteLine(@"AddFairyTaleToReadList-Exception");
             }
         }
+
+        public static User_Tale GetUserTaleByUserId(int taleId, string userId)
+        {
+            var currentUser = CurrentUser(userId);
+
+            if (currentUser == null)
+                return null;
+
+            return currentUser.User_Tale.FirstOrDefault(innerUserTale => innerUserTale.Tale_ID == taleId);
+        }
+
+        public static bool IsUserLikedTaleWithId(int taleId, string userId)
+        {
+            var userTale = GetUserTaleByUserId(taleId, userId);
+            return userTale != null && userTale.IsLiked;
+        }
+
+        public static bool IsUserFavoriteTaleWithId(int taleId, string userId)
+        {
+            var userTale = GetUserTaleByUserId(taleId, userId);
+            return userTale != null && userTale.IsFavorite;
+        }
+        #endregion // Tale Functionality
     }
 }
