@@ -23,6 +23,7 @@ namespace FairyTales
                         "~/Scripts/login.js",
                         "~/Scripts/navigation.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js",
+                        "~/Scripts/contact_validation.js",
                         "~/Scripts/"
                         ));
 

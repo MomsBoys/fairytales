@@ -64,7 +64,7 @@ namespace FairyTales.Controllers
                 await SignInAsync(user, false);
                 var cookie = new HttpCookie("first_name", user.FirstName);
                 Response.SetCookie(cookie);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Popular", "Library");
             }
 
             var appUser = new ApplicationUser()

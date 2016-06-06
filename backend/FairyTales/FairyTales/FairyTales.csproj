@@ -165,6 +165,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\FairyTaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
@@ -173,6 +174,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EmailSender.cs" />
     <Compile Include="Models\MainPageData.cs" />
     <Compile Include="Models\DBManager.cs" />
     <Compile Include="Models\FairyTale.cs" />
@@ -305,6 +307,9 @@
     <Content Include="Views\Library\Popular.cshtml" />
     <Content Include="Views\Shared\_ShortTaleView.cshtml" />
     <Content Include="Views\Shared\_FoundError.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\_FormContact.cshtml" />
+    <Content Include="Views\Contact\_SendSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
