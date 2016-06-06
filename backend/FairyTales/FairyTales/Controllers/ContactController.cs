@@ -17,7 +17,6 @@ namespace FairyTales.Controllers
         // GET: /Contact/
         public ActionResult Index()
         {
-            ViewBag.hello = "sdsdsd";
             return View(new EmailModel());
         }
 
