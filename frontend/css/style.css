@@ -420,9 +420,7 @@ html * {
 	width: 360px;
 	height: 40px;
 	float: left;
-	overflow: hidden;
 	margin-top: 30px;
-	margin-left: -2%;
 	z-index: 50;
 	position: absolute;
 }
@@ -2190,8 +2188,8 @@ a.responsive-menu-toggle {
 	}
 
 	#login {
-		margin-top: 10px;
-		margin-right: 0;
+		margin-top: 100px;
+		margin-right: 10px;
 	}
 
 	#slider .slider-info {
@@ -2281,7 +2279,8 @@ Search Form
 	transition: transform 0.3s, opacity 0.3s;
 }
 .cd-main-nav input[type="text"] {
-	background-color: #292a37;
+	background-color: #888888;
+	color: white;
 	-webkit-transition: background-color 0.3s;
 	-moz-transition: background-color 0.3s;
 	transition: background-color 0.3s;

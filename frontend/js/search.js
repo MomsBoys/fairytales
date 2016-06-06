@@ -29,6 +29,7 @@ jQuery(document).ready(function($){
 			navigationWrapper.detach().insertBefore(searchForm).find('.cd-serch-wrapper').remove();
 			$('.search').css("display", "inline-block");
 			$('.close').css("display", "inline-block");
+			$('#menu').css("padding-right", "60px");
 		} else if( screenSize == 'mobile' && !(mainHeader.children('.cd-main-nav-wrapper').length == 0)) {
 			//mobile screen - move navigation and search form after .cd-main-content element
 			//navigationWrapper.detach().insertAfter('.cd-main-content');
@@ -37,6 +38,7 @@ jQuery(document).ready(function($){
 			newListItem.appendTo(navigation);
 			$('.search').css("display", "none");
 			$('.close').css("display", "none");
+			$('#menu').css("padding-right", "0px");
 		}
 
 		resizing = false;
