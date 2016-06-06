@@ -1,0 +1,50 @@
+﻿@model List<FairyTales.Entities.Author>
+
+@{
+    ViewBag.Title = "Автори";
+    Layout = "../Shared/_AdminPanelLayout.cshtml";
+}
+
+<div id="rev-content">
+    <div id="rev-body">
+        <div class="wrap">
+            @if (Model.Count == 0)
+            {
+                <h1>На даному сайтів не знайдено жодного автора.</h1>
+            }
+            else
+            {
+                <h1>Автори</h1>
+
+                <table class="posts" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="manage-column id">ID</th>
+                            <th scope="col" class="manage-column author-name">Імя автора</th>
+                            <th scope="col" class="manage-column edit">Змінити</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col" class="manage-column id">ID</th>
+                            <th scope="col" class="manage-column author-name">Імя автора</th>
+                            <th scope="col" class="manage-column edit">Змінити</th>
+                        </tr>
+                    </tfoot>
+                    <tbody id="list">
+                        @foreach (var author in Model)
+                        {
+                            <tr id="/authors/@author.Author_ID">
+                                <td class="author-id">@author.Author_ID</td>
+                                <td class="author-name">@author.LastName @author.FirstName</td>
+                                <td class="edit-author">
+                                    <a style="display: block;" href="/adminpanel/editauthor/@author.Author_ID">Редагувати</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div><!-- .wrap -->
+    </div><!-- #rev-body -->
+</div><!-- #rev-content -->

@@ -1,0 +1,201 @@
+﻿using System.Linq;
+using System.Web.Mvc;
+using FairyTales.Models;
+
+namespace FairyTales.Controllers
+{
+    public class AdminPanelController : Controller
+    {
+        private readonly AdminPanel _adminPanel;
+
+        public AdminPanelController()
+        {
+            _adminPanel = new AdminPanel();
+        }
+
+        // GET: AdminPanel
+        public ActionResult Index()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View(_adminPanel);
+        }
+        
+        // GET: Tales List
+        public ActionResult Tales()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View(_adminPanel.Tales);
+        }
+
+        // GET: Add Tale
+        public ActionResult AddTale()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View();
+        }
+
+        // GET: Edit Tale
+        public ActionResult EditTale(int id)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            var fairyTale = _adminPanel.Tales.FirstOrDefault(tale => tale.Id == id);
+
+            GetDefaultViewBag();
+
+            return View(fairyTale);
+        }
+
+        // GET: Authors List
+        public ActionResult Authors()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View(_adminPanel.Authors);
+        }
+
+        // GET: Add Author
+        public ActionResult AddAuthor()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View();
+        }
+
+        // GET: Edit Author
+        public ActionResult EditAuthor(int id)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            var author = _adminPanel.Authors.FirstOrDefault(innerAuthor => innerAuthor.Author_ID == id);
+
+            GetDefaultViewBag();
+
+            return View(author);
+        }
+
+        // GET: Categories List
+        public ActionResult Categories()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View(_adminPanel.Categories);
+        }
+
+        // GET: Add Category
+        public ActionResult AddCategory()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View();
+        }
+
+        // GET: Edit Category
+        public ActionResult EditCategory(int id)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            var category = _adminPanel.Categories.FirstOrDefault(innerCategory => innerCategory.Category_ID == id);
+
+            GetDefaultViewBag();
+
+            return View(category);
+        }
+
+        // GET: Tags List
+        public ActionResult Tags()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View(_adminPanel.Tags);
+        }
+
+        // GET: Add Tag
+        public ActionResult AddTag()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View();
+        }
+
+        // GET: Edit Tag
+        public ActionResult EditTag(int id)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            var tag = _adminPanel.Tags.FirstOrDefault(innerTag => innerTag.Tag_ID == id);
+
+            GetDefaultViewBag();
+
+            return View(tag);
+        }
+
+        // GET: Users List
+        public ActionResult Users()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View(_adminPanel.Users);
+        }
+
+        // GET: Edit User
+        public ActionResult EditUser(string id)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return PartialView("Error");
+
+            var user = _adminPanel.Users.FirstOrDefault(innerUser => innerUser.Id == id);
+
+            GetDefaultViewBag();
+
+            return View(user);
+        }
+
+        #region Additional Methods
+        private void GetDefaultViewBag()
+        {
+            ViewBag.Tales = _adminPanel.Tales;
+            ViewBag.Categories = _adminPanel.Categories;
+            ViewBag.Tags = _adminPanel.Tags;
+            ViewBag.Authors = _adminPanel.Authors;
+        }
+        #endregion // Additional Methods
+    }
+}

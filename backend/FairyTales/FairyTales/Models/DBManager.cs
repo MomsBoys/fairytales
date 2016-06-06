@@ -71,6 +71,26 @@ namespace FairyTales.Models
             return context.Categories.Select(v => v).ToList();
         }
 
+        public static List<Tag> GetTags()
+        {
+            return new DBFairytaleEntities().Tags.ToList();
+        }
+
+        public static List<Author> GetAuthors()
+        {
+            return new DBFairytaleEntities().Authors.ToList();
+        }
+
+        public static List<FairyTale> GetTales()
+        {
+            return new DBFairytaleEntities().Tales.ToList().Select(tale => new FairyTale(tale)).ToList();
+        }
+
+        public static List<AspNetUser> GetUsers()
+        {
+            return new DBFairytaleEntities().AspNetUsers.ToList();
+        } 
+
         public static List<FairyTale> GetPopularShortTales(int talesCount)
         {
             return GetShortTales(null, null).OrderByDescending(c => c.LikesCount).Take(talesCount).ToList();
@@ -106,6 +126,12 @@ namespace FairyTales.Models
         public static FairyTale GetTaleByPath(string path)
         {
             var fairyTale = new DBFairytaleEntities().Tales.FirstOrDefault(tale => tale.Path.Equals(path));
+            return new FairyTale(fairyTale);
+        }
+
+        public static FairyTale GetTaleById(int id)
+        {
+            var fairyTale = new DBFairytaleEntities().Tales.FirstOrDefault(tale => tale.Tale_ID == id);
             return new FairyTale(fairyTale);
         }
 

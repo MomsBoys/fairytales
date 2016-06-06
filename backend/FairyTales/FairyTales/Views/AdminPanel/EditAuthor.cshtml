@@ -1,0 +1,67 @@
+﻿@model FairyTales.Entities.Author
+
+@{
+    ViewBag.Title = "Редагувати автора";
+    Layout = "../Shared/_AdminPanelLayout.cshtml";
+}
+
+<div id="rev-content">
+    <div id="rev-body">
+        <div class="wrap">
+
+            <h1>Редагувати автора</h1>
+
+            <form action="/adminpanel/editauthor/@Model.Author_ID" method="post" autocomplete="off">
+
+                <div id="post">
+                    <div id="post-body">
+                        <div id="post-body-content">
+
+                            <div id="namediv" class="stuffbox">
+                                <h3 class="area-title">Дані про автора</h3>
+                                <div class="inside">
+
+                                    <table class="form-table addauthor">
+                                        <tbody>
+                                            <tr valign="top">
+                                                <td class="first">Ім'я:</td>
+                                                <td><input type="text" name="author_name" size="30" id="name" placeholder="Для прикладу: Іван"></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td class="first">Прізвище:</td>
+                                                <td><input type="text" name="author_lastname" size="30" id="author_lastname" placeholder="Для прикладу: Франко"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div><!-- #namediv -->
+                        </div>
+
+                        <div id="right-sidebar">
+                            <div id="side-wrap">
+
+                                <div id="submitdiv">
+                                    <h3 class="area-title">Редагувати автора</h3>
+                                    <div class="inside">
+                                        <div id="submitbox">
+                                            <div class="pub-actions">
+                                                <div id="publicate">
+                                                    <input type="submit" name="submit" id="publish" value="Редагувати" />
+                                                </div><!-- #publicate -->
+                                            </div>
+                                        </div>
+                                    </div><!-- .inside -->
+                                </div><!-- #submitdiv -->
+
+                            </div><!-- #side-wrap -->
+                        </div><!-- #right-sidebar -->
+
+                    </div><!-- #post-body -->
+                </div><!-- #post -->
+
+            </form>
+
+        </div><!-- .wrap -->
+    </div><!-- #rev-body -->
+</div><!-- #rev-content -->

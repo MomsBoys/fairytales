@@ -119,7 +119,7 @@
           <Key>
             <PropertyRef Name="User_Tale_ID" />
           </Key>
-          <Property Name="User_Tale_ID" Type="int" Nullable="false" />
+          <Property Name="User_Tale_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Tale_ID" Type="int" Nullable="false" />
           <Property Name="IsFavorite" Type="bit" Nullable="false" />
