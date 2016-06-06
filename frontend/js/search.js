@@ -93,4 +93,6 @@ jQuery(document).ready(function($){
 	searchForm.on('change', 'select', function(){
 		searchForm.find('.selected-value').text($(this).children('option:selected').text());
 	});
+	
 });
+

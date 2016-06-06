@@ -48,7 +48,7 @@
 		</div><!-- #Header -->
 
 		<div id="search" class="cd-main-search">
-			<form>
+			<form id="search-form">
 				<input type="text" placeholder="Пошук...">
 
 				<div class="cd-select">
@@ -88,7 +88,7 @@
 
 			</div> <!-- .cd-search-suggestions -->
 
-			<a href="#0" class="search cd-text-replace">Пошук</a>
+			<a href="#" class="search cd-text-replace" onClick='submitSearchForm()'>Пошук</a>
 			<a href="#0" class="close cd-text-replace">Закрити</a>
 
 		</div> <!-- .cd-main-search -->
@@ -335,6 +335,11 @@
 			animation: "slide",
 			cssBlur: true
 		});
+
+
+		function submitSearchForm() {
+			$('#search-form').submit();
+		}
 	</script>
 </body>
 </html>
