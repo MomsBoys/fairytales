@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+}
+
+
+
+<div id="Content">
+    <div class="container">
+        <section id="primary">
+            <div class="content contact contact-page">
+                <h1 class="page-title">Контакти</h1>
+
+                <div class="contact-wrap">
+                    <div class="contact-form">
+                        <form id="rev_contact_form" method="post"  action="/Contact/Sender">
+                            @Html.ValidationSummary(true)
+                            <div class="row">
+                                <div class="row-half">
+                                    <div class="field">
+                                        <label for="sender_name">Ім'я</label>
+                                        <input type="text" class="text name_field" name="SenderName" id="sender_name" placeholder="Ваше імя" value="">
+                                    </div>
+                                </div>
+                                <div class="row-half right">
+                                    <div class="field">
+                                        <label for="sender_email">Електронна пошта<span class="required">обов'язково</span></label>
+                                        <input type="text" class="text requiredField email" name="SenderEmail" id="sender_email" placeholder="Для контакту з Вами" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="field message-field">
+                                    <label for="message_title">Заголовок повідомлення<span class="required">обов'язково</span></label>
+                                    <input type="text" class="text title_field requiredField" name="MessageTitle" id="message_title" placeholder="Те, про що хочете запитати" value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="field textarea-field">
+                                    <label for="message_text">Напишіть Ваше повідомлення нижче<span class="required">обов'язково</span></label>
+                                    <textarea class="textarea message_field requiredField" name="MessageText" id="message_text" placeholder="Ваше запитання тут"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="field">
+                                    <input type="submit" id="form_submit" name="rev_submit" value="Відправити повідомлення" class="button">
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- .contact-form -->
+                </div><!-- .contact-wrap -->
+
+            </div><!-- .content -->
+        </section><!-- #primary -->
+
+        <p id="back-top">
+            <a href="#top"><span></span></a>
+        </p><!-- #back-top -->
+    </div><!-- .container -->
+</div><!-- #Content -->
+
