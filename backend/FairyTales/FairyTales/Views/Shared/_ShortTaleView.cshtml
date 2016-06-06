@@ -1,4 +1,4 @@
-﻿@model FairyTales.Entities.Tale
+﻿@model FairyTales.Models.FairyTale
 <article class="post">
     <a href="/tales/@Model.Path">
         <img width="305" src="@Model.Cover" class="post-image" />
@@ -7,7 +7,7 @@
     <div class="post-right">
         @if (!String.IsNullOrWhiteSpace(Model.Audio))
         {
-            <a href="#" class="audio">Аудіо</a>
+            <span href="#" class="audio">Аудіо</span>
         }
 
         <h2 class="entry-title"> 
@@ -15,15 +15,23 @@
         </h2>
 
         <div class="entry-meta">
-            <span class="date"><i class="icon-calendar"></i>@Model.Date.ToShortDateString()</span>
-            @if (Model.Author_ID != null)
+            @{
+                var likesCount = new HtmlString(string.Format(" ({0})", @Model.LikesCount));
+            }
+            <span class="date"><i class="fa fa-calendar"></i>@Model.Date.ToShortDateString()</span>
+            @if (Model.Author != null)
             {
-                <span class="author"><i class="icon-user"></i><a href="#">@String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName)</a></span>
+                <span class="author"><i class="fa fa-user"></i><a href="#">@String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName)</a></span>
             }
             else
             {
-                <span class="author"><i class="icon-user"></i><a href="#">Народна</a></span>
+                <span class="author"><i class="fa fa-user"></i><a href="#">Народна</a></span>
             }
+            <a href="#0" class="like@{if (@Model.IsUserLiked){@Html.Raw(" is-selected")}}">
+                <i class="fa fa-thumbs-up"></i>Подобається@{if (!@Model.LikesCount.Equals(0))
+                    {@Html.Raw(likesCount)
+                    }}
+            </a>
         </div>
 
         <div class="entry-content">@Html.Raw(@Model.ShortDescription ?? "")</div>

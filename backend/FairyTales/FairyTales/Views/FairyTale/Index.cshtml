@@ -12,26 +12,69 @@
                     <img width="305" src="@Model.Cover" class="post-image" />
 
                     <div class="post-right">
-                        <div class="article-top">
-                            @{
-                                var likesCount = new HtmlString(string.Format(" ({0})", @Model.LikeCount));
-                            }
-                            <a href="#" class="article-like@{if (@Model.IsUserLiked){@Html.Raw(" is-selected")}}">Подобається@{if (!@Model.LikeCount.Equals(0)){@Html.Raw(likesCount)}}</a>
-                            <a href="#" class="article-favorite@{if (@Model.IsUserFavorited){@Html.Raw(" is-selected")}} ">В улюблені</a>
-                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="article-top">
+                                <form action="/tales/@Model.Path/favorite" data-ajax="true" method="POST" id="favorite-form">
+                                    <input style="visibility: hidden" value="is-selected" name="user-favorite" />
+                                    <input type="submit" value="В улюблені" class="article-favorite@{
+                                                                                                       if (@Model.IsUserFavorite)
+                                                                                                       {
+                                                                                                           @Html.Raw(" is-selected")
+                                                                                                       }
+                                                                                                   }" />
+                                </form>
 
-                        <h2 class="entry-title">@Model.Name</h2>
+                                <script>
+                                    $(document).ready(function() {
+                                        $("input.article-favorite").on("click", function() {
+                                            $(this).removeAttr("style");
+
+                                            if ($(this).hasClass("is-selected")) {
+                                                $(this).css({
+                                                    background: "#E5E5E5",
+                                                    color: "#5DA1B1"
+                                                });
+                                                $(this).removeClass("is-selected");
+                                            } else {
+                                                $(this).css({
+                                                    background: "#5DA1B1",
+                                                    color: "#FFF"
+                                                });
+                                                $(this).addClass("is-selected");
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </div>
+
+                            <h2 class="entry-title top-space">@Model.Name</h2>
+                        }
+                        else
+                        {
+                            <h2 class="entry-title">@Model.Name</h2>
+                        }
 
                         <div class="entry-meta">
-                            <span class="date"><i class="icon-calendar"></i>@Model.Date.ToShortDateString()</span>
+                            @{
+                                var likesCount = new HtmlString(string.Format(" ({0})", @Model.LikesCount));
+                            }
+                            <span class="date"><i class="fa fa-calendar"></i>@Model.Date.ToShortDateString()</span>
                             @if (Model.Author != null)
                             {
-                                <span class="author"><i class="icon-user"></i><a href="#">@string.Format("{0} {1}", @Model.Author.FirstName, @Model.Author.LastName)</a></span>
+                                <span class="author"><i class="fa fa-user"></i><a href="#">@string.Format("{0} {1}", @Model.Author.FirstName, @Model.Author.LastName)</a></span>
                             }
                             else
                             {
-                                <span class="author"><i class="icon-user"></i><a href="#">Народна</a></span>
+                                <span class="author"><i class="fa fa-user"></i><a href="#">Народна</a></span>
                             }
+                            <a href="#0" class="like@{if (@Model.IsUserLiked)
+                                                    {@Html.Raw(" is-selected")
+                                                    }}">
+                                <i class="fa fa-thumbs-up"></i>Подобається@{if (!@Model.LikesCount.Equals(0))
+                                                                          {@Html.Raw(likesCount)
+                                                                          }}
+                            </a>
                         </div>
 
                         @if (!string.IsNullOrWhiteSpace(Model.Audio))
@@ -51,10 +94,10 @@
                         @if (Model.Tags.Count != 0)
                         {
                             <ul class="tags">
-                            @foreach (var tag in Model.Tags)
-                            {
-                                <li><a href="#">@tag.Name</a></li>
-                            }
+                                @foreach (var tag in Model.Tags)
+                                {
+                                    <li><a href="#">@tag.Name</a></li>
+                                }
                             </ul>
                         }
                     </div><!-- .post-right -->
