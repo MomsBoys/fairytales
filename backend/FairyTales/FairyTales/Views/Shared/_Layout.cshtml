@@ -87,78 +87,11 @@
                 </ul>
 
                 <div id="cd-login">
-                    <form action="/Account/Login" method="post" novalidate="novalidate" class="cd-form" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results-auth">
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
-                        <div id="results-auth"></div>
-                        <p class="fieldset">
-                            <label class="image-replace cd-email" for="signin-email">E-mail</label>
-                            <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="Електронна пошта" name="UserName">
-                            <span class="cd-error-message">Введено невірну електронну пошту!</span>
-                        </p>
-
-                        <p class="fieldset">
-                            <label class="image-replace cd-password" for="signin-password">Пароль</label>
-                            <input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Пароль" name="Password">
-                            <span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
-                            <a href="#0" class="hide-password">Показати</a>
-                        </p>
-
-                        <p class="fieldset no-right-margin">
-                            <input class="full-width" type="submit" value="Авторизуватися">
-                        </p>
-
-                        <!-- uLogin - авторизація через соц мережі -->
-                        <div data-ulogin="display=buttons;fields=first_name,last_name;
-                         providers=vkontakte,facebook,google;
-                         redirect_uri=http%3A%2F%2Flocalhost%3A1599%2FUserSocial%2FLogin" data-ulogin-inited="1464819237654">
-                            <p class="fieldset" style="margin-bottom: 30px;">
-                                <a data-uloginbutton="facebook" class="full-width has-padding has-border signin-social" id="signin-facebook" href="#">Увійти через Facebook</a>
-                            </p>
-
-                            <p class="fieldset">
-                                <a data-uloginbutton="vkontakte" class="full-width has-padding has-border signin-social" id="signin-vk" href="#">Увійти через VK</a>
-                            </p>
-                        </div>
-                        <script src="//ulogin.ru/js/ulogin.js"></script>
-
-                    </form>
+                    @Html.Partial("_SignInPartial", new FairyTales.Models.LoginViewModel())
                 </div>
 
                 <div id="cd-signup">
-                    <form action="/Account/Register" method="post" novalidate="novalidate" class="cd-form" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results-reg">
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary()
-                        <div id="results-reg"></div>
-                        <p class="fieldset">
-                            <label class="image-replace cd-username" for="signup-firstname">Ім'я</label>
-                            <input class="full-width has-padding has-border" id="signup-firstname" type="text" placeholder="Ваше ім'я" name="FirstName">
-                            <span class="cd-error-message">Заповніть будь ласка поле з іменем.</span>
-                        </p>
-
-                        <p class="fieldset">
-                            <label class="image-replace cd-username" for="signup-lastname">Прізвище</label>
-                            <input class="full-width has-padding has-border" id="signup-lastname" type="text" placeholder="Ваше прізвище" name="SecondName">
-                            <span class=" cd-error-message">Заповніть будь ласка поле з прізвищем.</span>
-                        </p>
-
-                        <p class="fieldset">
-                            <label class="image-replace cd-email" for="signup-email">E-mail</label>
-                            <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="Електронна пошта" name="UserName">
-                            <span class="cd-error-message">Введено невірну електронну пошту!</span>
-                        </p>
-
-                        <p class="fieldset">
-                            <label class="image-replace cd-password" for="signup-password">Пароль</label>
-                            <input class="full-width has-padding has-border" id="signup-password" type="password" placeholder="Пароль" name="Password">
-                            <span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
-                            <a href="#0" class="hide-password">Показати</a>
-                        </p>
-
-                        <p class="fieldset no-right-margin">
-                            <input class="full-width has-padding" type="submit" value="Створити профіль">
-                        </p>
-                    </form>
+                    @Html.Partial("_SignUpPartial", new FairyTales.Models.RegisterViewModel())
                 </div>
 
                 <a href="#0" class="cd-close-form">Close</a>

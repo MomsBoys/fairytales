@@ -10,6 +10,8 @@ namespace FairyTales.Models
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }
+        public string Email { get; set; }
+        public bool ConfirmedEmail { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

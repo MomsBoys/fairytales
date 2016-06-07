@@ -310,6 +310,9 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contact\_FormContact.cshtml" />
     <Content Include="Views\Contact\_SendSuccess.cshtml" />
+    <Content Include="Views\Shared\_SignInPartial.cshtml" />
+    <Content Include="Views\Shared\_SignUpPartial.cshtml" />
+    <Content Include="Views\Shared\_SignUpSuccessfulPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

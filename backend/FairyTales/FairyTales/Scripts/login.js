@@ -180,3 +180,4 @@ jQuery.fn.putCursorAtEnd = function() {
     	}
 	});
 };
+

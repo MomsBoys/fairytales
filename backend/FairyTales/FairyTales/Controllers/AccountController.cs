@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using FairyTales.Models;
@@ -43,29 +45,33 @@ namespace FairyTales.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            string errorMessage;
-
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
+                    if (user.ConfirmedEmail)
+                    {
+                        await SignInAsync(user, model.RememberMe);
 
-                    var cookie = new HttpCookie("first_name", user.FirstName);
-                    Response.SetCookie(cookie);
-                    return JavaScript("location.reload(true)");
+                        var cookie = new HttpCookie("first_name", user.FirstName);
+                        Response.SetCookie(cookie);
+                        return JavaScript("location.reload(true)");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorSignIn = "Підтвердіть свій email.";
+                        return PartialView("_SignInPartial", model);
+                    }
                 }
                 else
                 {
-                    errorMessage = "Невірний email або пароль.";
-                    return PartialView("_ErrorPartial", errorMessage);
+                    ViewBag.ErrorSignIn = "Невірний email або пароль.";
+                    return PartialView("_SignInPartial", model);
                 }
             }
-
-            // If we got this far, something failed, redisplay form
-            errorMessage = "Некоректний email або пароль.";
-            return PartialView("_ErrorPartial", errorMessage);
+            ViewBag.ErrorSignIn = "Некоректний email або пароль.";
+            return PartialView("_SignInPartial", model);
         }
 
         //
@@ -84,35 +90,68 @@ namespace FairyTales.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             string errorMessage = string.Empty;
-
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser()
                 {
                     UserName = model.UserName,
                     FirstName = model.FirstName,
-                    SecondName = model.SecondName
+                    SecondName = model.SecondName,
+                    Email = model.UserName,
+                    ConfirmedEmail = false
                 };
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    var configuration = System.Web.Configuration.WebConfigurationManager.AppSettings;
+                    string message = string.Format("Для завершення реєстрації перейдіть за посиланням:" +
+                                    "<a href=\"{0}\" title=\"Підтвердити реєстрацію\">{0}</a>",
+                        Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Url.Scheme));
+                    var emailSender = new ConfirmAccountEmailSender(configuration["Email"], configuration["EmailPass"], user.Email);
+                    if (emailSender.IsEmailSent(message, "Завершення реєстрації"))
+                    {
+                        return PartialView("_SignUpSuccessfulPartial");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorSignUp = "Вибачте реєстрація пройшла не успішно.";
+                        return PartialView("_SignUpPartial", model);
+                    }
 
+                }
+                ViewBag.ErrorSignUp = "Користувач з введеним email вже існує. Введіть інший email.";
+                return PartialView("_SignUpPartial", model);
+            }
+            ViewBag.ErrorSignUp = "Пароль повинен містити мінімум 6 символів.";
+            return PartialView("_SignUpPartial", model);
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string Token, string Email)
+        {
+            ApplicationUser user = this.UserManager.FindById(Token);
+            if (user != null)
+            {
+                if (user.Email == Email)
+                {
+                    user.ConfirmedEmail = true;
+                    await UserManager.UpdateAsync(user);
+                    await SignInAsync(user, isPersistent: false);
                     var cookie = new HttpCookie("first_name", user.FirstName);
                     Response.SetCookie(cookie);
-                    return JavaScript("location.reload(true)");
+                    return RedirectToAction("LastAdded", "Library");
                 }
-
-                errorMessage = "Користувач з введеним email вже існує. Введіть інший email.";
-                return PartialView("_ErrorPartial", errorMessage);
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
-
-            errorMessage = "Пароль повинен містити мінімум 6 символів.";
-            
-            // If we got this far, something failed, redisplay form
-            return PartialView("_ErrorPartial", errorMessage);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult Redirect()
@@ -315,6 +354,12 @@ namespace FairyTales.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            if (Request.Cookies["first_name"] != null)
+            {
+                HttpCookie cookie = new HttpCookie("first_name");
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
+            }
             return RedirectToAction("Index", "Home");
         }
 
