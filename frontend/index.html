@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html id="ie6"><![endif]-->
+<!--[if IE 7]><html id="ie7"><![endif]-->
+<!--[if IE 8]><html id="ie8"><![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" />
+	<title>Title of current page</title> <!-- Changable in different pages! -->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="shortcut icon" href="images/favicon.png" />
+	<link rel="apple-touch-icon" href="images/apple-icon-touch.png" />
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/modernizr.js"></script>
+	<script type="text/javascript" src="js/homeslider.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script>
+</head>
+<body>
+	<div id="Wrapper">
+		
+		<div id="Header" role="banner">
+			<div class="container">
+				<div id="logo">
+					<a href="index.html" title="Mom's Stories">
+						<img src="images/logo.png" alt="Mom's Stories" />
+					</a>
+				</div><!-- #logo -->
+
+				<a href="#0" class="cd-signin" id="login">Вхід</a>
+
+				<nav id="menu">
+					<ul class="menu">
+						<li class="current-menu-item"><a href="index.html">Головна</a></li>
+						<li><a href="library.html">Бібліотека</a></li>
+						<li><a href="contact.html">Контакти</a></li>
+						<li class="menu-item-search"><a href="search.html" class="">Пошук</a></li>
+					</ul>
+				</nav><!-- #menu -->
+
+				<a href="#" class="responsive-menu-toggle"><i class="icon-reorder"></i></a>
+			</div><!-- .container -->
+		</div><!-- #Header -->
+
+		<!-- Login Area -->
+		<div class="cd-user-modal">
+			<div class="cd-user-modal-container">
+				<ul class="cd-switcher">
+					<li><a href="#0" class="is-selected">Увійти</a></li>
+					<li><a href="#1">Зареєструватися</a></li>
+				</ul>
+
+				<div id="cd-login">
+					<form action="#" class="cd-form">
+						<p class="fieldset">
+							<label class="image-replace cd-email" for="signin-email">E-mail</label>
+							<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="Електронна пошта">
+							<span class="cd-error-message">Введено невірну електронну пошту!</span>
+						</p>
+
+						<p class="fieldset">
+							<label class="image-replace cd-password" for="signin-password">Пароль</label>
+							<input class="full-width has-padding has-border" id="signin-password" type="text" placeholder="Пароль">
+							<span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+							<a href="#0" class="hide-password">Сховати</a>
+						</p>
+
+						<p class="fieldset no-right-margin">
+							<input class="full-width" type="submit" value="Авторизуватися">
+						</p>
+
+						<p class="fieldset" style="margin-bottom:30px;">
+							<a class="full-width has-padding has-border signin-social" id="signin-facebook" href="#">Увійти через Facebook</a>
+						</p>
+
+						<p class="fieldset">
+							<a class="full-width has-padding has-border signin-social" id="signin-vk" href="#">Увійти через VK</a>
+						</p>
+					</form>
+				</div>
+
+				<div id="cd-signup">
+					<form class="cd-form">
+						<p class="fieldset">
+							<label class="image-replace cd-username" for="signup-firstname">Ім'я</label>
+							<input class="full-width has-padding has-border" id="signup-firstname" type="text" placeholder="Ваше ім'я">
+							<span class="cd-error-message">Заповніть будь ласка поле з іменем.</span>
+						</p>
+
+						<p class="fieldset">
+							<label class="image-replace cd-username" for="signup-lastname">Прізвище</label>
+							<input class="full-width has-padding has-border" id="signup-lastname" type="text" placeholder="Ваше прізвище">
+							<span class="cd-error-message">Заповніть будь ласка поле з прізвищем.</span>
+						</p>
+
+						<p class="fieldset">
+							<label class="image-replace cd-email" for="signup-email">E-mail</label>
+							<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="Електронна пошта">
+							<span class="cd-error-message">Введено невірну електронну пошту!</span>
+						</p>
+
+						<p class="fieldset">
+							<label class="image-replace cd-password" for="signup-password">Пароль</label>
+							<input class="full-width has-padding has-border" id="signup-password" type="text" placeholder="Пароль">
+							<span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+							<a href="#0" class="hide-password">Сховати</a>
+						</p>
+
+						<p class="fieldset no-right-margin">
+							<input class="full-width has-padding" type="submit" value="Створити профіль">
+						</p>
+					</form>
+				</div>
+
+				<a href="#0" class="cd-close-form">Close</a>
+			</div>
+		</div>
+		<!-- /Login Area -->
+
+		<div id="Content">
+			<div id="slider">
+				<div class="slider-container">
+					<div class="page_container">
+						<div id="slider-info" class="slider-info">
+							<div class="slide">
+								<h2><a href="article.html">Назва казки №1</a></h2>
+								<div class="image">
+									<img src="http://cdn.tinybuddha.com/wp-content/uploads/2015/04/Fairy-Tale.png" alt="Slide 1" />
+								</div>
+							</div>
+
+							<div class="slide" data-blurred="images/slide2.jpg">
+								<h2><a href="article.html">Назва казки №2</a></h2>
+								<div class="image">
+									<img src="http://uplissa.org/wp-content/uploads/2016/02/103088.jpg" alt="Slide 2" />
+								</div>
+							</div>
+
+							<div class="slide">
+								<h2><a href="article.html">Назва казки №3</a></h2>
+								<div class="image">
+									<img src="https://thelovehawk.files.wordpress.com/2013/11/fairy-tale.jpg" alt="Slide 3" />
+								</div>
+							</div>
+
+							<div class="slide">
+								<h2><a href="article.html">Назва казки №4</a></h2>
+								<div class="image">
+									<img src="http://uplissa.org/wp-content/uploads/2016/02/103088.jpg" alt="Slide 4" />
+								</div>
+							</div>
+
+							<div class="is-nav">
+								<ul class="slider-direction-nav">
+									<li><a href="#" class="is-prev">Previous</a></li>
+									<li><a href="#" class="is-next">Next</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- #slider -->
+
+			<div class="container">
+				<section id="primary">
+					<div class="content">
+						<h1 class="content-title">
+							<a href="library.html">Останні додані</a>
+						</h1>
+
+						<article class="post">
+							<a href="article.html">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
+
+							<div class="post-right">
+								<a href="#" class="audio">Audio</a>
+
+								<h2 class="entry-title">
+									<a href="article.html">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>15 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+
+						<article class="post">
+							<a href="article.html">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
+
+							<div class="post-right">
+								<h2 class="entry-title">
+									<a href="article.html">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>15 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+
+						<article class="post">
+							<a href="article.html">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
+
+							<div class="post-right">
+								<h2 class="entry-title">
+									<a href="article.html">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>14 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+
+						<article class="post">
+							<a href="article.html">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
+
+							<div class="post-right">
+								<h2 class="entry-title">
+									<a href="article.html">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>13 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+
+						<article class="post">
+							<a href="article.html">
+								<img width="305" src="images/article-1.jpg" class="post-image" />
+							</a>
+
+							<div class="post-right">
+								<h2 class="entry-title">
+									<a href="article.html">Назва казки</a>
+								</h2>
+
+								<div class="entry-meta">
+									<span class="date"><i class="icon-calendar"></i>13 травня, 2016</span>
+									<span class="author"><i class="icon-user"></i><a href="#">Ім'я автора</a></span>
+								</div> 
+
+								<div class="entry-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores sed, neque laudantium totam accusamus ipsum a nisi fuga non architecto, cum asperiores. Distinctio veritatis nulla ea, quos pariatur natus voluptates?</div>
+							</div><!-- .post-right -->
+						</article><!-- .post -->
+
+					</div><!-- .content -->
+				</section><!-- #primary -->
+
+				<p id="back-top">
+					<a href="#top"><span></span></a>
+				</p><!-- #back-top -->
+			</div><!-- .container -->
+		</div><!-- #Content -->
+	</div><!-- #Wrapper -->
+
+	<script type="text/javascript">
+		$("#slider-info").immersive_slider({
+			animation: "slide",
+			cssBlur: true
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿@using FairyTales.Controllers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>@ViewBag.Title - Адмін панель | Mom's Stories</title>
+    <link rel="stylesheet" href="~/css/adminpanel/style.css" />
+    <script type="text/javascript" src="~/Scripts/jquery-1.11.0.min.js"></script>
+    <script src="~/Scripts/adminpanel/preloader.js"></script>
+    <script src="~/Scripts/adminpanel/froala_editor.min.js"></script>
+    <link rel="stylesheet" href="~/css/adminpanel/froala_editor.min.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png" />
+    <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png" />
+</head>
+<body>
+    <div class="container">
+
+        <!-- Preloader -->
+        <div id="preloader">
+            <div id="status">
+                <i class="fa fa-spinner fa-spin"></i>
+            </div>
+        </div>
+
+        <div id="rev-menu">
+            <script src="~/Scripts/adminpanel/menu.js"></script>
+            <script>$(document).ready(function() { $('.leftpanel').fadeIn('600'); });</script>
+            <div class="leftpanel" style="display: none;">
+                <h5 class="sidebartitle">Навігація</h5>
+                <ul id="adminmenu">
+                    <li class="nav-home"><a href="/adminpanel">Головна</a></li>
+                    <li class="nav-parent nav-posts">
+                        <a href="/adminpanel/tales">Казки</a>
+                        <ul class="submenu">
+                            <li><a href="/adminpanel/addtale">Додати</a></li>
+                            <li><a href="/adminpanel/tales">Редагувати</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent nav-cats">
+                        <a href="/adminpanel/categories">Категорії</a>
+                        <ul class="submenu">
+                            <li><a href="/adminpanel/addcategory">Додати</a></li>
+                            <li><a href="/adminpanel/categories">Редагувати</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent nav-authors">
+                        <a href="/adminpanel/authors">Автори</a>
+                        <ul class="submenu">
+                            <li><a href="/adminpanel/addauthor">Додати</a></li>
+                            <li><a href="/adminpanel/authors">Редагувати</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent nav-tags">
+                        <a href="/adminpanel/tags">Теги</a>
+                        <ul class="submenu">
+                            <li><a href="/adminpanel/addtag">Додати</a></li>
+                            <li><a href="/adminpanel/tags">Редагувати</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-users">
+                        <a href="/adminpanel/users">Користувачі</a>
+                    </li>
+                    <li>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a class="closebutton" href="javascript:document.getElementById('logoutForm').submit()">Вихід</a>
+                    }
+                    </li>
+                </ul><!-- #adminmenu -->
+
+                <div class="infosummary">
+                    <h5 class="sidebartitle">Підсумок</h5>
+                    <ul>
+                        <li>
+                            <div class="datainfo"><span class="text-muted">Кількість казок</span></div>
+                            <div class="chart"><h4>@ViewBag.Tales.Count</h4></div>
+                        </li>
+                        <li>
+                            <div class="datainfo"><span class="text-muted">Кількість рубрик</span></div>
+                            <div class="chart"><h4>@ViewBag.Categories.Count</h4></div>
+                        </li>
+                        <li>
+                            <div class="datainfo"><span class="text-muted">Кількість авторів</span></div>
+                            <div class="chart"><h4>@ViewBag.Authors.Count</h4></div>
+                        </li>
+                        <li>
+                            <div class="datainfo"><span class="text-muted">Кількість тегів</span></div>
+                            <div class="chart"><h4>@ViewBag.Tags.Count</h4></div>
+                        </li>
+                    </ul>
+                </div><!-- .infosummary -->
+                <p class="gotosite">Відвідати <a href="/">Mom's Stories</a>.</p>
+            </div><!-- .leftpanel -->
+        </div><!-- #rev-menu -->
+
+        @RenderBody()
+
+        <div class="clear"></div>
+    </div><!-- .container -->
+</body>
+</html>
