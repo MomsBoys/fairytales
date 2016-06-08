@@ -1,4 +1,6 @@
-﻿@model FairyTales.Entities.Category
+﻿@using System.Web.Mvc.Html
+@using FairyTales.Models
+@model FairyTales.Entities.Category
 
 @{
     ViewBag.Title = "Додати категорію";
@@ -10,6 +12,11 @@
         <div class="wrap">
 
             <h1>Додати категорію</h1>
+
+            @if (ViewBag.ResponseResult != null)
+            {
+                @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
+            }
 
             <form action="/adminpanel/addcategory" method="post" autocomplete="off">
 
@@ -25,7 +32,7 @@
                                         <tbody>
                                             <tr valign="top">
                                                 <td class="first">Назва:</td>
-                                                <td><input type="text" name="category_name" size="30" id="name" placeholder="Для прикладу: Народні казки"></td>
+                                                <td><input type="text" name="category_name" size="30" id="name" placeholder="Для прикладу: Народні казки" value="@Model.Name"></td>
                                             </tr>
                                         </tbody>
                                     </table>

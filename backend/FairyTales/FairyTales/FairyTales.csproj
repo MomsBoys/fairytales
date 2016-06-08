@@ -361,6 +361,7 @@
     <None Include="Views\AdminPanel\Tags.cshtml" />
     <None Include="Views\AdminPanel\Tales.cshtml" />
     <None Include="Views\AdminPanel\Users.cshtml" />
+    <Content Include="Views\Shared\_OperationResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

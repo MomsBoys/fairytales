@@ -158,12 +158,37 @@ body {
 	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 
+#responseresult,
 #error,
 #back {
 	line-height: 1em;
 	width: 400px;
 	margin: 5px 0 20px;
 	padding: 2px 10px;
+}
+
+#responseresult {
+    border-left-width: 4px;
+    border-left-style: solid;
+    background: #fff;
+    padding: 15px;
+}
+
+#responseresult.success,
+#responseresult.updated {
+    border-left-color: #22985d;
+}
+
+#responseresult.error {
+    border-left-color: #dd3d36;
+}
+
+#responseresult.exists {
+    border-left-color: #cbdd64;
+}
+
+#responseresult.emptyvalues {
+    border-left-color: #0074a2;
 }
 
 #back {

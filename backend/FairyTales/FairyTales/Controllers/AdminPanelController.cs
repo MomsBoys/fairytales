@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using System.Web.WebPages;
+using FairyTales.Entities;
 using FairyTales.Models;
 
 namespace FairyTales.Controllers
@@ -112,8 +115,30 @@ namespace FairyTales.Controllers
                 return PartialView("Error");
 
             GetDefaultViewBag();
+            
+            return View(new Category());
+        }
 
-            return View();
+        // POST: Add Category
+        [HttpPost]
+        public ActionResult AddCategory(Category category)
+        {
+            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            category.Name = Request.Form["category_name"];
+
+            var operationResult = category.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewCategoryWithName(category.Name);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.EmptyValues ||
+                operationResult == ResponseType.Exists)
+                return View("AddCategory", category);
+            
+            ModelState.Clear();
+            return View("AddCategory", new Category());
         }
 
         // GET: Edit Category
@@ -123,10 +148,35 @@ namespace FairyTales.Controllers
                 return PartialView("Error");
 
             var category = _adminPanel.Categories.FirstOrDefault(innerCategory => innerCategory.Category_ID == id);
+            
+            if (category == null)
+                return PartialView("Error");
 
             GetDefaultViewBag();
 
             return View(category);
+        }
+
+        // POST: Add Category
+        [HttpPost]
+        public ActionResult EditCategory(Category category)
+        {
+            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            category.Category_ID = Convert.ToInt32(Request.Form["category_id"]);
+            category.Name = Request.Form["category_name"];
+
+            var operationResult = category.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.EditExistingCategory(category);
+            ViewBag.ResponseResult = operationResult;
+            
+            if (operationResult == ResponseType.EmptyValues || operationResult == ResponseType.Error)
+                return View("EditCategory", category);
+
+            ModelState.Clear();
+            return View("AddCategory", new Category());
         }
 
         // GET: Tags List

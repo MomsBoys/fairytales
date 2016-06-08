@@ -1,0 +1,26 @@
+﻿@using FairyTales.Models
+@model ResponseType
+<div id="responseresult" class="@Model.ToString().ToLower()">
+    @switch (@Model)
+    {
+        case ResponseType.EmptyValues:
+            @:Будь ласка заповніть дані форми
+            break;
+
+        case ResponseType.Exists:
+            @:База даних уже містить даний запис
+            break;
+
+        case ResponseType.Error:
+            @:Нажаль, сталася помилка. Будь ласка попробуйте знову
+            break;
+
+        case ResponseType.Success:
+            @:Запис успішно додано
+            break;
+
+        case ResponseType.Updated:
+            @:Запис успішно оновлено
+            break;
+    }
+</div>

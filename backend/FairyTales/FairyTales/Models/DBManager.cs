@@ -6,6 +6,15 @@ using Type = FairyTales.Entities.Type;
 
 namespace FairyTales.Models
 {
+    public enum ResponseType
+    {
+        Success,
+        Updated,
+        Error,
+        Exists,
+        EmptyValues
+    }
+
     public static class DbManager
     {
         public const string RootPath = @"http://localhost:1599/Content/Data";
@@ -228,5 +237,62 @@ namespace FairyTales.Models
             return userTale != null && userTale.IsFavorite;
         }
         #endregion // Tale Functionality
+
+        #region Admin Panel
+        public static ResponseType AddNewCategoryWithName(string categoryName)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isCategoryExists = dbContext.Categories.Any(
+                    innerCategory => innerCategory.Name.Equals(categoryName)
+                );
+
+                if (isCategoryExists)
+                    return ResponseType.Exists;
+
+                var category = new Category
+                {
+                    Category_ID = dbContext.Categories.Max(innerCategory => innerCategory.Category_ID) + 1,
+                    Name = categoryName,
+                    Tales = new List<Tale>()
+                };
+
+                dbContext.Categories.Add(category);
+                dbContext.SaveChanges();
+                return ResponseType.Success;
+            }
+            catch
+            {
+                Console.WriteLine(@"AddNewCategoryWithName-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType EditExistingCategory(Category category)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentCategory = dbContext.Categories.FirstOrDefault(
+                    innerCategory => innerCategory.Category_ID == category.Category_ID
+                );
+
+                if (currentCategory == null)
+                    return ResponseType.Error;
+
+                currentCategory.Name = category.Name;
+                dbContext.SaveChanges();
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingCategory-Exception");
+                return ResponseType.Error;
+            }
+        }
+        #endregion // Admin Panel
     }
 }
