@@ -81,7 +81,30 @@ namespace FairyTales.Controllers
 
             GetDefaultViewBag();
 
-            return View();
+            return View(new Author());
+        }
+
+        // POST: Add Author
+        [HttpPost]
+        public ActionResult AddAuthor(Author author)
+        {
+            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            author.FirstName = Request.Form["first_name"];
+            author.LastName = Request.Form["last_name"];
+
+            var operationResult = author.FirstName.IsEmpty() || author.LastName.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewAuthor(author);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.EmptyValues ||
+                operationResult == ResponseType.Exists)
+                return View("AddAuthor", author);
+
+            ModelState.Clear();
+            return View("AddAuthor", new Author());
         }
 
         // GET: Edit Author
@@ -95,6 +118,29 @@ namespace FairyTales.Controllers
             GetDefaultViewBag();
 
             return View(author);
+        }
+
+        // POST: Edit Author
+        [HttpPost]
+        public ActionResult EditAuthor(Author author)
+        {
+            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            author.FirstName = Request.Form["first_name"];
+            author.LastName = Request.Form["last_name"];
+
+            var operationResult = author.FirstName.IsEmpty() || author.LastName.IsEmpty() ? ResponseType.EmptyValues : DbManager.EditExistingAuthor(author);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.EmptyValues || operationResult == ResponseType.Error)
+                return View("EditAuthor", author);
+
+            ModelState.Clear();
+
+            return View("AddAuthor", new Author());
         }
 
         // GET: Categories List
@@ -130,7 +176,7 @@ namespace FairyTales.Controllers
 
             category.Name = Request.Form["category_name"];
 
-            var operationResult = category.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewCategoryWithName(category.Name);
+            var operationResult = category.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewCategory(category);
             ViewBag.ResponseResult = operationResult;
 
             if (operationResult == ResponseType.EmptyValues ||
@@ -157,7 +203,7 @@ namespace FairyTales.Controllers
             return View(category);
         }
 
-        // POST: Add Category
+        // POST: Edit Category
         [HttpPost]
         public ActionResult EditCategory(Category category)
         {

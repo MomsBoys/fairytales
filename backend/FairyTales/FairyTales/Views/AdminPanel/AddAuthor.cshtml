@@ -1,4 +1,5 @@
-﻿@model FairyTales.Entities.Author
+﻿@using FairyTales.Models
+@model FairyTales.Entities.Author
 
 @{
     ViewBag.Title = "Додати автора";
@@ -10,8 +11,13 @@
         <div class="wrap">
 
             <h1>Додати автора</h1>
-            
-        <form action="/adminpanel/addauthor" method="post" autocomplete="off">
+
+            @if (ViewBag.ResponseResult != null)
+            {
+                @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
+            }
+
+            <form action="/adminpanel/addauthor" method="post" autocomplete="off">
 
                 <div id="post">
                     <div id="post-body">
@@ -25,11 +31,11 @@
                                         <tbody>
                                             <tr valign="top">
                                                 <td class="first">Ім'я:</td>
-                                                <td><input type="text" name="author_name" size="30" id="name" placeholder="Для прикладу: Іван"></td>
+                                                <td><input type="text" name="first_name" size="30" id="name" placeholder="Для прикладу: Іван" value="@Model.FirstName"></td>
                                             </tr>
                                             <tr valign="top">
                                                 <td class="first">Прізвище:</td>
-                                                <td><input type="text" name="author_lastname" size="30" id="author_lastname" placeholder="Для прикладу: Франко"></td>
+                                                <td><input type="text" name="last_name" size="30" id="author_lastname" placeholder="Для прикладу: Франко" value="@Model.LastName"></td>
                                             </tr>
                                         </tbody>
                                     </table>

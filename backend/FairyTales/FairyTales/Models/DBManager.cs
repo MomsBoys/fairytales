@@ -239,28 +239,25 @@ namespace FairyTales.Models
         #endregion // Tale Functionality
 
         #region Admin Panel
-        public static ResponseType AddNewCategoryWithName(string categoryName)
+        public static ResponseType AddNewCategory(Category category)
         {
             try
             {
                 var dbContext = new DBFairytaleEntities();
 
                 var isCategoryExists = dbContext.Categories.Any(
-                    innerCategory => innerCategory.Name.Equals(categoryName)
+                    innerCategory => innerCategory.Name.Equals(category.Name)
                 );
 
                 if (isCategoryExists)
                     return ResponseType.Exists;
 
-                var category = new Category
-                {
-                    Category_ID = dbContext.Categories.Max(innerCategory => innerCategory.Category_ID) + 1,
-                    Name = categoryName,
-                    Tales = new List<Tale>()
-                };
-
+                category.Category_ID = dbContext.Categories.Max(innerCategory => innerCategory.Category_ID) + 1;
+                category.Tales = new List<Tale>();
+                
                 dbContext.Categories.Add(category);
                 dbContext.SaveChanges();
+
                 return ResponseType.Success;
             }
             catch
@@ -290,6 +287,60 @@ namespace FairyTales.Models
             catch
             {
                 Console.WriteLine(@"EditExistingCategory-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType AddNewAuthor(Author author)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isAuthorExists = dbContext.Authors.Any(
+                    innerAuthor => innerAuthor.FirstName.Equals(author.FirstName) && innerAuthor.LastName.Equals(author.LastName)
+                );
+
+                if (isAuthorExists)
+                    return ResponseType.Exists;
+
+                author.Author_ID = dbContext.Authors.Max(innerAuthor => innerAuthor.Author_ID) + 1;
+                author.Tales = new List<Tale>();
+                
+                dbContext.Authors.Add(author);
+                dbContext.SaveChanges();
+
+                return ResponseType.Success;
+            }
+            catch
+            {
+                Console.WriteLine(@"AddNewAuthor-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType EditExistingAuthor(Author author)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentAuthor = dbContext.Authors.FirstOrDefault(
+                    innerCategory => innerCategory.Author_ID == author.Author_ID
+                );
+
+                if (currentAuthor == null)
+                    return ResponseType.Error;
+
+                currentAuthor.FirstName = author.FirstName;
+                currentAuthor.LastName = author.LastName;
+                dbContext.SaveChanges();
+
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingAuthor-Exception");
                 return ResponseType.Error;
             }
         }
