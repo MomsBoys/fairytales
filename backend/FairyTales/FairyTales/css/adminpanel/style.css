@@ -375,7 +375,7 @@ body {
 #post {
 	overflow: hidden;
 	padding-top: 10px;
-	min-width: 1210px;
+    min-width: 950px;
 }
 
 #post-body {
@@ -384,9 +384,9 @@ body {
 }
 
 #post-body-content {
-	width: 860px;
+	width: 60%;
 	float: left;
-	min-width: 550px;
+	min-width: 600px;
 }
 
 #right-sidebar {
@@ -600,10 +600,9 @@ body {
 }
 
 .posts {
-	width: 1160px;
 	background: #fff;
 	margin: 0;
-	min-width: 800px;
+	min-width: 600px;
 	border: 1px solid #e5e5e5;
 	border-spacing: 0;
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);

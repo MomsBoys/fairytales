@@ -344,6 +344,58 @@ namespace FairyTales.Models
                 return ResponseType.Error;
             }
         }
+
+        public static ResponseType AddNewTag(Tag tag)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isTagExists = dbContext.Tags.Any(
+                    innerTag => innerTag.Name.Equals(tag.Name)
+                );
+
+                if (isTagExists)
+                    return ResponseType.Exists;
+
+                tag.Tag_ID = dbContext.Tags.Max(innerTag => innerTag.Tag_ID) + 1;
+
+                dbContext.Tags.Add(tag);
+                dbContext.SaveChanges();
+
+                return ResponseType.Success;
+            }
+            catch
+            {
+                Console.WriteLine(@"AddNewTag-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType EditExistingTag(Tag tag)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentTag = dbContext.Tags.FirstOrDefault(
+                    innerTag => innerTag.Tag_ID == tag.Tag_ID
+                );
+
+                if (currentTag == null)
+                    return ResponseType.Error;
+
+                currentTag.Name = tag.Name;
+                dbContext.SaveChanges();
+
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingTag-Exception");
+                return ResponseType.Error;
+            }
+        }
         #endregion // Admin Panel
     }
 }

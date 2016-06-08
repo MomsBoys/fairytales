@@ -244,7 +244,29 @@ namespace FairyTales.Controllers
 
             GetDefaultViewBag();
 
-            return View();
+            return View(new Tag());
+        }
+
+        // POST: Add Tag
+        [HttpPost]
+        public ActionResult AddTag(Tag tag)
+        {
+            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            tag.Name = Request.Form["tag_name"];
+
+            var operationResult = tag.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewTag(tag);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.EmptyValues ||
+                operationResult == ResponseType.Exists)
+                return View("AddTag", tag);
+
+            ModelState.Clear();
+            return View("AddTag", new Tag());
         }
 
         // GET: Edit Tag
@@ -258,6 +280,28 @@ namespace FairyTales.Controllers
             GetDefaultViewBag();
 
             return View(tag);
+        }
+
+        // POST: Edit Tag
+        [HttpPost]
+        public ActionResult EditTag(Tag tag)
+        {
+            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            tag.Tag_ID = Convert.ToInt32(Request.Form["tag_id"]);
+            tag.Name = Request.Form["tag_name"];
+
+            var operationResult = tag.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.EditExistingTag(tag);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.EmptyValues || operationResult == ResponseType.Error)
+                return View("EditTag", tag);
+
+            ModelState.Clear();
+            return View("AddTag", new Tag());
         }
 
         // GET: Users List
