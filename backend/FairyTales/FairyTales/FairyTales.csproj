@@ -314,6 +314,7 @@
     <Content Include="Views\Shared\_SignInPartial.cshtml" />
     <Content Include="Views\Shared\_SignUpPartial.cshtml" />
     <Content Include="Views\Shared\_SignUpSuccessfulPartial.cshtml" />
+    <Content Include="Views\Library\Favourite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

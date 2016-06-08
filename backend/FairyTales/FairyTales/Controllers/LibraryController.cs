@@ -15,6 +15,7 @@ namespace FairyTales.Controllers
             ViewBag.Types = DbManager.GetTypes();
             return View(PopulateLikesAndFavorites(DbManager.GetNewShortTales(null, null)));   
         }
+
          
         public ActionResult Popular()
         {
@@ -22,7 +23,19 @@ namespace FairyTales.Controllers
             ViewBag.Types = DbManager.GetTypes();
             return View(PopulateLikesAndFavorites(DbManager.GetPopularShortTales(null, null)));   
         }
-         
+
+        public ActionResult Favourite()
+        {
+            ViewBag.Categories = DbManager.GetCategories();
+            ViewBag.Types = DbManager.GetTypes();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(PopulateLikesAndFavorites(DbManager.GetShortTales(User.Identity.GetUserId())));
+            }
+            
+            return View(PopulateLikesAndFavorites(DbManager.GetNewShortTales(null, null)));
+        }
+
         [HttpPost]
         public ActionResult Filter(int? id)
         {
