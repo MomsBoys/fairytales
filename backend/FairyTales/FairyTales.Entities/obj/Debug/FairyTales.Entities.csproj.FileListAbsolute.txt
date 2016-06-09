@@ -17,3 +17,13 @@ H:\Rostislav\NULP\3_2_semester\Practice\git\backend\FairyTales\FairyTales.Entiti
 H:\Rostislav\NULP\3_2_semester\Practice\git\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.csprojResolveAssemblyReference.cache
 H:\Rostislav\NULP\3_2_semester\Practice\git\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.dll
 H:\Rostislav\NULP\3_2_semester\Practice\git\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.pdb
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\FairyTales.Entities.dll.config
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\FairyTales.Entities.dll
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\FairyTales.Entities.pdb
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFramework.dll
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFramework.SqlServer.dll
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFramework.xml
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFramework.SqlServer.xml
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.csprojResolveAssemblyReference.cache
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.dll
+E:\КУРСОВІ\FairyTale\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.pdb

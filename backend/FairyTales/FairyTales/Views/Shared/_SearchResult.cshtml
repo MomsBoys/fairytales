@@ -1,0 +1,98 @@
+﻿
+
+@model List<FairyTales.Models.FairyTale>
+
+    @{
+    ViewBag.Title = "SearchResult";
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Пошук</title> <!-- Changable in different pages! -->
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="shortcut icon" href="images/favicon.png" />
+        <link rel="apple-touch-icon" href="images/apple-icon-touch.png" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/filter-style.css"> <!-- Resource style -->
+        <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/navigation.js"></script>
+        <script src="js/modernizr.js"></script> <!-- Modernizr -->
+    </head>
+    <body>
+        <div id="Wrapper">
+
+
+            <div id="Content">
+                <div class="container">
+                    <section id="primary">
+                        <div class="content">
+                            <h1 class="content-title">Результат пошуку для "@ViewBag.SeacrhText" та категорії "@ViewBag.Category"</h1>
+                            
+                            @foreach (var item in ViewBag.Search)
+                            {
+                                    <article class="post">
+                                        <a href="/tales/@item.Path">
+                                            <img width="305" src="@item.Cover" class="post-image" />
+                                        </a>
+
+                                        <div class="post-right">
+                                            @if (!String.IsNullOrWhiteSpace(item.Audio))
+                                            {
+                                                <span href="#" class="audio">Аудіо</span>
+                                            }
+
+                                            <h2 class="entry-title">
+                                                <a href="/tales/@item.Path">@item.Name</a>
+                                            </h2>
+
+                                            <div class="entry-meta">
+                                                @{
+                                                    var likesCount = new HtmlString(string.Format(" ({0})", @item.LikesCount));
+                                                }
+                                                <span class="date"><i class="fa fa-calendar"></i>@item.Date.ToShortDateString()</span>
+                                                @if (item.Author != null)
+                                                {
+                                                    <span class="author"><i class="fa fa-user"></i><a href="#">@String.Format("{0} {1}", item.Author.FirstName, item.Author.LastName)</a></span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="author"><i class="fa fa-user"></i><a href="#">Народна</a></span>
+                                                }
+                                                
+                                            </div>
+
+                                            <div class="entry-content">@Html.Raw(@item.ShortDescription ?? "")</div>
+                                        </div><!-- .post-right -->
+                                    </article><!-- .post -->
+                               }
+                        </div><!-- .content -->
+                    </section><!-- #primary -->
+
+                    <div id="pagination">
+                        <ul>
+                            <li class="control-button"><a href="#" class="disabled">Назад</a></li>
+                            <li><a href="#0" class="current">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><span>...</span></li>
+                            <li><a href="#">12</a></li>
+                            <li class="control-button"><a href="#">Вперед</a></li>
+                        </ul>
+                    </div><!-- #pagination -->
+
+                    <p id="back-top">
+                        <a href="#top"><span></span></a>
+                    </p><!-- #back-top -->
+                </div><!-- .container -->
+            </div><!-- #Content -->
+
+        </div><!-- #Wrapper -->
+    </body>
+</html>
+

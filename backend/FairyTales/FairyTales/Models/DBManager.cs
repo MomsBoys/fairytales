@@ -10,6 +10,65 @@ namespace FairyTales.Models
     {
         public const string RootPath = @"http://localhost:1599/Content/Data";
 
+        public static List<FairyTale> GetSearchByAll(string text)
+        {
+            var taleByName = DbManager.GetSearchByTaleName(text);
+            var taleByTag = DbManager.GetSearchByTag(text);
+            var taleByAuthor = DbManager.GetSearchByAuthor(text);
+
+            List<FairyTale> resultList = new List<FairyTale>();
+            resultList.AddRange(taleByAuthor);
+            resultList.AddRange(taleByTag);
+            resultList.AddRange(taleByName);
+
+            return resultList;
+        }
+
+        public static List<FairyTale> GetSearchByAuthor(string _authorLastName)
+        {
+            var context = new DBFairytaleEntities();
+            var _searchAuthor = (from tale in context.Tales
+                                 join author in context.Authors on tale.Author_ID equals author.Author_ID
+                                 where author.LastName == _authorLastName
+                                 select tale).ToList();
+            var resultListAuthor = new List<FairyTale>();
+            foreach (var item in _searchAuthor)
+            {
+                resultListAuthor.Add(new FairyTale(item));
+            }
+            return resultListAuthor;
+        }
+
+        public static List<FairyTale> GetSearchByTaleName(string _taleName)
+        {
+            var context = new DBFairytaleEntities();
+            var _searchName = (from tale in context.Tales select tale).Where(t => t.Name == _taleName).ToList();
+            var result = new List<FairyTale>();
+            foreach (var tale in _searchName)
+            {
+                result.Add(new FairyTale(tale));
+            }
+            return result;
+        }
+
+        public static List<FairyTale> GetSearchByTag(string _tag)
+        {
+            var context = new DBFairytaleEntities();
+            var _searchTag = (from tale_tag in context.Tale_Tag
+                              join tag in context.Tags on tale_tag.Tag_ID equals tag.Tag_ID
+                              join tale in context.Tales on tale_tag.Tale_ID equals tale.Tale_ID
+                              where tag.Name == _tag
+                              select tale).ToList();
+
+            var resultListTag = new List<FairyTale>();
+            foreach (var item in _searchTag)
+            {
+                resultListTag.Add(new FairyTale(item));
+            }
+            return resultListTag;
+        }
+
+
         public static AspNetUser CurrentUser(string userId)
         {
             var users = new DBFairytaleEntities().AspNetUsers;
