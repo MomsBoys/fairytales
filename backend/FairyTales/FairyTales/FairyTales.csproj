@@ -169,6 +169,7 @@
     <Compile Include="Controllers\FairyTaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserSocialController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -303,7 +304,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPartial.cshtml" />
     <Content Include="Views\FairyTale\Index.cshtml" />
-    <Content Include="Views\Library\Filter.cshtml" />
+    <Content Include="Views\Shared\Filter.cshtml" />
     <Content Include="Views\Library\LastAdded.cshtml" />
     <Content Include="Views\Library\Popular.cshtml" />
     <Content Include="Views\Shared\_ShortTaleView.cshtml" />
@@ -318,6 +319,7 @@
     <Content Include="Views\Library\RecentReaded.cshtml" />
     <Content Include="Views\Library\_NotAuthorizedPartial.cshtml" />
     <Content Include="Views\Library\_EmptyResultPartial.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

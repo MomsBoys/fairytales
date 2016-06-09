@@ -62,7 +62,9 @@
                             <span class="date"><i class="fa fa-calendar"></i>@Model.Date.ToShortDateString()</span>
                             @if (Model.Author != null)
                             {
-                                <span class="author"><i class="fa fa-user"></i><a href="#">@string.Format("{0} {1}", @Model.Author.FirstName, @Model.Author.LastName)</a></span>
+                                <span class="author"><i class="fa fa-user"></i>
+                                    @Html.ActionLink(String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName), "Index", "Search", new { text = String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName), category = "author" }, null)
+                                </span>
                             }
                             else
                             {
@@ -96,7 +98,9 @@
                             <ul class="tags">
                                 @foreach (var tag in Model.Tags)
                                 {
-                                    <li><a href="#">@tag.Name</a></li>
+                                    <li>
+                                        @Html.ActionLink(@tag.Name, "Index", "Search", new { text = @tag.Name, category = "tag" }, null)
+                                    </li>
                                 }
                             </ul>
                         }
