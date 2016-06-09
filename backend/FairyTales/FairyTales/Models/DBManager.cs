@@ -42,7 +42,7 @@ namespace FairyTales.Models
         public static List<FairyTale> GetSearchByTaleName(string _taleName)
         {
             var context = new DBFairytaleEntities();
-            var _searchName = (from tale in context.Tales select tale).Where(t => t.Name == _taleName).ToList();
+            var _searchName = (from tale in context.Tales select tale).Where(t => t.Name.Contains(_taleName)).ToList();
             var result = new List<FairyTale>();
             foreach (var tale in _searchName)
             {
@@ -57,7 +57,7 @@ namespace FairyTales.Models
             var _searchTag = (from tale_tag in context.Tale_Tag
                               join tag in context.Tags on tale_tag.Tag_ID equals tag.Tag_ID
                               join tale in context.Tales on tale_tag.Tale_ID equals tale.Tale_ID
-                              where tag.Name == _tag
+                              where tag.Name.Contains(_tag)
                               select tale).ToList();
 
             var resultListTag = new List<FairyTale>();
