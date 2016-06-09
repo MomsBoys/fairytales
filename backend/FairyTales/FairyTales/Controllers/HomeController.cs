@@ -19,5 +19,5 @@ namespace FairyTales.Controllers
 
             return View(mainPage);
         }
-	}
+    }
 }

@@ -55,6 +55,8 @@
     <Property Name="FirstName" Type="nvarchar(max)" />
     <Property Name="SecondName" Type="nvarchar(max)" />
     <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="ConfirmedEmail" Type="bit" />
   </EntityType>
   <EntityType Name="Author">
     <Key>
@@ -99,7 +101,7 @@
     <Key>
       <PropertyRef Name="Tale_Tag_ID" />
     </Key>
-    <Property Name="Tale_Tag_ID" Type="int" Nullable="false" />
+    <Property Name="Tale_Tag_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Tale_ID" Type="int" Nullable="false" />
     <Property Name="Tag_ID" Type="int" Nullable="false" />
   </EntityType>
@@ -114,7 +116,7 @@
     <Key>
       <PropertyRef Name="User_Tale_ID" />
     </Key>
-    <Property Name="User_Tale_ID" Type="int" Nullable="false" />
+    <Property Name="User_Tale_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Tale_ID" Type="int" Nullable="false" />
     <Property Name="IsFavorite" Type="bit" Nullable="false" />

@@ -60,6 +60,8 @@
           <Property Name="FirstName" Type="nvarchar(max)" />
           <Property Name="SecondName" Type="nvarchar(max)" />
           <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="ConfirmedEmail" Type="bit" />
         </EntityType>
         <EntityType Name="Author">
           <Key>
@@ -104,7 +106,7 @@
           <Key>
             <PropertyRef Name="Tale_Tag_ID" />
           </Key>
-          <Property Name="Tale_Tag_ID" Type="int" Nullable="false" />
+          <Property Name="Tale_Tag_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Tale_ID" Type="int" Nullable="false" />
           <Property Name="Tag_ID" Type="int" Nullable="false" />
         </EntityType>
@@ -119,7 +121,7 @@
           <Key>
             <PropertyRef Name="User_Tale_ID" />
           </Key>
-          <Property Name="User_Tale_ID" Type="int" Nullable="false" />
+          <Property Name="User_Tale_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Tale_ID" Type="int" Nullable="false" />
           <Property Name="IsFavorite" Type="bit" Nullable="false" />
@@ -438,6 +440,8 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="User_Tale" Relationship="DBFairytaleModel.FK_User_Tale_AspNetUsers" FromRole="AspNetUser" ToRole="User_Tale" />
           <NavigationProperty Name="AspNetRoles" Relationship="DBFairytaleModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmedEmail" Type="Boolean" />
         </EntityType>
         <EntityType Name="Author">
           <Key>
@@ -680,6 +684,8 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="DBFairytaleModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="ConfirmedEmail" ColumnName="ConfirmedEmail" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
                 <ScalarProperty Name="SecondName" ColumnName="SecondName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

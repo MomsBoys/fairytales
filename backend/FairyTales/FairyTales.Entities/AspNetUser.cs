@@ -29,6 +29,8 @@ namespace FairyTales.Entities
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Discriminator { get; set; }
+        public string Email { get; set; }
+        public Nullable<bool> ConfirmedEmail { get; set; }
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
