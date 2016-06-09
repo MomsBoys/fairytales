@@ -202,5 +202,53 @@ namespace FairyTales.Models
             return userTale != null && userTale.IsFavorite;
         }
         #endregion // Tale Functionality
+
+        public static List<FairyTale> GetRecommendedTale(string userId)
+        {
+            var context = new DBFairytaleEntities();
+            var tales = context.Tales.Select(v => v).Where(t => t.User_Tale.Any(s => s.User_ID == userId && s.IsFavorite == true)).ToList();
+
+            var tags = new List<TagCounter>();
+            foreach (var item in tales)
+            {
+                foreach (var tag in item.Tale_Tag)
+                {
+                    if (tags.All(t => t.Tag_Id != tag.Tag_ID))
+                    {
+                        tags.Add(new TagCounter() {Count = 1, Tag_Id = tag.Tag_ID});
+                    }
+                    else
+                    {
+                        var el = tags.FirstOrDefault(t => t.Tag_Id == tag.Tag_ID);
+                        if (el != null)
+                            el.Count++;
+                    }
+                }
+            }
+
+            tags = tags.OrderByDescending(s => s.Count).Take(3).ToList();
+
+            var recommendedTales = context.Tales.Select(w => w).ToList();
+            recommendedTales = recommendedTales.Where(w => tales.All(a => a.Tale_ID != w.Tale_ID)).ToList();
+            recommendedTales = recommendedTales.OrderByDescending(t => t.Tale_Tag.Count(v => tags.Any(e => e.Tag_Id == v.Tag_ID))).ToList();
+
+            if (recommendedTales.Count != 0 &&
+                tags.Count(c => recommendedTales[0].Tale_Tag.Any(a => a.Tag_ID == c.Tag_Id)) == 0)
+            {
+                // нема співпадінь по тегам - недостатньо казок в улюблених (або в базу додано), або теги погано написані (чи взагалі відсутні)
+                //забиваємо все популярними казками
+                recommendedTales =
+                    recommendedTales.Where(r => tales.All(a => a.Tale_ID != r.Tale_ID))
+                        .OrderByDescending(t => t.User_Tale.Count(u => u.IsFavorite))
+                        .ToList();
+            }
+            return recommendedTales.Select(v => new FairyTale(v)).Take(5).ToList();
+        }
+
+        public class TagCounter
+        {
+            public int Tag_Id { get; set; }
+            public int Count { get; set; }
+        }
     }
 }

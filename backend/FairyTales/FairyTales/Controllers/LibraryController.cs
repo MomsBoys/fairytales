@@ -14,7 +14,7 @@ namespace FairyTales.Controllers
         {
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
-            var pagination = new PaginationManager(Filter(FilterMode.LastAdded)) { TalesPerPage = 3 };
+            var pagination = new PaginationManager(Filter(FilterMode.LastAdded)) { TalesPerPage = 5 };
             ViewBag.Pagination = pagination;
 
             int page = 0;
@@ -31,7 +31,7 @@ namespace FairyTales.Controllers
         {
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
-            var pagination = new PaginationManager(Filter(FilterMode.Popular)) { TalesPerPage = 3 };
+            var pagination = new PaginationManager(Filter(FilterMode.Popular)) { TalesPerPage = 5 };
             ViewBag.Pagination = pagination;
 
             int page = 0;
@@ -90,6 +90,14 @@ namespace FairyTales.Controllers
                 DbManager.PopulateUserLikesAndFavorites(ref tales, User.Identity.GetUserId());
 
             return tales;
+        }
+
+        public ActionResult Recommended()
+        {
+            if (User.Identity.IsAuthenticated)
+                return View(DbManager.GetRecommendedTale(User.Identity.GetUserId()));
+
+            return View();    
         }
     }
 }
