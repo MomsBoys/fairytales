@@ -17,3 +17,13 @@ H:\Rostislav\NULP\3_2_semester\Practice\git\backend\FairyTales\FairyTales.Entiti
 H:\Rostislav\NULP\3_2_semester\Practice\git\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.csprojResolveAssemblyReference.cache
 H:\Rostislav\NULP\3_2_semester\Practice\git\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.dll
 H:\Rostislav\NULP\3_2_semester\Practice\git\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.pdb
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\FairyTales.Entities.dll.config
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\FairyTales.Entities.dll
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\FairyTales.Entities.pdb
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFramework.dll
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFramework.SqlServer.dll
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFramework.xml
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFramework.SqlServer.xml
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.csprojResolveAssemblyReference.cache
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.dll
+D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.pdb

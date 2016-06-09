@@ -36,5 +36,18 @@ namespace FairyTales.Controllers
             if (User.Identity.IsAuthenticated)
                 DbManager.AddFairyTaleToFavorites(fairyTale.Id, User.Identity.GetUserId());
         }
+
+        // POST: Like FairyTale
+        [HttpPost]
+        public void LikeAction(string path)
+        {
+            if (string.IsNullOrEmpty(path) || !DbManager.ValidateTaleByPath(path))
+                return;
+
+            var fairyTale = DbManager.GetTaleByPath(path);
+
+            if (User.Identity.IsAuthenticated)
+                DbManager.LikeFairyTale(fairyTale.Id, User.Identity.GetUserId());
+        }
     }
 }

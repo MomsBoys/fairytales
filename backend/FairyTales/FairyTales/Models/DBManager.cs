@@ -282,6 +282,56 @@ namespace FairyTales.Models
             }
         }
 
+
+        public static void LikeFairyTale(int fairyTaleId, string userId)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+                
+                var userTale =
+                    dbContext.User_Tale.FirstOrDefault(
+                        innerUserTale => innerUserTale.Tale_ID == fairyTaleId && innerUserTale.User_ID.Equals(userId));
+
+                var tale = dbContext.Tales.First(innerTale => innerTale.Tale_ID == fairyTaleId);
+
+                if (userTale == null)
+                {
+                    userTale = new User_Tale
+                    {
+                        Tale_ID = fairyTaleId,
+                        User_ID = userId,
+                        Date = DateTime.Now,
+                        IsReaded = false,
+                        IsLiked = true,
+                        IsFavorite = false
+                    };
+
+                    tale.LikeCount++;
+
+                    dbContext.User_Tale.Add(userTale);
+                }
+                else
+                {
+                    if (userTale.IsLiked)
+                    {
+                        tale.LikeCount--;
+                    }
+                    else
+                    {
+                        tale.LikeCount++;
+                    }
+                    userTale.IsLiked = !userTale.IsLiked;
+                }
+
+                dbContext.SaveChanges();
+            }
+            catch
+            {
+                Console.WriteLine(@"LikeFairyTale-Exception");
+            }
+        }
+
         public static User_Tale GetUserTaleByUserId(int taleId, string userId)
         {
             var currentUser = CurrentUser(userId);
