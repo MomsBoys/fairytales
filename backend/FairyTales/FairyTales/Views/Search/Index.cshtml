@@ -1,0 +1,17 @@
+﻿@using FairyTales.Entities
+@using Type = FairyTales.Entities.Type
+@model List<FairyTales.Models.FairyTale>
+@{
+    ViewBag.Title = "Пошук";
+}
+
+<div id="Content">
+    <div class="container">
+        <h1 class="content-title">Результат пошуку для "@ViewBag.SeacrhText" @ViewBag.Category</h1>
+        
+
+
+        @Html.Partial("Filter", Model)
+    </div><!-- .container -->
+</div><!-- #Content -->
+

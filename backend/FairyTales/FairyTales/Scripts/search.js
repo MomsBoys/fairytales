@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
 		coverLayer = $('.cd-cover-layer'),
 		navigationTrigger = $('.cd-nav-trigger'),
 		mainHeader = $('.cd-main-header');
-	
+
 	function checkWindowWidth() {
 		var mq = window.getComputedStyle(mainHeader.get(0), '::before').getPropertyValue('content').replace(/"/g, '').replace(/'/g, "");
 		return mq;
@@ -27,12 +27,18 @@ jQuery(document).ready(function($){
         	//desktop screen - insert navigation and search form inside <header>
         	searchForm.detach().insertBefore(navigationTrigger);
 			navigationWrapper.detach().insertBefore(searchForm).find('.cd-serch-wrapper').remove();
+			$('.search').css("display", "inline-block");
+			$('.close').css("display", "inline-block");
+			$('#menu').css("padding-right", "60px");
 		} else if( screenSize == 'mobile' && !(mainHeader.children('.cd-main-nav-wrapper').length == 0)) {
 			//mobile screen - move navigation and search form after .cd-main-content element
-			navigationWrapper.detach().insertAfter('.cd-main-content');
+			//navigationWrapper.detach().insertAfter('.cd-main-content');
 			var newListItem = $('<li class="cd-serch-wrapper"></li>');
 			searchForm.detach().appendTo(newListItem);
 			newListItem.appendTo(navigation);
+			$('.search').css("display", "none");
+			$('.close').css("display", "none");
+			$('#menu').css("padding-right", "0px");
 		}
 
 		resizing = false;
@@ -65,7 +71,7 @@ jQuery(document).ready(function($){
 			searchTrigger.addClass('search-form-visible');
 			coverLayer.addClass('search-form-visible');
 			searchForm.addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-				searchForm.find('input[type="search"]').focus().end().off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
+				searchForm.find('input[type="text"]').focus().end().off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
 			});
 		}
 	});
@@ -78,7 +84,7 @@ jQuery(document).ready(function($){
 	coverLayer.on('click', function(){
 		closeSearchForm();
 	});
-	
+
 	$(document).keyup(function(event){
 		if( event.which=='27' ) closeSearchForm();
 	});
@@ -87,4 +93,6 @@ jQuery(document).ready(function($){
 	searchForm.on('change', 'select', function(){
 		searchForm.find('.selected-value').text($(this).children('option:selected').text());
 	});
+	
 });
+

@@ -1,0 +1,54 @@
+﻿@using FairyTales.Entities
+@using Type = FairyTales.Entities.Type
+@model List<FairyTales.Models.FairyTale>
+
+@{
+    ViewBag.Title = "Улюбленні";
+}
+@section scripts{
+    <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/css/filter-style.css"> <!-- Resource style -->
+    <script src="~/Scripts/filter-main.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.mixitup.min.js"></script><!-- Resource jQuery -->
+}
+
+<div id="Content">
+    <div id="filter">
+        <main class="cd-main-content">
+            <div class="cd-tab-filter-wrapper">
+                <div class="cd-tab-filter">
+                    <ul class="cd-filters">
+                        <li class="placeholder">
+                            <a data-type="all" href="#0">Останні додані</a> <!-- selected option on mobile -->
+                        </li>
+                        <li class="filter"><a href="/Library/LastAdded" data-type="all">Останні додані</a></li>
+                        <li class="filter" data-filter=".color-1"><a href="/Library/Popular" data-type="color-1">Популярні</a></li>
+                        <li class="filter" data-filter=".color-2"><a href="/Library/Recommended" data-type="color-2">Рекомендовані</a></li>
+                        <li class="filter" data-filter=".color-2"><a href="/Library/RecentReaded" data-type="color-2">Прочитані</a></li>
+                        <li class="filter" data-filter=".color-3"><a class="selected" href="/Library/Favourite" data-type="color-3">Улюблені</a></li>
+                    </ul> <!-- cd-filters -->
+                </div> <!-- cd-tab-filter -->
+            </div> <!-- cd-tab-filter-wrapper -->
+
+           
+
+            </main> <!-- cd-main-content -->
+    </div><!-- #filter -->
+
+
+    <div class="container" id="container1">
+
+    </div>
+    <div class="container" id="container">
+        @if (User.Identity.IsAuthenticated)
+        {
+            @(Model.Count == 0 ? Html.Partial("_EmptyResultPartial", "Тут будуть відображатись Ваші улюблені казки.") : Html.Partial("Filter", Model))
+        }
+        else
+        {
+            @Html.Partial("_NotAuthorizedPartial")
+        }
+    </div><!-- .container -->
+</div><!-- #Content -->

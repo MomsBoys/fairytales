@@ -1,0 +1,39 @@
+﻿@model FairyTales.Models.RegisterViewModel
+
+
+<form action="/Account/Register" method="post" novalidate="novalidate" class="cd-form" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#cd-signup">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div id="results-reg">
+        <p style="color: darkred; font-size: 120%"> @ViewBag.ErrorSignUp</p>
+    </div>
+    <p class="fieldset">
+        <label class="image-replace cd-username" for="signup-firstname">Ім'я</label>
+        <input class="full-width has-padding has-border" id="signup-firstname" type="text" placeholder="Ваше ім'я" name="FirstName" value=@Model.FirstName>
+        <span class="cd-error-message">Заповніть будь ласка поле з іменем.</span>
+    </p>
+
+    <p class="fieldset">
+        <label class="image-replace cd-username" for="signup-lastname">Прізвище</label>
+        <input class="full-width has-padding has-border" id="signup-lastname" type="text" placeholder="Ваше прізвище" name="SecondName" value=@Model.SecondName>
+        <span class=" cd-error-message">Заповніть будь ласка поле з прізвищем.</span>
+    </p>
+
+    <p class="fieldset">
+        <label class="image-replace cd-email" for="signup-email">E-mail</label>
+        <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="Електронна пошта" name="UserName" value=@Model.UserName>
+        <span class="cd-error-message">Введено невірну електронну пошту!</span>
+    </p>
+
+    <p class="fieldset">
+        <label class="image-replace cd-password" for="signup-password">Пароль</label>
+        <input class="full-width has-padding has-border" id="signup-password" type="password" placeholder="Пароль" name="Password" value=@Model.Password>
+        <span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
+        <a href="#0" class="hide-password">Показати</a>
+    </p>
+
+    <p class="fieldset no-right-margin">
+        <input class="full-width has-padding" type="submit" value="Створити профіль">
+    </p>
+</form>
+

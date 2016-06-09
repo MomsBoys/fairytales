@@ -1,0 +1,25 @@
+﻿@model FairyTales.Models.EmailModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+
+
+<div id="Content">
+    <div class="container">
+        <section id="primary">
+            <div class="content contact contact-page">
+                <h1 class="page-title">Контакти</h1>
+                <div class="contact-wrap">
+                   @Html.Partial("_FormContact", Model)
+                </div><!-- .contact-wrap -->
+                </div><!-- .content -->
+        </section><!-- #primary -->
+
+        <p id="back-top">
+            <a href="#top"><span></span></a>
+        </p><!-- #back-top -->
+    </div><!-- .container -->
+</div><!-- #Content -->
+

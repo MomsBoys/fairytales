@@ -19,7 +19,9 @@
                 var likesCount = new HtmlString(string.Format(" ({0})", @Model.LikesCount));
             }
             <span class="date"><i class="fa fa-calendar"></i>@Model.Date.ToShortDateString()</span>
-            <span class="author"><i class="fa fa-user"></i><a href="#">@String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName)</a></span>
+            <span class="author"><i class="fa fa-user"></i>
+                @Html.ActionLink(String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName), "Index", "Search", new { text = String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName), category = "author" }, null)
+            </span>
            
             <a href="#0" class="like@{if (@Model.IsUserLiked){@Html.Raw(" is-selected")}}">
                 <i class="fa fa-thumbs-up"></i>Подобається@{if (!@Model.LikesCount.Equals(0))

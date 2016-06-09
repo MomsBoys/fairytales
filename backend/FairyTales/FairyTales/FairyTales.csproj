@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -165,14 +165,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\FairyTaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserSocialController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EmailSender.cs" />
     <Compile Include="Models\MainPageData.cs" />
     <Compile Include="Models\DBManager.cs" />
     <Compile Include="Models\FairyTale.cs" />
@@ -229,6 +232,7 @@
     <Content Include="images\plus-white.png" />
     <Content Include="images\plus.png" />
     <Content Include="images\rev-admin_logo.png" />
+    <Content Include="images\search.png" />
     <Content Include="images\search16-black.png" />
     <Content Include="images\search16.png" />
     <Content Include="images\slide1.jpg" />
@@ -302,7 +306,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPartial.cshtml" />
     <Content Include="Views\FairyTale\Index.cshtml" />
-    <Content Include="Views\Library\Filter.cshtml" />
+    <Content Include="Views\Shared\Filter.cshtml" />
     <Content Include="Views\Library\LastAdded.cshtml" />
     <Content Include="Views\Library\Popular.cshtml" />
     <Content Include="Views\Shared\_ShortTaleView.cshtml" />
@@ -310,6 +314,17 @@
     <Content Include="Views\Shared\_Pagination.cshtml" />
     <Content Include="Views\Shared\_PaginationPart.cshtml" />
     <Content Include="Views\Library\Recommended.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\_FormContact.cshtml" />
+    <Content Include="Views\Contact\_SendSuccess.cshtml" />
+    <Content Include="Views\Shared\_SignInPartial.cshtml" />
+    <Content Include="Views\Shared\_SignUpPartial.cshtml" />
+    <Content Include="Views\Shared\_SignUpSuccessfulPartial.cshtml" />
+    <Content Include="Views\Library\Favourite.cshtml" />
+    <Content Include="Views\Library\RecentReaded.cshtml" />
+    <Content Include="Views\Library\_NotAuthorizedPartial.cshtml" />
+    <Content Include="Views\Library\_EmptyResultPartial.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -46,6 +46,31 @@ namespace FairyTales.Models
             return result;
         }
 
+        public static List<FairyTale> GetRecentReadedShortTales(string user)
+        {
+            var context = new DBFairytaleEntities();
+            var queryTale = from fairytale in context.Tales
+                join userTale in context.User_Tale on fairytale.Tale_ID equals userTale.Tale_ID
+                where userTale.User_ID == user
+                orderby userTale.Date descending 
+                select fairytale;
+            
+            var tales = queryTale.ToList();
+            return tales.Select(item => new FairyTale(item)).ToList();
+        }
+
+        public static List<FairyTale> GetFavouriteShortTales(string user)
+        {
+            var context = new DBFairytaleEntities();
+            var queryTale = from fairytale in context.Tales
+                            join userTale in context.User_Tale on fairytale.Tale_ID equals userTale.Tale_ID
+                            where userTale.User_ID == user && userTale.IsFavorite
+                            orderby userTale.Date descending
+                            select fairytale;
+            var tales = queryTale.ToList();
+            return tales.Select(item => new FairyTale(item)).ToList();
+        }
+
         public static void PopulateUserLikesAndFavorites(ref List<FairyTale> tales, string userId)
         {
             var currentUser = CurrentUser(userId);
@@ -96,6 +121,83 @@ namespace FairyTales.Models
             return new DBFairytaleEntities().Types.Select(v => v).ToList();
         }
         #endregion // Tales Library Functionality
+
+        #region Tales Search
+
+        public static List<FairyTale> GetSearchByAll(string text)
+        {
+            var taleByName = GetSearchByTaleName(text);
+            var taleByTag = GetSearchByTag(text);
+            var taleByAuthor = GetSearchByAuthor(text);
+
+            List<FairyTale> resultList = new List<FairyTale>();
+            resultList.AddRange(taleByAuthor);
+            resultList.AddRange(taleByTag);
+            resultList.AddRange(taleByName);
+
+            return resultList.Distinct(new ProductComparer()).ToList();
+        }
+
+        public static List<FairyTale> GetSearchByAuthor(string authorName)
+        {
+            var context = new DBFairytaleEntities();
+            var queryByAuthor = (from tale in context.Tales
+                                 join author in context.Authors on tale.Author_ID equals author.Author_ID
+                                 let nameAuth1 = author.FirstName + " " + author.LastName
+                                 let nameAuth2 = author.LastName + " " + author.FirstName
+                                 where nameAuth1.Contains(authorName) || nameAuth2.Contains(authorName)
+                                 select tale).ToList();
+            return queryByAuthor.Select(item => new FairyTale(item)).ToList();
+        }
+
+        public static List<FairyTale> GetSearchByTaleName(string taleName)
+        {
+            var context = new DBFairytaleEntities();
+            var queryByName = (from tale in context.Tales
+                               where tale.Name.Contains(taleName)
+                               select tale).ToList();
+            return queryByName.Select(tale => new FairyTale(tale)).ToList();
+        }
+
+        public static List<FairyTale> GetSearchByTag(string myTag)
+        {
+            var context = new DBFairytaleEntities();
+            var queryByTag = (from tale_tag in context.Tale_Tag
+                              join tag in context.Tags on tale_tag.Tag_ID equals tag.Tag_ID
+                              join tale in context.Tales on tale_tag.Tale_ID equals tale.Tale_ID
+                              where tag.Name.Contains(myTag)
+                              select tale).ToList();
+            return queryByTag.Select(item => new FairyTale(item)).ToList();
+        }
+
+        class ProductComparer : IEqualityComparer<FairyTale>
+        {
+            public bool Equals(FairyTale x, FairyTale y)
+            {
+                if (Object.ReferenceEquals(x, y)) return true;
+
+                if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+                    return false;
+
+                return x.Id == y.Id && x.Name == y.Name;
+            }
+
+   
+            public int GetHashCode(FairyTale tale)
+            {
+                
+                if (Object.ReferenceEquals(tale, null)) return 0;
+
+                int hashTaleName = tale.Name == null ? 0 : tale.Name.GetHashCode();
+
+                int hashTaleId = tale.Id.GetHashCode();
+
+                return hashTaleName ^ hashTaleId;
+            }
+
+        }
+
+        #endregion  // Tales Search
 
         #region Tale Functionality
         public static bool ValidateTaleByPath(string path)
