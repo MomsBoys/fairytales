@@ -27,10 +27,10 @@
             <a href="#0" class="like@{if (@Model.IsUserLiked)
                                                     {@Html.Raw(" is-selected")
                                                     }}
-               @if (!User.Identity.IsAuthenticated)
-               {
-                   @: disabled
-               } ">
+                                                   @if (!User.Identity.IsAuthenticated)
+                                                   {
+                                                       @: disabled
+                                                   } ">
                 <i class="fa fa-thumbs-up"></i>Подобається
                 <span class="like-counter">
                     @{if (!@Model.LikesCount.Equals(0))
