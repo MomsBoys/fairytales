@@ -24,15 +24,29 @@ namespace FairyTales.Controllers
             return View(PopulateLikesAndFavorites(DbManager.GetPopularShortTales(null, null)));   
         }
 
+
         public ActionResult Favourite()
+        {
+            @ViewBag.ros = "kuku";
+            ViewBag.Categories = DbManager.GetCategories();
+            ViewBag.Types = DbManager.GetTypes();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(PopulateLikesAndFavorites(DbManager.GetFavouriteShortTales(User.Identity.GetUserId())));
+            }
+            
+            return View(PopulateLikesAndFavorites(DbManager.GetNewShortTales(null, null)));
+        }
+
+        public ActionResult RecentReaded()
         {
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
             if (User.Identity.IsAuthenticated)
             {
-                return View(PopulateLikesAndFavorites(DbManager.GetShortTales(User.Identity.GetUserId())));
+                return View(PopulateLikesAndFavorites(DbManager.GetRecentReadedShortTales(User.Identity.GetUserId())));
             }
-            
+
             return View(PopulateLikesAndFavorites(DbManager.GetNewShortTales(null, null)));
         }
 

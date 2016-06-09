@@ -46,24 +46,30 @@ namespace FairyTales.Models
             return result;
         }
 
-        public static List<FairyTale> GetShortTales(string user)
+        public static List<FairyTale> GetRecentReadedShortTales(string user)
         {
             var context = new DBFairytaleEntities();
             var queryTale = from fairytale in context.Tales
                 join userTale in context.User_Tale on fairytale.Tale_ID equals userTale.Tale_ID
                 where userTale.User_ID == user
-                orderby userTale.Date ascending 
+                orderby userTale.Date descending 
                 select fairytale;
             
             var tales = queryTale.ToList();
-            var result = new List<FairyTale>();
+            return tales.Select(item => new FairyTale(item)).ToList();
+        }
 
-            foreach (var item in tales)
-            {
-                result.Add(new FairyTale(item));
-            }
+        public static List<FairyTale> GetFavouriteShortTales(string user)
+        {
+            var context = new DBFairytaleEntities();
+            var queryTale = from fairytale in context.Tales
+                            join userTale in context.User_Tale on fairytale.Tale_ID equals userTale.Tale_ID
+                            where userTale.User_ID == user && userTale.IsFavorite
+                            orderby userTale.Date descending
+                            select fairytale;
 
-            return result;
+            var tales = queryTale.ToList();
+            return tales.Select(item => new FairyTale(item)).ToList();
         }
 
         public static void PopulateUserLikesAndFavorites(ref List<FairyTale> tales, string userId)

@@ -315,6 +315,9 @@
     <Content Include="Views\Shared\_SignUpPartial.cshtml" />
     <Content Include="Views\Shared\_SignUpSuccessfulPartial.cshtml" />
     <Content Include="Views\Library\Favourite.cshtml" />
+    <Content Include="Views\Library\RecentReaded.cshtml" />
+    <Content Include="Views\Library\_NotAuthorizedPartial.cshtml" />
+    <Content Include="Views\Library\_EmptyResultPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

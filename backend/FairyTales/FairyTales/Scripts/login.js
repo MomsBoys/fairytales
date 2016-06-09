@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
 		tabLogin = formModalTab.children('li').eq(0).children('a'),
 		tabSignup = formModalTab.children('li').eq(1).children('a'),
 		mainNav = $('#Header');
-
+	    notAuth = $('#Content');
 	// Open modal
 	mainNav.on('click', function(event){
 		$(event.target).is(mainNav) && mainNav.children('ul').toggleClass('is-visible');
@@ -17,6 +17,7 @@ jQuery(document).ready(function($){
 
 	// Open login-form form
 	mainNav.on('click', '.cd-signin', login_selected);
+	notAuth.on('click', '.notAuth', login_selected);
 
 	// Close modal
 	formModal.on('click', function(event){
