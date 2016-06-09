@@ -396,6 +396,34 @@ namespace FairyTales.Models
                 return ResponseType.Error;
             }
         }
+
+        public static ResponseType EditExistingUser(AspNetUser user)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentUser = dbContext.AspNetUsers.FirstOrDefault(
+                    innerUser => innerUser.Id == user.Id
+                );
+
+                if (currentUser == null)
+                    return ResponseType.Error;
+
+                currentUser.FirstName = user.FirstName;
+                currentUser.SecondName = user.SecondName;
+                currentUser.IsAdmin = user.IsAdmin;
+
+                dbContext.SaveChanges();
+
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingUser-Exception");
+                return ResponseType.Error;
+            }
+        }
         #endregion // Admin Panel
     }
 }

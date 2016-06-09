@@ -1,4 +1,5 @@
-﻿@model FairyTales.Entities.AspNetUser
+﻿@using FairyTales.Models
+@model FairyTales.Entities.AspNetUser
 
 @{
     ViewBag.Title = "Відредагувати користувача";
@@ -11,7 +12,12 @@
 
             <h1>Відредагувати користувача</h1>
 
-            <form action="/adminpanel/edittag/@Model.Id" method="post" autocomplete="off">
+            @if (ViewBag.ResponseResult != null)
+            {
+                @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
+            }
+
+            <form action="/adminpanel/edituser/@Model.Id" method="post" autocomplete="off">
 
                 <div id="post">
                     <div id="post-body">
@@ -24,27 +30,21 @@
                                     <table class="form-table addcat">
                                         <tbody>
                                             <tr valign="top">
-                                                <td class="first">Логін:</td>
-                                                <td><input type="text" name="login_name" size="30" id="name" placeholder="Для прикладу: Сім'я"></td>
-                                            </tr>
-                                            <tr valign="top">
-                                                <td class="first">Пароль:</td>
-                                                <td><input type="text" name="user_password" size="30" id="user_password" placeholder="Для прикладу: 12345"></td>
-                                            </tr>
-                                            <tr valign="top">
                                                 <td class="first">Ім'я:</td>
-                                                <td><input type="text" name="firstname" size="30" id="firstname" placeholder="Для прикладу: Андрій"></td>
+                                                <td><input type="text" name="first_name" size="30" id="first_name" placeholder="Для прикладу: Андрій" value="@Model.FirstName"></td>
                                             </tr>
                                             <tr valign="top">
                                                 <td class="first">Прізвище:</td>
-                                                <td><input type="text" name="lastname" size="30" id="lastname" placeholder="Для прикладу: Стодоля"></td>
+                                                <td><input type="text" name="last_name" size="30" id="last_name" placeholder="Для прикладу: Стодоля" value="@Model.SecondName"></td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td class="first">Привілегії адміна:</td>
+                                                <td><input type="checkbox" name="isadmin" size="30" id="isadmin" placeholder="Для прикладу: Стодоля" value="@Model.IsAdmin" @(Model.IsAdmin ? "checked=\"checked\"" : "")></td>
                                             </tr>
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div><!-- #namediv -->
-
                         </div>
 
                         <div id="right-sidebar">

@@ -8,7 +8,7 @@
 <div id="rev-content">
     <div id="rev-body">
         <div class="wrap">
-            @if (Model.Count == 0)
+            @if (Model == null || Model.Count == 0)
             {
                 <h1>На даному сайтів не знайдено жодного користувача.</h1>
             }
@@ -20,14 +20,16 @@
                     <thead>
                         <tr>
                             <th scope="col" class="manage-column id">ID</th>
-                            <th scope="col" class="manage-column user-name">Імя автора</th>
+                            <th scope="col" class="manage-column user-name">Ім'я автора</th>
+                            <th scope="col" class="manage-column is-admin">Адмін</th>
                             <th scope="col" class="manage-column edit">Змінити</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th scope="col" class="manage-column id">ID</th>
-                            <th scope="col" class="manage-column user-name">Імя автора</th>
+                            <th scope="col" class="manage-column user-name">Ім'я автора</th>
+                            <th scope="col" class="manage-column is-admin">Адмін</th>
                             <th scope="col" class="manage-column edit">Змінити</th>
                         </tr>
                     </tfoot>
@@ -37,8 +39,18 @@
                             var user = Model[i];
 
                             <tr id="/users/@user.Id">
-                                <td class="user-id">@(i+1)</td>
+                                <td class="user-id">@(i + 1)</td>
                                 <td class="user-name">@user.SecondName @user.FirstName</td>
+                                <td class="user-admin">
+                                    @if (user.IsAdmin)
+                                    {
+                                        @:Так
+                                    }
+                                    else
+                                    {
+                                        @:Ні
+                                    }
+                                </td>
                                 <td class="edit-user">
                                     <a style="display: block;" href="/adminpanel/edituser/@user.Id">Редагувати</a>
                                 </td>

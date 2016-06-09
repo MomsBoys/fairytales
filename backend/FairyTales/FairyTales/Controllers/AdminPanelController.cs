@@ -323,9 +323,38 @@ namespace FairyTales.Controllers
 
             var user = _adminPanel.Users.FirstOrDefault(innerUser => innerUser.Id == id);
 
+            if (user == null)
+                return PartialView("Error");
+
             GetDefaultViewBag();
 
             return View(user);
+        }
+
+        // POST: Edit User
+        [HttpPost]
+        public ActionResult EditUser(AspNetUser user)
+        {
+            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            user.FirstName = Request.Form["first_name"];
+            user.SecondName = Request.Form["last_name"];
+
+            if (Request.Form.AllKeys.Contains("isadmin"))
+                user.IsAdmin = true;
+
+            var hasEmptyFields = user.FirstName.IsEmpty() || user.SecondName.IsEmpty();
+            var operationResult = hasEmptyFields ? ResponseType.EmptyValues : DbManager.EditExistingUser(user);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.EmptyValues || operationResult == ResponseType.Error)
+                return View("EditUser", user);
+
+            ModelState.Clear();
+            return RedirectToAction("Users");
         }
 
         #region Additional Methods
