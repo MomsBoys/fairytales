@@ -108,6 +108,7 @@
     <NavigationProperty Name="AspNetUserLogins" Relationship="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
     <NavigationProperty Name="User_Tale" Relationship="DBFairytaleModel.FK_User_Tale_AspNetUsers" FromRole="AspNetUser" ToRole="User_Tale" />
     <NavigationProperty Name="AspNetRoles" Relationship="DBFairytaleModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+    <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Author">
     <Key>

@@ -60,6 +60,7 @@
           <Property Name="FirstName" Type="nvarchar(max)" />
           <Property Name="SecondName" Type="nvarchar(max)" />
           <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Author">
           <Key>
@@ -438,6 +439,7 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="User_Tale" Relationship="DBFairytaleModel.FK_User_Tale_AspNetUsers" FromRole="AspNetUser" ToRole="User_Tale" />
           <NavigationProperty Name="AspNetRoles" Relationship="DBFairytaleModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Author">
           <Key>
@@ -680,6 +682,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="DBFairytaleModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
                 <ScalarProperty Name="SecondName" ColumnName="SecondName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

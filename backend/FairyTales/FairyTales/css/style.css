@@ -498,7 +498,7 @@ a.responsive-menu-toggle {
 	font-size: 20px;
 	float: right;
 	margin-right: 20px;
-	padding: 5px 40px;
+	padding: 5px 20px;
 	background-color: #f3f3f3;
 	color: #5DA1B1;
 	text-decoration: none;
@@ -507,6 +507,18 @@ a.responsive-menu-toggle {
 #logoutForm {
     display: inline;
     margin-left: 10px;
+}
+
+#login a.adminpanel {
+    margin-right: 10px;
+    background: #525252;
+    color: #fff;
+    text-decoration: none;
+    padding: 4px 10px;
+}
+
+#login a.adminpanel:hover {
+    opacity: 0.8;
 }
 
 /* back-to top button */
