@@ -22,6 +22,12 @@ namespace FairyTales
             );
 
             routes.MapRoute(
+                name: "LikeAction",
+                url: "tales/{path}/like",
+                defaults: new { controller = "FairyTale", action = "LikeAction", path = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

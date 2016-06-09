@@ -2962,3 +2962,7 @@ Content cover layer
 		visibility: visible;
 	}
 }
+
+a.disabled {
+    pointer-events: none;
+}

@@ -57,7 +57,7 @@
 
                         <div class="entry-meta">
                             @{
-                                var likesCount = new HtmlString(string.Format(" ({0})", @Model.LikesCount));
+                                var likesCount = new HtmlString(string.Format("({0})", @Model.LikesCount));
                             }
                             <span class="date"><i class="fa fa-calendar"></i>@Model.Date.ToShortDateString()</span>
                             @if (Model.Author != null)
@@ -72,12 +72,21 @@
                             }
                             <a href="#0" class="like@{if (@Model.IsUserLiked)
                                                     {@Html.Raw(" is-selected")
-                                                    }}">
-                                <i class="fa fa-thumbs-up"></i>Подобається@{if (!@Model.LikesCount.Equals(0))
-                                                                          {@Html.Raw(likesCount)
-                                                                          }}
+                                                    }}
+                                                   @if (!User.Identity.IsAuthenticated)
+                                                   {
+                                                       @: disabled
+                                                   } ">
+                                <i class="fa fa-thumbs-up"></i>Подобається 
+                                <span class="like-counter">@{if (!@Model.LikesCount.Equals(0))
+                                                            {@Html.Raw(likesCount)
+                                                            }}</span>
                             </a>
                         </div>
+
+                        <form style="display: none" action="/tales/@Model.Path/like" data-ajax="true" method="POST" class="like-form">
+                            <input type="submit" class="like-submit" />
+                        </form>
 
                         @if (!string.IsNullOrWhiteSpace(Model.Audio))
                         {

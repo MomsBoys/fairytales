@@ -51,14 +51,29 @@ $(document).ready(function () {
     });
 
     $("a.like").on("click", function () {
+        $(this).parent().next().find('input').click();
         $(this).removeAttr("style");
 
+        var value = 0;
+        var val = $(this).find('span').text().trim();
+        if (val != "") {
+            value = parseInt(val.split('(')[1].split(')')[0]);
+        }
+        
         if ($(this).hasClass("is-selected")) {
             likeButtonOver(this, false);
             $(this).removeClass("is-selected");
+
+            if (--value > 0) {
+                $(this).find('span').text("(" + value + ")");
+            } else {
+                $(this).find('span').text("");
+            }
         } else {
             likeButtonOver(this, true);
             $(this).addClass("is-selected");
+
+            $(this).find('span').text("(" + ++value + ")");
         }
     });
 
