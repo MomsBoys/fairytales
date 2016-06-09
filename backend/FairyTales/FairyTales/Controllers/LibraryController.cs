@@ -48,24 +48,57 @@ namespace FairyTales.Controllers
             @ViewBag.ros = "kuku";
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
+            
+            List<FairyTale> fairyTales;
             if (User.Identity.IsAuthenticated)
             {
-                return View(PopulateLikesAndFavorites(DbManager.GetFavouriteShortTales(User.Identity.GetUserId())));
+                fairyTales =
+                 PopulateLikesAndFavorites(DbManager.GetFavouriteShortTales(User.Identity.GetUserId()));
+                var pagination = new PaginationManager(fairyTales) { TalesPerPage = 5 };
+                ViewBag.Pagination = pagination;
+                int page = 0;
+                var value = Request.QueryString["Page"];
+                if (!String.IsNullOrWhiteSpace(value))
+                {
+                    page = Int32.Parse(value);
+                }
+                return View(pagination.GetPage(page));
+
+            }
+            else
+            {
+                return View(new List<FairyTale>());
             }
             
-            return View(PopulateLikesAndFavorites(DbManager.GetNewShortTales(null, null)));
         }
 
         public ActionResult RecentReaded()
         {
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
+
+
+            List<FairyTale> fairyTales;
             if (User.Identity.IsAuthenticated)
             {
-                return View(PopulateLikesAndFavorites(DbManager.GetRecentReadedShortTales(User.Identity.GetUserId())));
+                fairyTales =
+                 PopulateLikesAndFavorites(DbManager.GetRecentReadedShortTales(User.Identity.GetUserId()));
+                var pagination = new PaginationManager(fairyTales) { TalesPerPage = 5 };
+                ViewBag.Pagination = pagination;
+                int page = 0;
+                var value = Request.QueryString["Page"];
+                if (!String.IsNullOrWhiteSpace(value))
+                {
+                    page = Int32.Parse(value);
+                }
+                return View(pagination.GetPage(page));
+
+            }
+            else
+            {
+                return View(new List<FairyTale>());
             }
 
-            return View(PopulateLikesAndFavorites(DbManager.GetNewShortTales(null, null)));
         }
 
 

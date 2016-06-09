@@ -1,4 +1,5 @@
 ﻿@using FairyTales.Entities
+@using FairyTales.Models.Pagination
 @using Type = FairyTales.Entities.Type
 @model List<FairyTales.Models.FairyTale>
 @{
@@ -8,10 +9,22 @@
 <div id="Content">
     <div class="container">
         <h1 class="content-title">Результат пошуку для "@ViewBag.SeacrhText" @ViewBag.Category</h1>
-        
+        <form action="/Search/Index" id="form0" name="form0" method="get">
+            <input type="hidden" id="Page" name="Page" value="1"/>
+            <input type="hidden" name="text" value="@ViewBag.SeacrhText">
+            <input type="hidden" name="category" value="@ViewBag.Name">
+        </form>
+        @if (Model.Count == 0)
+        {
+            @Html.Partial("Filter", Model)
+        }
+        else
+        {
+            @Html.Partial("Filter", Model)
+            @Html.Partial("_Pagination", (PaginationManager) ViewBag.Pagination)
+        }
 
-
-        @Html.Partial("Filter", Model)
+       
     </div><!-- .container -->
 </div><!-- #Content -->
 

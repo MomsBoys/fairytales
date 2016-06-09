@@ -1,4 +1,5 @@
 ﻿@using FairyTales.Entities
+@using FairyTales.Models.Pagination
 @using Type = FairyTales.Entities.Type
 @model List<FairyTales.Models.FairyTale>
 
@@ -42,13 +43,28 @@
 
     </div>
     <div class="container" id="container">
-        @if (User.Identity.IsAuthenticated)
-        {
-            @(Model.Count == 0 ? Html.Partial("_EmptyResultPartial", "Тут будуть відображатись Ваші улюблені казки.") : Html.Partial("Filter", Model))
-        }
-        else
-        {
-            @Html.Partial("_NotAuthorizedPartial")
-        }
-    </div><!-- .container -->
+        <form action="/Library/Favourite" id="form0" name="form0" method="get">
+        <input type="hidden" id="Page" name="Page" value="1"/>
+            </form>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (Model.Count == 0)
+                {
+                    @Html.Partial("_EmptyResultPartial", "Тут будуть відображатись Ваші улюблені казки.")
+                }
+                else
+                {
+                    @Html.Partial("Filter", Model)
+                    ;
+                    @Html.Partial("_Pagination", (PaginationManager)ViewBag.Pagination)
+                    ;
+                }
+
+
+            }
+            else
+            {
+                @Html.Partial("_NotAuthorizedPartial")
+            }
+</div><!-- .container -->
 </div><!-- #Content -->
