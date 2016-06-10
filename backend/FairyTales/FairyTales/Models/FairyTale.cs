@@ -54,6 +54,8 @@ namespace FairyTales.Models
             get { return DbManager.GetTagsByTale(Id); }
         }
 
+        public FairyTale() { }
+
         public FairyTale(Tale tale)
         {
             Id = tale.Tale_ID;
@@ -69,5 +71,13 @@ namespace FairyTales.Models
             Type = tale.Type;
             Category = tale.Category;
         }
+
+        public string TextPath { get; set; }
+        public string CoverPath { get; set; }
+        public string AudioPath { get; set; }
+        public string AuthorInput { get; set; }
+        public string CategoryInput { get; set; }
+        public string TypeInput { get; set; }
+        public string[] SelectedTags { get; set; }
     }
 }

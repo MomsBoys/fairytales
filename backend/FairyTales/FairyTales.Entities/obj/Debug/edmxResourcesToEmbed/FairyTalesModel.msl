@@ -41,6 +41,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="DBFairytaleModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
           <ScalarProperty Name="ConfirmedEmail" ColumnName="ConfirmedEmail" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />

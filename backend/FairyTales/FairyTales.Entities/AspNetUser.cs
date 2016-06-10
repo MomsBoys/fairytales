@@ -31,6 +31,7 @@ namespace FairyTales.Entities
         public string Discriminator { get; set; }
         public string Email { get; set; }
         public bool ConfirmedEmail { get; set; }
+        public bool IsAdmin { get; set; }
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
