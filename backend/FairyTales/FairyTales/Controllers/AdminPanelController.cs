@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.WebPages;
 using FairyTales.Entities;
 using FairyTales.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FairyTales.Controllers
 {
@@ -19,10 +20,15 @@ namespace FairyTales.Controllers
             _adminPanel = new AdminPanel();
         }
 
+        private bool IsAdminUser()
+        {
+            return User.Identity.IsAuthenticated && DbManager.CurrentUser(User.Identity.GetUserId()).IsAdmin;
+        }
+
         // GET: AdminPanel
         public ActionResult Index()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -33,7 +39,7 @@ namespace FairyTales.Controllers
         // GET: Tales List
         public ActionResult Tales()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -44,7 +50,7 @@ namespace FairyTales.Controllers
         // GET: Add Tale
         public ActionResult AddTale()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -57,7 +63,7 @@ namespace FairyTales.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult AddTale(FairyTale tale)
         {
-            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -130,7 +136,7 @@ namespace FairyTales.Controllers
         // GET: Edit Tale
         public ActionResult EditTale(int id)
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             var fairyTale = _adminPanel.Tales.FirstOrDefault(tale => tale.Id == id);
@@ -143,7 +149,7 @@ namespace FairyTales.Controllers
         // GET: Authors List
         public ActionResult Authors()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -154,7 +160,7 @@ namespace FairyTales.Controllers
         // GET: Add Author
         public ActionResult AddAuthor()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -166,7 +172,7 @@ namespace FairyTales.Controllers
         [HttpPost]
         public ActionResult AddAuthor(Author author)
         {
-            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -188,7 +194,7 @@ namespace FairyTales.Controllers
         // GET: Edit Author
         public ActionResult EditAuthor(int id)
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             var author = _adminPanel.Authors.FirstOrDefault(innerAuthor => innerAuthor.Author_ID == id);
@@ -202,7 +208,7 @@ namespace FairyTales.Controllers
         [HttpPost]
         public ActionResult EditAuthor(Author author)
         {
-            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -224,7 +230,7 @@ namespace FairyTales.Controllers
         // GET: Categories List
         public ActionResult Categories()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -235,7 +241,7 @@ namespace FairyTales.Controllers
         // GET: Add Category
         public ActionResult AddCategory()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -247,7 +253,7 @@ namespace FairyTales.Controllers
         [HttpPost]
         public ActionResult AddCategory(Category category)
         {
-            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -268,7 +274,7 @@ namespace FairyTales.Controllers
         // GET: Edit Category
         public ActionResult EditCategory(int id)
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             var category = _adminPanel.Categories.FirstOrDefault(innerCategory => innerCategory.Category_ID == id);
@@ -285,7 +291,7 @@ namespace FairyTales.Controllers
         [HttpPost]
         public ActionResult EditCategory(Category category)
         {
-            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -306,7 +312,7 @@ namespace FairyTales.Controllers
         // GET: Tags List
         public ActionResult Tags()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -317,7 +323,7 @@ namespace FairyTales.Controllers
         // GET: Add Tag
         public ActionResult AddTag()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -329,7 +335,7 @@ namespace FairyTales.Controllers
         [HttpPost]
         public ActionResult AddTag(Tag tag)
         {
-            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -350,7 +356,7 @@ namespace FairyTales.Controllers
         // GET: Edit Tag
         public ActionResult EditTag(int id)
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             var tag = _adminPanel.Tags.FirstOrDefault(innerTag => innerTag.Tag_ID == id);
@@ -364,7 +370,7 @@ namespace FairyTales.Controllers
         [HttpPost]
         public ActionResult EditTag(Tag tag)
         {
-            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -385,7 +391,7 @@ namespace FairyTales.Controllers
         // GET: Users List
         public ActionResult Users()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             GetDefaultViewBag();
@@ -396,7 +402,7 @@ namespace FairyTales.Controllers
         // GET: Edit User
         public ActionResult EditUser(string id)
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!IsAdminUser())
                 return PartialView("Error");
 
             var user = _adminPanel.Users.FirstOrDefault(innerUser => innerUser.Id == id);
@@ -413,7 +419,7 @@ namespace FairyTales.Controllers
         [HttpPost]
         public ActionResult EditUser(AspNetUser user)
         {
-            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
                 return PartialView("Error");
 
             GetDefaultViewBag();

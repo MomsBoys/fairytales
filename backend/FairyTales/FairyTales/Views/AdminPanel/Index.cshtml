@@ -184,7 +184,7 @@
                                                 }
                                                 @foreach (var tale in tales)
                                                 {
-                                                    <tr id="<?php echo $post['ID']; ?>">
+                                                    <tr>
                                                         <td><a href="/adminpanel/edittale/@tale.Id" title="Редагувати казку">@tale.Id</a></td>
                                                         <td><a href="/tales/@tale.Path" target="_blank">@tale.Name</a></td>
                                                         <td>@tale.Date.ToString(@"D")</td>

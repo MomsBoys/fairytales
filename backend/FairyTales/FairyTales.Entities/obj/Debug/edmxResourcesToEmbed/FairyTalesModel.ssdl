@@ -55,8 +55,8 @@
     <Property Name="FirstName" Type="nvarchar(max)" />
     <Property Name="SecondName" Type="nvarchar(max)" />
     <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" />
     <Property Name="ConfirmedEmail" Type="bit" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" />
     <Property Name="IsAdmin" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Author">
@@ -88,7 +88,7 @@
     <Property Name="Tale_ID" Type="int" Nullable="false" />
     <Property Name="Path" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Author_ID" Type="int" />
+    <Property Name="Author_ID" Type="int" Nullable="false" />
     <Property Name="Text" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Audio" Type="nvarchar" MaxLength="50" />
     <Property Name="Cover" Type="nvarchar" MaxLength="50" />
@@ -102,7 +102,7 @@
     <Key>
       <PropertyRef Name="Tale_Tag_ID" />
     </Key>
-    <Property Name="Tale_Tag_ID" Type="int" Nullable="false" />
+    <Property Name="Tale_Tag_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Tale_ID" Type="int" Nullable="false" />
     <Property Name="Tag_ID" Type="int" Nullable="false" />
   </EntityType>
@@ -194,7 +194,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Tale_Author">
-    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Author" Type="Self.Author" Multiplicity="1" />
     <End Role="Tale" Type="Self.Tale" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Author">
