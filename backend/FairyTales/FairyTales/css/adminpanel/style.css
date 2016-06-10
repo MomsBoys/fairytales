@@ -425,7 +425,7 @@ body {
 }
 
 #seodiv label {
-	margin-right: 80px;
+	margin-right: 70px;
 }
 
 #seodiv .seowrap:nth-child(2) label {
@@ -587,7 +587,16 @@ body {
 	margin-bottom: 10px;
 }
 
-.panel-div input {
+.labeltext {
+    margin-right: 30px;
+}
+
+.audiotext {
+    margin-right: 50px;
+}
+
+.panel-div input,
+.panel-div select {
 	font-size: 14px;
 	line-height: 20px;
 	width: 90%;
@@ -1236,4 +1245,8 @@ h1 {
 	width: 30px;
 	height: 30px;
 	margin: -15px 0 0 -15px;
+}
+
+.tale {
+    width: auto !important;
 }

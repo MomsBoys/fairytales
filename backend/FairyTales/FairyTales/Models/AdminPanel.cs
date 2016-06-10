@@ -28,6 +28,11 @@ namespace FairyTales.Models
         public List<AspNetUser> Users
         {
             get { return DbManager.GetUsers(); }
+        }
+
+        public List<Type> Types
+        {
+            get { return DbManager.GetTypes(); }
         } 
     }
 }

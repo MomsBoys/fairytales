@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
+using System.Runtime.Remoting.Channels;
+using System.Web.WebPages;
 using FairyTales.Entities;
 using Type = FairyTales.Entities.Type;
 
@@ -421,6 +424,86 @@ namespace FairyTales.Models
             catch
             {
                 Console.WriteLine(@"EditExistingUser-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType AddNewTale(FairyTale tale)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isTaleExists = dbContext.Tales.Any(
+                    innerTale => innerTale.Path.Equals(tale.Path)
+                );
+
+                if (isTaleExists)
+                    return ResponseType.Exists;
+
+                var authorId = 1;
+                foreach (var author in GetAuthors())
+                {
+                    var authorFullName = string.Format("{0} {1}", author.LastName, author.FirstName);
+
+                    if (authorFullName.Contains(tale.AuthorInput))
+                    {
+                        authorId = author.Author_ID;
+                        break;
+                    }
+                }
+
+                var categoryId = GetCategories().First(category => category.Name.Equals(tale.CategoryInput)).Category_ID;
+                var typeId = GetTypes().First(type => type.Name.Equals(tale.TypeInput)).Type_ID;
+
+                var currentTale = new Tale
+                {
+                    Tale_ID = GetTales().Max(innerTale => innerTale.Id) + 1,
+                    Cover = "img.jpg",
+                    Text = "text.txt",
+                    Author_ID = authorId,
+                    Category_ID = categoryId,
+                    Type_ID = typeId,
+                    Date = DateTime.Now,
+                    LikeCount = 0,
+                    Path = tale.Path.Replace(" ", "_"),
+                    ShortDescription = tale.ShortDescription,
+                    Name = tale.Name,
+                    Tale_Tag = new List<Tale_Tag>()
+                };
+
+                if (!tale.AudioPath.IsEmpty())
+                    currentTale.Audio = "audio.mp3";
+
+                if (tale.SelectedTags != null)
+                {
+                    var allTags = GetTags();
+
+                    foreach (var selectedTagName in tale.SelectedTags)
+                    {
+                        foreach (var tag in allTags)
+                        {
+                            if (tag.Name.Equals(selectedTagName))
+                            {
+                                currentTale.Tale_Tag.Add(new Tale_Tag
+                                {
+                                    Tale_Tag_ID = dbContext.Tale_Tag.Max(taleTag => taleTag.Tale_Tag_ID) + 1,
+                                    Tag_ID = tag.Tag_ID,
+                                    Tale_ID = currentTale.Tale_ID
+                                });
+                            }
+                        }
+                    }
+                }
+
+                dbContext.Tales.Add(currentTale);
+                dbContext.SaveChanges();
+
+                return ResponseType.Success;
+            }
+            catch
+            {
+                Console.WriteLine(@"AddNewTale-Exception");
                 return ResponseType.Error;
             }
         }

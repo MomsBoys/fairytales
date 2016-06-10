@@ -49,8 +49,7 @@
                                     @{
                                     if (tale.Author != null && tale.Author.FirstName.Length > 0 && tale.Author.LastName.Length > 0)
                                     {
-                                        @tale.Author.LastName
-                                        @tale.Author.FirstName
+                                        @Html.Raw(string.Format("{0} {1}", @tale.Author.LastName, @tale.Author.FirstName))
                                     }
                                     else
                                     {

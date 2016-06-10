@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using FairyTales.Entities;
@@ -45,8 +48,83 @@ namespace FairyTales.Controllers
                 return PartialView("Error");
 
             GetDefaultViewBag();
+            ViewBag.Types = _adminPanel.Types;
 
-            return View();
+            return View(new FairyTale());
+        }
+
+        // POST: Add Tale
+        [HttpPost, ValidateInput(false)]
+        public ActionResult AddTale(FairyTale tale)
+        {
+            if (!User.Identity.IsAuthenticated || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+            ViewBag.Types = _adminPanel.Types;
+
+            if (TaleHasEmptyFields(tale))
+            {
+                ViewBag.ResponseResult = ResponseType.EmptyValues;
+                return View("AddTale", tale);
+            }
+
+            var talePath = string.Format("~/Content/Data/{0}", tale.Name);
+            var isFolderExists = Directory.Exists(Server.MapPath(talePath));
+
+            if (isFolderExists)
+            {
+                ViewBag.ResponseResult = ResponseType.Exists;
+                return View("AddTale", tale);
+            }
+
+            // Create root folder
+            Directory.CreateDirectory(Server.MapPath(talePath));
+            talePath = talePath.Remove(0, 2);
+            var fileStream = new FileStream(HostingEnvironment.ApplicationPhysicalPath + talePath + "/text.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            var writer = new StreamWriter(fileStream);
+            writer.Write(tale.TextPath);
+            writer.Close();
+
+            // Create cover (from url or local)
+            if (tale.CoverPath.Contains("://"))
+            {
+                byte[] data;
+                using (var client = new WebClient())
+                {
+                    data = client.DownloadData(tale.CoverPath);
+                }
+                System.IO.File.WriteAllBytes(HostingEnvironment.ApplicationPhysicalPath + talePath + "/img.jpg", data);
+            }
+            else
+            {
+                System.IO.File.Copy(tale.CoverPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/img.jpg");
+            }
+
+            // Add Audio
+            if (!tale.AudioPath.IsEmpty())
+                System.IO.File.Copy(tale.AudioPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+            
+            var operationResult = DbManager.AddNewTale(tale);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.Error || operationResult == ResponseType.Exists)
+                return View("AddTale", tale);
+
+            ModelState.Clear();
+            return View("AddTale", new FairyTale());
+        }
+
+        private static bool TaleHasEmptyFields(FairyTale tale)
+        {
+            return tale.Name.IsEmpty() || 
+                tale.Path.IsEmpty() ||
+                tale.TextPath.IsEmpty() ||
+                tale.ShortDescription.IsEmpty() ||
+                tale.CoverPath.IsEmpty() ||
+                tale.AuthorInput.IsEmpty() ||
+                tale.CategoryInput.IsEmpty() ||
+                tale.TypeInput.IsEmpty();
         }
 
         // GET: Edit Tale
