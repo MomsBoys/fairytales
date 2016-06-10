@@ -27,3 +27,4 @@ D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\bin\Debug\EntityFrame
 D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.csprojResolveAssemblyReference.cache
 D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.dll
 D:\Sigma\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.pdb
+C:\Users\Andrew\Documents\fairytales\backend\FairyTales\FairyTales.Entities\obj\Debug\FairyTales.Entities.csprojResolveAssemblyReference.cache

@@ -61,7 +61,7 @@
           <Property Name="SecondName" Type="nvarchar(max)" />
           <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="ConfirmedEmail" Type="bit" />
+          <Property Name="ConfirmedEmail" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Author">
           <Key>
@@ -106,7 +106,7 @@
           <Key>
             <PropertyRef Name="Tale_Tag_ID" />
           </Key>
-          <Property Name="Tale_Tag_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tale_Tag_ID" Type="int" Nullable="false" />
           <Property Name="Tale_ID" Type="int" Nullable="false" />
           <Property Name="Tag_ID" Type="int" Nullable="false" />
         </EntityType>
@@ -436,12 +436,12 @@
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SecondName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmedEmail" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="DBFairytaleModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="User_Tale" Relationship="DBFairytaleModel.FK_User_Tale_AspNetUsers" FromRole="AspNetUser" ToRole="User_Tale" />
           <NavigationProperty Name="AspNetRoles" Relationship="DBFairytaleModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ConfirmedEmail" Type="Boolean" />
         </EntityType>
         <EntityType Name="Author">
           <Key>
@@ -512,7 +512,7 @@
           <Key>
             <PropertyRef Name="User_Tale_ID" />
           </Key>
-          <Property Name="User_Tale_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_Tale_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Tale_ID" Type="Int32" Nullable="false" />
           <Property Name="IsFavorite" Type="Boolean" Nullable="false" />
