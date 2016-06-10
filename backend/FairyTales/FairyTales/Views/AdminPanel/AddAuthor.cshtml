@@ -17,8 +17,8 @@
                 @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
             }
 
-            <form action="/adminpanel/addauthor" method="post" autocomplete="off">
-
+            @using (Html.BeginForm("addauthor", "adminpanel", FormMethod.Post))
+            {
                 <div id="post">
                     <div id="post-body">
                         <div id="post-body-content">
@@ -31,11 +31,15 @@
                                         <tbody>
                                             <tr valign="top">
                                                 <td class="first">Ім'я:</td>
-                                                <td><input type="text" name="first_name" size="30" id="name" placeholder="Для прикладу: Іван" value="@Model.FirstName"></td>
+                                                <td>
+                                                    @Html.TextBox("FirstName", "", new { placeHolder = "Для прикладу: Іван", id = "first_name" })
+                                                </td>
                                             </tr>
                                             <tr valign="top">
                                                 <td class="first">Прізвище:</td>
-                                                <td><input type="text" name="last_name" size="30" id="author_lastname" placeholder="Для прикладу: Франко" value="@Model.LastName"></td>
+                                                <td>
+                                                    @Html.TextBox("LastName", "", new { placeHolder = "Для прикладу: Франко", id = "last_name" })
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -65,9 +69,7 @@
 
                     </div><!-- #post-body -->
                 </div><!-- #post -->
-
-            </form>
-
+            }
         </div><!-- .wrap -->
     </div><!-- #rev-body -->
 </div><!-- #rev-content -->

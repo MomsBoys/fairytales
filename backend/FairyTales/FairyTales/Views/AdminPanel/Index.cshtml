@@ -188,14 +188,7 @@
                                                         <td><a href="/adminpanel/edittale/@tale.Id" title="Редагувати казку">@tale.Id</a></td>
                                                         <td><a href="/tales/@tale.Path" target="_blank">@tale.Name</a></td>
                                                         <td>@tale.Date.ToString(@"D")</td>
-                                                        @if (@tale.Author != null && @tale.Author.FirstName.Length > 0 && @tale.Author.LastName.Length > 0)
-                                                        {
-                                                            <td>@tale.Author.LastName @tale.Author.FirstName</td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td>Невідомий</td>
-                                                        }
+                                                            <td><a href="/search?text=@tale.Author.LastName @tale.Author.FirstName&category=author" target="_blank">@tale.Author.LastName @tale.Author.FirstName</a></td>
                                                     </tr>
                                                 }
                                             </tbody>
@@ -227,7 +220,7 @@
                                         {
                                             <tr>
                                                 <td><a href="/adminpanel/editcategory/@category.Category_ID" title="Редагувати">@category.Category_ID</a></td>
-                                                <td><a href="/adminpanel/editcategory/@category.Category_ID" target="_blank">@category.Name</a></td>
+                                                <td><a href="/library/lastadded?category=@category.Category_ID" target="_blank">@category.Name</a></td>
                                                 <td>@category.Tales.Count</td>
                                             </tr>
                                         }

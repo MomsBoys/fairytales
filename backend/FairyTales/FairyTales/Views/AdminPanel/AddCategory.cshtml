@@ -18,8 +18,8 @@
                 @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
             }
 
-            <form action="/adminpanel/addcategory" method="post" autocomplete="off">
-
+            @using (Html.BeginForm("addcategory", "adminpanel", FormMethod.Post))
+            {
                 <div id="post">
                     <div id="post-body">
                         <div id="post-body-content">
@@ -32,7 +32,9 @@
                                         <tbody>
                                             <tr valign="top">
                                                 <td class="first">Назва:</td>
-                                                <td><input type="text" name="category_name" size="30" id="name" placeholder="Для прикладу: Народні казки" value="@Model.Name"></td>
+                                                <td>
+                                                    @Html.TextBox("Name", "", new { placeHolder = "Для прикладу: Народні казки", id = "category_name" })
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -63,9 +65,7 @@
 
                     </div><!-- #post-body -->
                 </div><!-- #post -->
-
-            </form>
-
+            }
         </div><!-- .wrap -->
     </div><!-- #rev-body -->
 </div><!-- #rev-content -->

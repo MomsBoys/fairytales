@@ -1,7 +1,7 @@
 ﻿@using FairyTales.Entities
 @using FairyTales.Models
 @using Type = FairyTales.Entities.Type
-@model FairyTales.Models.FairyTale
+@model FairyTale
 
 @{
     ViewBag.Title = "Створення казки";
@@ -19,12 +19,8 @@
                 @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
             }
 
-        @using (Html.BeginForm("AddTale", "AdminPanel", FormMethod.Post))
+        @using (Html.BeginForm("addtale", "adminpanel", FormMethod.Post))
         {
-
-            @*<form action="/adminpanel/addtale" method="post" autocomplete="off">*@
-
-
             <div id="post">
                 <div id="post-body">
                     <div id="post-body-content" class="tale">
@@ -136,7 +132,7 @@
                                         @{
                                             var tagsList = new List<Tag>(ViewBag.Tags).Select(tag=> new SelectListItem { Text = tag.Name }).ToList();
                                         }
-                                        @Html.DropDownListFor(model => model.SelectedTags, tagsList, new { multiple = "true" })
+                                        @Html.DropDownListFor(model => model.SelectedTags, tagsList, new { multiple = "true", style = "height: 300px" })
                                     </div>
                                     <div class="desc">
                                         <p>
@@ -145,16 +141,11 @@
                                     </div>
                                 </div><!-- .inside -->
                             </div>
-
-
                         </div><!-- #side-wrap -->
 
                     </div><!-- #right-sidebar -->
                 </div><!-- #post-body -->
-            </div>
-            <!-- #post -->
-
-            @*</form>*@
+            </div><!-- #post -->
         }
 
         </div><!-- .wrap -->

@@ -177,9 +177,6 @@ namespace FairyTales.Controllers
 
             GetDefaultViewBag();
 
-            author.FirstName = Request.Form["first_name"];
-            author.LastName = Request.Form["last_name"];
-
             var operationResult = author.FirstName.IsEmpty() || author.LastName.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewAuthor(author);
             ViewBag.ResponseResult = operationResult;
 
@@ -257,8 +254,6 @@ namespace FairyTales.Controllers
                 return PartialView("Error");
 
             GetDefaultViewBag();
-
-            category.Name = Request.Form["category_name"];
 
             var operationResult = category.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewCategory(category);
             ViewBag.ResponseResult = operationResult;
@@ -339,8 +334,6 @@ namespace FairyTales.Controllers
                 return PartialView("Error");
 
             GetDefaultViewBag();
-
-            tag.Name = Request.Form["tag_name"];
 
             var operationResult = tag.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewTag(tag);
             ViewBag.ResponseResult = operationResult;

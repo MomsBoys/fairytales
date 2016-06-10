@@ -17,8 +17,8 @@
                 @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
             }
 
-            <form action="/adminpanel/addtag" method="post" autocomplete="off">
-
+            @using (Html.BeginForm("addtag", "adminpanel", FormMethod.Post))
+            {
                 <div id="post">
                     <div id="post-body">
                         <div id="post-body-content">
@@ -31,7 +31,9 @@
                                         <tbody>
                                             <tr valign="top">
                                                 <td class="first">Назва:</td>
-                                                <td><input type="text" name="tag_name" size="30" id="name" placeholder="Для прикладу: Сім'я" value="@Model.Name"></td>
+                                                <td>
+                                                    @Html.TextBox("Name", "", new { placeHolder = "Для прикладу: Сім'я", id = "name" })
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -62,9 +64,7 @@
 
                     </div><!-- #post-body -->
                 </div><!-- #post -->
-
-            </form>
-
+            }
         </div><!-- .wrap -->
     </div><!-- #rev-body -->
 </div><!-- #rev-content -->

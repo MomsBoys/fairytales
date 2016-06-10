@@ -36,7 +36,9 @@
                         {
                             <tr id="/authors/@author.Author_ID">
                                 <td class="author-id">@author.Author_ID</td>
-                                <td class="author-name">@author.LastName @author.FirstName</td>
+                                <td class="author-name">
+                                    <a href="/search?text=@author.LastName @author.FirstName&category=author" target="_blank">@author.LastName @author.FirstName</a>
+                                </td>
                                 <td class="edit-author">
                                     <a style="display: block;" href="/adminpanel/editauthor/@author.Author_ID">Редагувати</a>
                                 </td>

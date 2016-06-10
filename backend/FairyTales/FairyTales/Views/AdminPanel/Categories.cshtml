@@ -36,7 +36,9 @@
                         {
                             <tr id="/categories/@category.Category_ID">
                                 <td class="category-id">@category.Category_ID</td>
-                                <td class="category-name">@category.Name</td>
+                                <td class="category-name">
+                                    <a href="/library/lastadded?category=@category.Category_ID" target="_blank">@category.Name</a>
+                                </td>
                                 <td class="edit-category">
                                     <a style="display: block;" href="/adminpanel/editcategory/@category.Category_ID">Редагувати</a>
                                 </td>
