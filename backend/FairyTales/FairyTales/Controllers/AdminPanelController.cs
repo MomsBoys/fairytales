@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -141,9 +142,104 @@ namespace FairyTales.Controllers
 
             var fairyTale = _adminPanel.Tales.FirstOrDefault(tale => tale.Id == id);
 
+            if (fairyTale == null)
+                return PartialView("Error");
+
+            fairyTale.AuthorInput = string.Format("{0} {1}", fairyTale.Author.LastName, fairyTale.Author.FirstName);
+            fairyTale.CategoryInput = fairyTale.Category.Name;
+            fairyTale.TypeInput = fairyTale.Type.Name;
+
+            var allTags = _adminPanel.Tags;
+            var selectedTagsNames = new List<string>();
+
+            foreach (var selectedTag in fairyTale.Tags)
+            {
+                selectedTagsNames.AddRange(from tag in allTags where tag.Tag_ID == selectedTag.Tag_ID select selectedTag.Name);
+            }
+
+            fairyTale.SelectedTags = selectedTagsNames.ToArray();
+
             GetDefaultViewBag();
+            ViewBag.Types = _adminPanel.Types;
 
             return View(fairyTale);
+        }
+
+        // POST: Add Tale
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditTale(FairyTale tale)
+        {
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+            ViewBag.Types = _adminPanel.Types;
+
+            if (TaleHasEmptyFields(tale))
+            {
+                ViewBag.ResponseResult = ResponseType.EmptyValues;
+                return View("EditTale", tale);
+            }
+
+            var talePath = string.Format("~/Content/Data/{0}", tale.Name);
+            var isFolderExists = Directory.Exists(Server.MapPath(talePath));
+
+            if (!isFolderExists)
+            {
+                ViewBag.ResponseResult = ResponseType.Error;
+                return RedirectToAction("Tales");
+            }
+            
+            // Use existing folder
+            talePath = talePath.Remove(0, 2);
+            var fileStream = new FileStream(HostingEnvironment.ApplicationPhysicalPath + talePath + "/text.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            var writer = new StreamWriter(fileStream);
+            writer.Write(tale.TextPath);
+            writer.Close();
+
+            // Update cover (from url or local)
+            if (tale.CoverPath.Contains("://"))
+            {
+                byte[] data;
+                using (var client = new WebClient())
+                {
+                    data = client.DownloadData(tale.CoverPath);
+                }
+
+                System.IO.File.WriteAllBytes(HostingEnvironment.ApplicationPhysicalPath + talePath + "/img.jpg",
+                    data);
+            }
+            else
+            {
+                System.IO.File.Copy(tale.CoverPath,
+                        HostingEnvironment.ApplicationPhysicalPath + talePath + "/img.jpg");
+            }
+
+            // Update Audio
+            if (tale.AudioPath.Contains("://"))
+            {
+                byte[] data;
+                using (var client = new WebClient())
+                {
+                    data = client.DownloadData(tale.AudioPath);
+                }
+
+                System.IO.File.WriteAllBytes(HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3",
+                    data);
+            }
+            else
+            {
+                System.IO.File.Copy(tale.AudioPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+            }
+
+            var operationResult = DbManager.EditExistingTale(tale);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.Error || operationResult == ResponseType.Exists)
+                return View("AddTale", tale);
+
+            ModelState.Clear();
+            return View("AddTale", new FairyTale());
         }
 
         // GET: Authors List

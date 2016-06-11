@@ -707,6 +707,75 @@ namespace FairyTales.Models
                 return ResponseType.Error;
             }
         }
+
+        public static ResponseType EditExistingTale(FairyTale tale)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentTale = dbContext.Tales.FirstOrDefault(
+                    innerTale => innerTale.Path.Equals(tale.Path)
+                );
+
+                if (currentTale == null)
+                    return ResponseType.Error;
+
+                var authorId = 1;
+                foreach (var author in GetAuthors())
+                {
+                    var authorFullName = string.Format("{0} {1}", author.LastName, author.FirstName);
+
+                    if (authorFullName.Contains(tale.AuthorInput))
+                    {
+                        authorId = author.Author_ID;
+                        break;
+                    }
+                }
+
+                currentTale.Author_ID = authorId;
+                currentTale.Category_ID = GetCategories().First(category => category.Name.Equals(tale.CategoryInput)).Category_ID;
+                currentTale.Type_ID = GetTypes().First(type => type.Name.Equals(tale.TypeInput)).Type_ID;
+                currentTale.ShortDescription = tale.ShortDescription;
+                currentTale.Name = tale.Name;
+                currentTale.Cover = "img.jpg";
+                currentTale.Text = "text.txt";
+                currentTale.Tale_Tag = new List<Tale_Tag>();
+
+                if (!tale.AudioPath.IsEmpty())
+                    currentTale.Audio = "audio.mp3";
+
+                if (tale.SelectedTags != null)
+                {
+                    var allTags = GetTags();
+
+                    foreach (var selectedTagName in tale.SelectedTags)
+                    {
+                        foreach (var tag in allTags)
+                        {
+                            if (tag.Name.Equals(selectedTagName))
+                            {
+                                currentTale.Tale_Tag.Add(new Tale_Tag
+                                {
+                                    Tale_Tag_ID = dbContext.Tale_Tag.Max(taleTag => taleTag.Tale_Tag_ID) + 1,
+                                    Tag_ID = tag.Tag_ID,
+                                    Tale_ID = currentTale.Tale_ID
+                                });
+                            }
+                        }
+                    }
+                }
+                
+                dbContext.SaveChanges();
+
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingTale-Exception");
+                return ResponseType.Error;
+            }
+        }
         #endregion // Admin Panel
     }
 }

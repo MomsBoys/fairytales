@@ -1,4 +1,7 @@
-﻿@model FairyTales.Models.FairyTale
+﻿@using FairyTales.Entities
+@using FairyTales.Models
+@using Type = FairyTales.Entities.Type
+@model FairyTales.Models.FairyTale
 
 @{
     ViewBag.Title = "Редагування казки";
@@ -11,48 +14,52 @@
 
             <h1>Редагування казки</h1>
 
-            <form action="/adminpanel/edittale/@Model.Id" method="post" autocomplete="off">
+            @if (ViewBag.ResponseResult != null)
+            {
+                @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
+            }
 
+            @using (Html.BeginForm("edittale", "adminpanel", FormMethod.Post))
+            {
                 <div id="post">
                     <div id="post-body">
                         <div id="post-body-content">
 
                             <div id="titlediv">
                                 <div class="titlewrap">
-                                    <input type="text" name="title" id="title" placeholder="Введіть заголовок тут" required />
+                                    @Html.TextBox("Name", @Model.Name, new { placeHolder = "Введіть заголовок тут", id = "title", required = "required", @readonly = "readonly" })
                                 </div>
                                 <div class="linkdiv">
                                     <label for="article_link">Посилання</label>
-                                    <input type="text" name="article_link" id="article_link" placeholder="Для прикладу: tale_example" required />
+                                    @Html.TextBox("Path", @Model.Path, new { placeHolder = "Для прикладу: tale_example", id = "article_link", @readonly = "readonly" })
                                 </div>
                             </div><!-- #titlediv -->
 
-                            <script>$(function () { $('#content').editable({ inlineMode: false,	height: 500	}) });</script>
+                            <script>$(function() { $('#content').editable({ inlineMode: false, height: 500 }) });</script>
                             <div id="contentdiv" class="postarea">
                                 <div id="content-wrap">
-                                    <textarea class="editor-area" name="content" id="content" placeholder="Введіть будь ласка інформацію" required></textarea>
+                                    @Html.TextArea("TextPath", @Model.Text, new { placeHolder = "Введіть будь ласка інформацію", @class = "editor-area", id = "content" })
                                 </div><!-- #content-wrap -->
                             </div><!-- #contentdiv -->
 
                             <div id="dif_fields" class="image author">
                                 <div id="thumbnaildiv">
                                     <label for="thumbnail">Основне зображення</label>
-                                    <input type="text" name="thumbnail" id="thumbnail" placeholder="Для прикладу: http://macinsider.org/images/logo.png" required />
+                                    @Html.TextBox("CoverPath", @Model.Cover, new { placeHolder = "Вкажіть шлях до зображення", id = "thumbnail" })
                                 </div><!-- #thumbnaildiv -->
 
-                                <div id="authordiv">
-                                    <label for="author_id">Ваш порядковий номер</label>
-                                    <input type="text" name="author_id" id="author_id" value="1" required />
-                                </div><!-- #authordiv -->
+                                <div>
+                                    <label class="audiotext" for="audio">Аудіо для читання</label>
+                                    @Html.TextBox("AudioPath", @Model.Audio, new { placeHolder = "Вкажіть шлях до аудіо", id = "audio" })
+                                </div><!-- #audio -->
                             </div><!-- #dif_fields -->
 
                             <div id="seodiv" class="seo-fields">
-                                <h3 class="area-title">SEO Оптимізація</h3>
                                 <div class="inside">
                                     <div class="seowrap">
                                         <div class="seo-input">
                                             <label for="article_excerpt">Короткий зміст</label>
-                                            <textarea name="article_excerpt" id="article_excerpt" required></textarea>
+                                            @Html.TextArea("ShortDescription", @Model.ShortDescription, new { id = "article_excerpt" })
                                         </div>
                                     </div>
                                 </div><!-- .inside -->
@@ -80,11 +87,15 @@
                                     <h3 class="area-title">Автор</h3>
                                     <div class="inside">
                                         <div class="cat-id">
-                                            <label for="author_id">Номер автора</label>
-                                            <input type="text" name="author_id" id="author_id" placeholder="Для прикладу: 1" />
+                                            @{
+                                                var authorsList = new List<Author>(ViewBag.Authors).Select(author => new SelectListItem { Text = string.Format("{0} {1}", author.LastName, author.FirstName) }).ToList();
+                                            }
+                                            @Html.DropDownListFor(model => model.AuthorInput, authorsList)
                                         </div>
                                         <div class="desc">
-                                            <p>Список авторів по номеру можна побачити перейшовши по адресу: <a href="/adminpanel/authors">Всі автори</a>.</p>
+                                            <p>
+                                                Список авторів можна побачити перейшовши по адресу: <a href="/adminpanel/authors">Автори</a>.
+                                            </p>
                                         </div>
                                     </div><!-- .inside -->
                                 </div><!-- #categorydiv -->
@@ -92,13 +103,26 @@
                                     <h3 class="area-title">Категорія</h3>
                                     <div class="inside">
                                         <div class="cat-id">
-                                            <label for="cat_id">Номер категорії</label>
-                                            <input type="text" name="ca_id" id="cat_id" placeholder="Для прикладу: 1" />
+                                            @{
+                                                var categoriesList = new List<Category>(ViewBag.Categories).Select(category => new SelectListItem {Text = category.Name}).ToList();
+                                            }
+                                            @Html.DropDownListFor(model => model.CategoryInput, categoriesList)
                                         </div>
                                         <div class="desc">
                                             <p>
-                                                Список категорії по номеру можна побачити перейшовши по адресу: <a href="/adminpanel/categories">Всі категорії</a>.
+                                                Список категорій можна побачити перейшовши по адресу: <a href="/adminpanel/categories">Категорії</a>.
                                             </p>
+                                        </div>
+                                    </div><!-- .inside -->
+                                </div>
+                                <div class="panel-div">
+                                    <h3 class="area-title">Тип</h3>
+                                    <div class="inside">
+                                        <div class="cat-id">
+                                            @{
+                                                var typesList = new List<Type>(ViewBag.Types).Select(type => new SelectListItem { Text = type.Name }).ToList();
+                                            }
+                                            @Html.DropDownListFor(model => model.TypeInput, typesList)
                                         </div>
                                     </div><!-- .inside -->
                                 </div>
@@ -106,26 +130,24 @@
                                     <h3 class="area-title">Теги</h3>
                                     <div class="inside">
                                         <div class="cat-id">
-                                            <label for="tag_id">Номери тегів</label>
-                                            <input type="text" name="tag_id" id="tag_id" placeholder="Для прикладу: 1, 2, 3.." />
+                                            @{
+                                                var tagsList = new List<Tag>(ViewBag.Tags).Select(tag => new SelectListItem { Text = tag.Name }).ToList();
+                                            }
+                                            @Html.DropDownListFor(model => model.SelectedTags, tagsList, new { multiple = "true", style = "height: 300px" })
                                         </div>
                                         <div class="desc">
                                             <p>
-                                                Список тегів по номеру можна побачити перейшовши по адресу: <a href="/adminpanel/tags">Всі теги</a>.
+                                                Список тегів можна побачити перейшовши по адресу: <a href="/adminpanel/tags">Теги</a>.
                                             </p>
                                         </div>
                                     </div><!-- .inside -->
                                 </div>
-
-
                             </div><!-- #side-wrap -->
-
                         </div><!-- #right-sidebar -->
+
                     </div><!-- #post-body -->
                 </div><!-- #post -->
-
-            </form>
-
+            }
         </div><!-- .wrap -->
     </div><!-- #rev-body -->
 </div><!-- #rev-content -->

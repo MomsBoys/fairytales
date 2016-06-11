@@ -26,7 +26,7 @@ namespace FairyTales.Models
                 return
                     File.ReadAllText(
                         System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data/" + Name + "/" + _text),
-                        Encoding.Default);
+                        Encoding.UTF8);
             }
             set { _text = value; }
         }
