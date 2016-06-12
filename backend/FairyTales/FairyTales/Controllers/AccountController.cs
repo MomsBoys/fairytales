@@ -234,7 +234,7 @@ namespace FairyTales.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> PasswordRecovery(string email, string password, string token)//string token
+        public async Task<ActionResult> PasswordRecovery(string email, string password, string token)
         {
             if (email.IsEmpty())
                 return PartialView("_ErrorPartial", "Введіть email.");

@@ -12,6 +12,7 @@ namespace FairyTales.Controllers
     { 
         public ActionResult LastAdded()
         {
+            ViewBag.isLibrary = true;
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
             var pagination = new PaginationManager(Filter(FilterMode.LastAdded)) { TalesPerPage = 5 };
@@ -29,6 +30,7 @@ namespace FairyTales.Controllers
           
         public ActionResult Popular()
         {
+            ViewBag.isLibrary = true;
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
             var pagination = new PaginationManager(Filter(FilterMode.Popular)) { TalesPerPage = 5 };
@@ -45,7 +47,7 @@ namespace FairyTales.Controllers
         }
          public ActionResult Favourite()
         {
-            @ViewBag.ros = "kuku";
+            ViewBag.isLibrary = true;
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
             
@@ -74,6 +76,7 @@ namespace FairyTales.Controllers
 
         public ActionResult RecentReaded()
         {
+            ViewBag.isLibrary = true;
             ViewBag.Categories = DbManager.GetCategories();
             ViewBag.Types = DbManager.GetTypes();
 
@@ -151,6 +154,7 @@ namespace FairyTales.Controllers
 
         public ActionResult Recommended()
         {
+            ViewBag.isLibrary = true;
             if (User.Identity.IsAuthenticated)
                 return View(DbManager.GetRecommendedTale(User.Identity.GetUserId()));
 

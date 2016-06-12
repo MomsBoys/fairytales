@@ -27,7 +27,10 @@
                 <a href="#search" class="cd-search-trigger cd-text-replace">Пошук</a>
                 <ul class="menu cd-main-nav">
                     <li><a href="/">Головна</a></li>
-                    <li><a href="/library/lastadded">Бібліотека</a></li>
+                    <li @if (@ViewBag.isLibrary != null && @ViewBag.isLibrary) { @: class="current-menu-item"
+                                                }
+                                                ><a href="/library/lastadded">Бібліотека</a></li>
+
                     <li><a href="/contact">Контакти</a></li>
                 </ul>
 
