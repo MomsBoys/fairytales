@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
-using System.Runtime.Remoting.Channels;
 using System.Web.WebPages;
 using FairyTales.Entities;
 using Type = FairyTales.Entities.Type;
@@ -194,41 +192,38 @@ namespace FairyTales.Models
         public static List<FairyTale> GetSearchByTag(string myTag)
         {
             var context = new DBFairytaleEntities();
-            var queryByTag = (from tale_tag in context.Tale_Tag
-                              join tag in context.Tags on tale_tag.Tag_ID equals tag.Tag_ID
-                              join tale in context.Tales on tale_tag.Tale_ID equals tale.Tale_ID
+            var queryByTag = (from taleTag in context.Tale_Tag
+                              join tag in context.Tags on taleTag.Tag_ID equals tag.Tag_ID
+                              join tale in context.Tales on taleTag.Tale_ID equals tale.Tale_ID
                               where tag.Name.Contains(myTag)
                               select tale).ToList();
             return queryByTag.Select(item => new FairyTale(item)).ToList();
         }
 
-        class ProductComparer : IEqualityComparer<FairyTale>
+        private class ProductComparer : IEqualityComparer<FairyTale>
         {
             public bool Equals(FairyTale x, FairyTale y)
             {
-                if (Object.ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, y))
+                    return true;
 
-                if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+                if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
                     return false;
 
                 return x.Id == y.Id && x.Name == y.Name;
             }
 
-   
             public int GetHashCode(FairyTale tale)
             {
-                
-                if (Object.ReferenceEquals(tale, null)) return 0;
+                if (ReferenceEquals(tale, null))
+                    return 0;
 
-                int hashTaleName = tale.Name == null ? 0 : tale.Name.GetHashCode();
-
-                int hashTaleId = tale.Id.GetHashCode();
+                var hashTaleName = tale.Name == null ? 0 : tale.Name.GetHashCode();
+                var hashTaleId = tale.Id.GetHashCode();
 
                 return hashTaleName ^ hashTaleId;
             }
-
         }
-
         #endregion  // Tales Search
 
         #region Tale Functionality
@@ -396,20 +391,20 @@ namespace FairyTales.Models
         public static List<FairyTale> GetRecommendedTale(string userId)
         {
             var context = new DBFairytaleEntities();
-            var tales = context.Tales.Select(v => v).Where(t => t.User_Tale.Any(s => s.User_ID == userId && s.IsFavorite == true)).ToList();
+            var tales = context.Tales.Select(v => v).Where(t => t.User_Tale.Any(s => s.User_ID == userId && s.IsFavorite)).ToList();
 
             var tags = new List<TagCounter>();
             foreach (var item in tales)
             {
                 foreach (var tag in item.Tale_Tag)
                 {
-                    if (tags.All(t => t.Tag_Id != tag.Tag_ID))
+                    if (tags.All(t => t.TagId != tag.Tag_ID))
                     {
-                        tags.Add(new TagCounter() {Count = 1, Tag_Id = tag.Tag_ID});
+                        tags.Add(new TagCounter() {Count = 1, TagId = tag.Tag_ID});
                     }
                     else
                     {
-                        var el = tags.FirstOrDefault(t => t.Tag_Id == tag.Tag_ID);
+                        var el = tags.FirstOrDefault(t => t.TagId == tag.Tag_ID);
                         if (el != null)
                             el.Count++;
                     }
@@ -420,10 +415,10 @@ namespace FairyTales.Models
 
             var recommendedTales = context.Tales.Select(w => w).ToList();
             recommendedTales = recommendedTales.Where(w => tales.All(a => a.Tale_ID != w.Tale_ID)).ToList();
-            recommendedTales = recommendedTales.OrderByDescending(t => t.Tale_Tag.Count(v => tags.Any(e => e.Tag_Id == v.Tag_ID))).ToList();
+            recommendedTales = recommendedTales.OrderByDescending(t => t.Tale_Tag.Count(v => tags.Any(e => e.TagId == v.Tag_ID))).ToList();
 
             if (recommendedTales.Count != 0 &&
-                tags.Count(c => recommendedTales[0].Tale_Tag.Any(a => a.Tag_ID == c.Tag_Id)) == 0)
+                tags.Count(c => recommendedTales[0].Tale_Tag.Any(a => a.Tag_ID == c.TagId)) == 0)
             {
                 // нема співпадінь по тегам - недостатньо казок в улюблених (або в базу додано), або теги погано написані (чи взагалі відсутні)
                 //забиваємо все популярними казками
@@ -435,9 +430,9 @@ namespace FairyTales.Models
             return recommendedTales.Select(v => new FairyTale(v)).Take(5).ToList();
         }
 
-        public class TagCounter
+        private class TagCounter
         {
-            public int Tag_Id { get; set; }
+            public int TagId { get; set; }
             public int Count { get; set; }
         }
 

@@ -206,7 +206,7 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 100;
+	z-index: 2;
 	width: 240px;
 	background: #1D2939;
 	float: left;
@@ -373,7 +373,6 @@ body {
 }
 
 #post {
-	overflow: hidden;
 	padding-top: 10px;
     min-width: 950px;
 }
@@ -387,6 +386,10 @@ body {
 	width: 60%;
 	float: left;
 	min-width: 600px;
+}
+
+.post-tale-content {
+    width: 740px !important;
 }
 
 #right-sidebar {
@@ -425,7 +428,8 @@ body {
 }
 
 #seodiv label {
-	margin-right: 70px;
+    margin-bottom: 10px;
+    display: block;
 }
 
 #seodiv .seowrap:nth-child(2) label {

@@ -8,6 +8,21 @@
     Layout = "../Shared/_AdminPanelLayout.cshtml";
 }
 
+<link rel="stylesheet" href="~/css/adminpanel/froala_editor.min.css" />
+<link rel="stylesheet" href="~/css/adminpanel/froala_style.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/code_view.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/colors.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/draggable.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/file.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/fullscreen.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/image.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/image_manager.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/line_breaker.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/quick_insert.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/table.min.css">
+<link rel="stylesheet" href="~/css/adminpanel/plugins/video.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
 <div id="rev-content">
     <div id="rev-body">
         <div class="wrap">
@@ -23,7 +38,7 @@
         {
             <div id="post">
                 <div id="post-body">
-                    <div id="post-body-content" class="tale">
+                    <div id="post-body-content" class="tale post-tale-content">
 
                         <div id="titlediv">
                             <div class="titlewrap">
@@ -35,7 +50,6 @@
                             </div>
                         </div><!-- #titlediv -->
 
-                        <script>$(function() { $('#content').editable({ inlineMode: false, height: 500 }) });</script>
                         <div id="contentdiv" class="postarea">
                             <div id="content-wrap">
                                 @Html.TextArea("TextPath", "", new { placeHolder = "Введіть будь ласка інформацію", @class = "editor-area", id = "content" })
@@ -147,7 +161,34 @@
                 </div><!-- #post-body -->
             </div><!-- #post -->
         }
-
         </div><!-- .wrap -->
     </div><!-- #rev-body -->
 </div><!-- #rev-content -->
+
+<script src="~/Scripts/adminpanel/froala_editor.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/froala_editor.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/align.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/code_beautifier.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/fullscreen.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/code_view.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/colors.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/entities.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/file.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/forms.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/draggable.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/image.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/image_manager.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/inline_style.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/link.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/lists.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/paragraph_format.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/paragraph_style.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/quick_insert.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/table.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/video.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/url.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/plugins/entities.min.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/languages/ua.js"></script>
+<script type="text/javascript" src="~/Scripts/adminpanel/custom.js"></script>
