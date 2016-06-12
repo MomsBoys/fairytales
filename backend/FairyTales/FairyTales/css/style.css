@@ -1098,6 +1098,9 @@ a.responsive-menu-toggle {
 	margin: 0;
 	list-style: none;
 }
+.cd-user-modal-container input {
+	font-family: CyrillicChancellor, sans-serif;
+}
 
 .cd-user-modal-container .cd-switcher:after {
 	content: "";
@@ -1152,7 +1155,7 @@ a.responsive-menu-toggle {
 
 .cd-form .fieldset {
 	position: relative;
-	margin: 1.4em 0;
+	margin: 1.0em 0;
 	/*margin-right: 70px;*/
 }
 
@@ -2472,7 +2475,7 @@ Search Form
 		background-color: transparent;
 		/* don't overlap <select> element */
 		padding-right: 170px;
-		padding-left: 250px;
+		padding-left: 40%;
 	}
 	.cd-main-search .cd-select {
 		display: inline-block;
@@ -2575,7 +2578,7 @@ Search Form
 		top: 50%;
 		height: 40px;
 		width: 40px;
-		background: #dd85ac url("../images/search.png") no-repeat center;
+		background: #99CCF3 url("../images/search.png") no-repeat center;
 		border-radius: 50%;
 		-webkit-transform: translateY(-50%) scale(0);
 		-moz-transform: translateY(-50%) scale(0);
@@ -2871,14 +2874,14 @@ Search Form
 		transform: translateX(-50%) translateY(-50%) scale(0);
 		height: 100%;
 		width: 100%;
-		background-color: #dd85ac;
+		background-color: #99CCF3;
 		border-radius: 50%;
 		-webkit-transition: -webkit-transform 0.3s;
 		-moz-transition: -moz-transform 0.3s;
 		transition: transform 0.3s;
 	}
 	.no-touch .cd-search-trigger:hover::before {
-		background-color: #df8bb0;
+		background-color: #99CCF3;
 	}
 	.cd-search-trigger.search-form-visible {
 		-webkit-transform: translateX(-20px) translateY(-10px);
