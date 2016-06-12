@@ -19,6 +19,9 @@
         <span class="cd-error-message">Заповніть будь ласка поле з паролем!</span>
         <a href="#0" class="hide-password">Показати</a>
     </p>
+    <p class="fieldset" style="padding-left: 5px;">
+        @Ajax.ActionLink("Забули пароль?", "ForgetPass", "Account", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "cd-login" })
+    </p>
 
     <p class="fieldset no-right-margin">
         <input class="full-width" type="submit" value="Авторизуватися">

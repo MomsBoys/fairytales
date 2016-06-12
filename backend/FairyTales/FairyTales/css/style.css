@@ -1098,6 +1098,9 @@ a.responsive-menu-toggle {
 	margin: 0;
 	list-style: none;
 }
+.cd-user-modal-container input {
+	font-family: CyrillicChancellor, sans-serif;
+}
 
 .cd-user-modal-container .cd-switcher:after {
 	content: "";
@@ -1152,7 +1155,7 @@ a.responsive-menu-toggle {
 
 .cd-form .fieldset {
 	position: relative;
-	margin: 1.4em 0;
+	margin: 1.0em 0;
 	/*margin-right: 70px;*/
 }
 

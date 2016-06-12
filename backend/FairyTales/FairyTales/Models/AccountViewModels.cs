@@ -69,4 +69,12 @@ namespace FairyTales.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
     }
+
+    public class ForgotPassViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "User name")]
+        public string Email { get; set; }
+    }
 }

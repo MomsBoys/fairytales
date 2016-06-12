@@ -323,7 +323,6 @@ H:\Rostislav\NULP\3_2_semester\Practice\git_new\backend\FairyTales\FairyTales\bi
 H:\Rostislav\NULP\3_2_semester\Practice\git_new\backend\FairyTales\FairyTales\bin\System.Web.WebPages.Deployment.xml
 H:\Rostislav\NULP\3_2_semester\Practice\git_new\backend\FairyTales\FairyTales\bin\System.Web.WebPages.Razor.xml
 H:\Rostislav\NULP\3_2_semester\Practice\git_new\backend\FairyTales\FairyTales\bin\Newtonsoft.Json.xml
-H:\Rostislav\NULP\3_2_semester\Practice\git_new\backend\FairyTales\FairyTales\bin\Antlr3.Runtime.pdb
 H:\Rostislav\NULP\3_2_semester\Practice\git_new\backend\FairyTales\FairyTales\bin\Microsoft.AspNet.Identity.Core.xml
 H:\Rostislav\NULP\3_2_semester\Practice\git_new\backend\FairyTales\FairyTales\bin\Microsoft.AspNet.Identity.Owin.xml
 H:\Rostislav\NULP\3_2_semester\Practice\git_new\backend\FairyTales\FairyTales\bin\Microsoft.AspNet.Identity.EntityFramework.xml

@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using FairyTales.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using FairyTales.Entities;
 
 namespace FairyTales.Controllers
 {
@@ -112,7 +115,7 @@ namespace FairyTales.Controllers
                     var emailSender = new ConfirmAccountEmailSender(configuration["Email"], configuration["EmailPass"], user.Email);
                     if (emailSender.IsEmailSent(message, "Завершення реєстрації"))
                     {
-                        return PartialView("_SignUpSuccessfulPartial");
+                        return PartialView("_SignUpSuccessfulPartial", "На Вашу електронну адресу відправлено лист для завершення реєстрації.");
                     }
                     else
                     {
@@ -128,6 +131,7 @@ namespace FairyTales.Controllers
             return PartialView("_SignUpPartial", model);
         }
 
+        // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string Token, string Email)
         {
@@ -153,6 +157,104 @@ namespace FairyTales.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        // POST: /Account/ForgetPass
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult ForgetPass()
+        {
+            return PartialView("_SignInForgotPass",new ForgotPassViewModel());
+        }
+
+        // POST: /Account/LoginBack
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult LoginBack()
+        {
+            return PartialView("_SignInPartial", new LoginViewModel());
+        }
+
+        // POST: /Account/ForgotPassEmail
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassEmail(ForgotPassViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                AspNetUser user = null;
+                using (var context = new DBFairytaleEntities())
+                {
+                    var query = context.AspNetUsers.Where(e => e.Email == model.Email);
+                    if (query.Any())
+                    {
+                        user = query.First();
+                    }
+                }
+                if (user!=null)
+                {
+                    var configuration = System.Web.Configuration.WebConfigurationManager.AppSettings;
+                    string message = string.Format("Для відновлення паролю перейдіть за посиланням:" +
+                                    "<a href=\"{0}\" title=\"Підтвердити реєстрацію\">{0}</a>",
+                        Url.Action("PasswordRecovery", "Account", new { Token = user.Id }, Request.Url.Scheme));
+                    var emailSender = new ConfirmAccountEmailSender(configuration["Email"], configuration["EmailPass"], user.Email);
+                    if (emailSender.IsEmailSent(message, "Відновлення паролю"))
+                    {
+                        return PartialView("_SignUpSuccessfulPartial", "На Вашу електронну адресу відправлено лист для відновлення паролю.");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorSignInForgotPass = "Вибачте відновлення пройшло не успішно. Спробуйте згодом.";
+                        return PartialView("_SignInForgotPass", model);
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorSignInForgotPass = "Користувача з введеним email не знайдено.";
+                    return PartialView("_SignInForgotPass", model);
+                }
+            }
+            else
+            {
+                ViewBag.ErrorSignInForgotPass = "Некоректно введений email.";
+                return PartialView("_SignInForgotPass", model);
+            }
+            
+        }
+
+        // GET: /Account/PasswordRecovery
+        [AllowAnonymous]
+        public ActionResult PasswordRecovery(string token)
+        {
+            ViewBag.RecoveryPassToken = token;
+            return View();
+        }
+
+        // POST: /Account/PasswordRecovery
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> PasswordRecovery(string email, string password, string token)//string token
+        {
+            if (email.IsEmpty())
+                return PartialView("_ErrorPartial", "Введіть email.");
+            if (password.Length < 6 || password.IsEmpty())
+                return PartialView("_ErrorPartial", "Пароль повинен містити мінімум 6 символів");
+            ApplicationUser user = this.UserManager.FindById(token);
+            if (user != null)
+            {
+                if(user.Email != email)
+                    return PartialView("_ErrorPartial", "Неправильний email.");
+                await UserManager.RemovePasswordAsync(user.Id);
+                await UserManager.AddPasswordAsync(user.Id, password);
+                await SignInAsync(user, isPersistent: false);
+                var cookie = new HttpCookie("first_name", user.FirstName);
+                Response.SetCookie(cookie);
+                return JavaScript("window.location = '/library/lastadded'");
+            }
+            return JavaScript("window.location = '/'");
+        }
+
 
         public ActionResult Redirect()
         {
