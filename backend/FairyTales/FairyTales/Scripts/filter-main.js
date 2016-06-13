@@ -7,6 +7,17 @@ jQuery(document).ready(function($){
 		triggerFilter(false);
 	});
 
+	$('#filter-reset').on('click', function () {
+	    var checkboxes = new Array();
+	    checkboxes = document['form0'].getElementsByTagName('input');
+
+	    for (var i = 0; i < checkboxes.length; i++) {
+	        if (checkboxes[i].type == 'checkbox') {
+	            checkboxes[i].checked = false;
+	        }
+	    }
+	});
+
 	function triggerFilter($bool) {
 		var elementsToTrigger = $([$('.cd-filter-trigger'), $('.cd-filter'), $('.cd-tab-filter'), $('.cd-gallery')]);
 		elementsToTrigger.each(function(){
