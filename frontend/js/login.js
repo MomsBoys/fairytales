@@ -41,7 +41,7 @@ jQuery(document).ready(function($){
 	// Hide or show password
 	$('.hide-password').on('click', function(){
 		var togglePass= $(this),
-			passwordField = togglePass.prev('input');
+			passwordField = togglePass.prev().prev('input');
 		
 		( 'password' == passwordField.attr('type') ) ? passwordField.attr('type', 'text') : passwordField.attr('type', 'password');
 		( 'Сховати' == togglePass.text() ) ? togglePass.text('Показати') : togglePass.text('Сховати');
@@ -75,12 +75,10 @@ jQuery(document).ready(function($){
 	}
 
 	function validatePassword(password) {
-		return password.length >= 8;
+		return password.length > 0;
 	}
 
 	formLogin.find('input[type="submit"]').on('click', function(event) {
-		event.preventDefault();
-
 		var emailInput = formLogin.find('input[type="email"]');
 		var passwordInput = formLogin.find('#signin-password');
 
@@ -88,6 +86,7 @@ jQuery(document).ready(function($){
 		defineErrorMessage(emailInput, isValidEmail);
 
 		if (!isValidEmail) {
+			event.preventDefault();
 			return;
 		}
 
@@ -95,13 +94,12 @@ jQuery(document).ready(function($){
 		defineErrorMessage(passwordInput, isValidPassword);
 
 		if (!isValidPassword) {
+			event.preventDefault();
 			return;
 		}
 	});
 
 	formSignup.find('input[type="submit"]').on('click', function(event) {
-		event.preventDefault();
-
 		var emailInput = formSignup.find('input[type="email"]');
 		var firstNameInput = formSignup.find('#signup-firstname');
 		var lastNameInput = formSignup.find('#signup-lastname');
@@ -111,6 +109,7 @@ jQuery(document).ready(function($){
 		defineErrorMessage(firstNameInput, isValidFirstName);
 
 		if (!isValidFirstName) {
+			event.preventDefault();
 			return;
 		}
 
@@ -118,6 +117,7 @@ jQuery(document).ready(function($){
 		defineErrorMessage(lastNameInput, isValidLastName);
 
 		if (!isValidLastName) {
+			event.preventDefault();
 			return;
 		}
 
@@ -125,6 +125,7 @@ jQuery(document).ready(function($){
 		defineErrorMessage(emailInput, isValidEmail);
 
 		if (!isValidEmail) {
+			event.preventDefault();
 			return;
 		}
 
@@ -132,9 +133,9 @@ jQuery(document).ready(function($){
 		defineErrorMessage(passwordInput, isValidPassword);
 
 		if (!isValidPassword) {
+			event.preventDefault();
 			return;
 		}
-
 	});
 
 	function defineErrorMessage(formInput, isValid) {

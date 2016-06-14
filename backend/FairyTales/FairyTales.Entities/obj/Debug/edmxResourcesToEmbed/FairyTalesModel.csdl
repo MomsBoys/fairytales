@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBFairytaleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBFairytaleEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="DBFairytaleModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="DBFairytaleModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="DBFairytaleModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="DBFairytaleModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="DBFairytaleModel.AspNetUser" />
+    <EntitySet Name="Authors" EntityType="DBFairytaleModel.Author" />
+    <EntitySet Name="Categories" EntityType="DBFairytaleModel.Category" />
+    <EntitySet Name="Tags" EntityType="DBFairytaleModel.Tag" />
+    <EntitySet Name="Tales" EntityType="DBFairytaleModel.Tale" />
+    <EntitySet Name="Tale_Tag" EntityType="DBFairytaleModel.Tale_Tag" />
+    <EntitySet Name="Types" EntityType="DBFairytaleModel.Type" />
+    <EntitySet Name="User_Tale" EntityType="DBFairytaleModel.User_Tale" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="DBFairytaleModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Tale_AspNetUsers" Association="DBFairytaleModel.FK_User_Tale_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="User_Tale" EntitySet="User_Tale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tale_Author" Association="DBFairytaleModel.FK_Tale_Author">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Tale" EntitySet="Tales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tale_Category" Association="DBFairytaleModel.FK_Tale_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Tale" EntitySet="Tales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tale_Tag_Tag" Association="DBFairytaleModel.FK_Tale_Tag_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="Tale_Tag" EntitySet="Tale_Tag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Readed_Tale_Tale" Association="DBFairytaleModel.FK_Readed_Tale_Tale">
+      <End Role="Tale" EntitySet="Tales" />
+      <End Role="User_Tale" EntitySet="User_Tale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tale_Tag_Tale" Association="DBFairytaleModel.FK_Tale_Tag_Tale">
+      <End Role="Tale" EntitySet="Tales" />
+      <End Role="Tale_Tag" EntitySet="Tale_Tag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tale_Type" Association="DBFairytaleModel.FK_Tale_Type">
+      <End Role="Type" EntitySet="Types" />
+      <End Role="Tale" EntitySet="Tales" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="DBFairytaleModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="DBFairytaleModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="DBFairytaleModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecondName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ConfirmedEmail" Type="Boolean" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="DBFairytaleModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="User_Tale" Relationship="DBFairytaleModel.FK_User_Tale_AspNetUsers" FromRole="AspNetUser" ToRole="User_Tale" />
+    <NavigationProperty Name="AspNetRoles" Relationship="DBFairytaleModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="Author_ID" />
+    </Key>
+    <Property Name="Author_ID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tales" Relationship="DBFairytaleModel.FK_Tale_Author" FromRole="Author" ToRole="Tale" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Category_ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tales" Relationship="DBFairytaleModel.FK_Tale_Category" FromRole="Category" ToRole="Tale" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="Tag_ID" />
+    </Key>
+    <Property Name="Tag_ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tale_Tag" Relationship="DBFairytaleModel.FK_Tale_Tag_Tag" FromRole="Tag" ToRole="Tale_Tag" />
+  </EntityType>
+  <EntityType Name="Tale">
+    <Key>
+      <PropertyRef Name="Tale_ID" />
+    </Key>
+    <Property Name="Tale_ID" Type="Int32" Nullable="false" />
+    <Property Name="Path" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Author_ID" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Audio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cover" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Category_ID" Type="Int32" Nullable="false" />
+    <Property Name="Type_ID" Type="Int32" Nullable="false" />
+    <Property Name="LikeCount" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ShortDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Author" Relationship="DBFairytaleModel.FK_Tale_Author" FromRole="Tale" ToRole="Author" />
+    <NavigationProperty Name="Category" Relationship="DBFairytaleModel.FK_Tale_Category" FromRole="Tale" ToRole="Category" />
+    <NavigationProperty Name="User_Tale" Relationship="DBFairytaleModel.FK_Readed_Tale_Tale" FromRole="Tale" ToRole="User_Tale" />
+    <NavigationProperty Name="Tale_Tag" Relationship="DBFairytaleModel.FK_Tale_Tag_Tale" FromRole="Tale" ToRole="Tale_Tag" />
+    <NavigationProperty Name="Type" Relationship="DBFairytaleModel.FK_Tale_Type" FromRole="Tale" ToRole="Type" />
+  </EntityType>
+  <EntityType Name="Tale_Tag">
+    <Key>
+      <PropertyRef Name="Tale_Tag_ID" />
+    </Key>
+    <Property Name="Tale_Tag_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tale_ID" Type="Int32" Nullable="false" />
+    <Property Name="Tag_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tag" Relationship="DBFairytaleModel.FK_Tale_Tag_Tag" FromRole="Tale_Tag" ToRole="Tag" />
+    <NavigationProperty Name="Tale" Relationship="DBFairytaleModel.FK_Tale_Tag_Tale" FromRole="Tale_Tag" ToRole="Tale" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="Type_ID" />
+    </Key>
+    <Property Name="Type_ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tales" Relationship="DBFairytaleModel.FK_Tale_Type" FromRole="Type" ToRole="Tale" />
+  </EntityType>
+  <EntityType Name="User_Tale">
+    <Key>
+      <PropertyRef Name="User_Tale_ID" />
+    </Key>
+    <Property Name="User_Tale_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Tale_ID" Type="Int32" Nullable="false" />
+    <Property Name="IsFavorite" Type="Boolean" Nullable="false" />
+    <Property Name="IsReaded" Type="Boolean" Nullable="false" />
+    <Property Name="IsLiked" Type="Boolean" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="DBFairytaleModel.FK_User_Tale_AspNetUsers" FromRole="User_Tale" ToRole="AspNetUser" />
+    <NavigationProperty Name="Tale" Relationship="DBFairytaleModel.FK_Readed_Tale_Tale" FromRole="User_Tale" ToRole="Tale" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+    <End Type="DBFairytaleModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBFairytaleModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="DBFairytaleModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBFairytaleModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Tale_AspNetUsers">
+    <End Type="DBFairytaleModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="DBFairytaleModel.User_Tale" Role="User_Tale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Tale">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tale_Author">
+    <End Type="DBFairytaleModel.Author" Role="Author" Multiplicity="1" />
+    <End Type="DBFairytaleModel.Tale" Role="Tale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Author_ID" />
+      </Principal>
+      <Dependent Role="Tale">
+        <PropertyRef Name="Author_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tale_Category">
+    <End Type="DBFairytaleModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="DBFairytaleModel.Tale" Role="Tale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Category_ID" />
+      </Principal>
+      <Dependent Role="Tale">
+        <PropertyRef Name="Category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tale_Tag_Tag">
+    <End Type="DBFairytaleModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="DBFairytaleModel.Tale_Tag" Role="Tale_Tag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="Tag_ID" />
+      </Principal>
+      <Dependent Role="Tale_Tag">
+        <PropertyRef Name="Tag_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Readed_Tale_Tale">
+    <End Type="DBFairytaleModel.Tale" Role="Tale" Multiplicity="1" />
+    <End Type="DBFairytaleModel.User_Tale" Role="User_Tale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tale">
+        <PropertyRef Name="Tale_ID" />
+      </Principal>
+      <Dependent Role="User_Tale">
+        <PropertyRef Name="Tale_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tale_Tag_Tale">
+    <End Type="DBFairytaleModel.Tale" Role="Tale" Multiplicity="1" />
+    <End Type="DBFairytaleModel.Tale_Tag" Role="Tale_Tag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tale">
+        <PropertyRef Name="Tale_ID" />
+      </Principal>
+      <Dependent Role="Tale_Tag">
+        <PropertyRef Name="Tale_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tale_Type">
+    <End Type="DBFairytaleModel.Type" Role="Type" Multiplicity="1" />
+    <End Type="DBFairytaleModel.Tale" Role="Tale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="Type_ID" />
+      </Principal>
+      <Dependent Role="Tale">
+        <PropertyRef Name="Type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="DBFairytaleModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="DBFairytaleModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+</Schema>

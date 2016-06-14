@@ -1,0 +1,49 @@
+﻿@model FairyTales.Models.FairyTale
+<article class="post">
+    <a href="/tales/@Model.Path">
+        <img width="305" src="@Model.Cover" class="post-image" />
+    </a>
+
+    <div class="post-right">
+        @if (!String.IsNullOrWhiteSpace(Model.Audio))
+        {
+            <span href="#" class="audio">Аудіо</span>
+        }
+
+        <h2 class="entry-title"> 
+            <a href="/tales/@Model.Path">@Model.Name</a>
+        </h2>
+
+        <div class="entry-meta">
+            @{
+                var likesCount = new HtmlString(string.Format("({0})", @Model.LikesCount));
+            }
+            <span class="date"><i class="fa fa-calendar"></i>@Model.Date.ToShortDateString()</span>
+            <span class="author">
+                <i class="fa fa-user"></i>
+                @Html.ActionLink(String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName), "Index", "Search", new { text = String.Format("{0} {1}", Model.Author.FirstName, Model.Author.LastName), category = "author" }, null)
+            </span>
+
+            <a href="#0" class="like@{if (@Model.IsUserLiked)
+                                                    {@Html.Raw(" is-selected")
+                                                    }}
+                                                   @if (!User.Identity.IsAuthenticated)
+                                                   {
+                                                       @: disabled
+                                                   } ">
+                <i class="fa fa-thumbs-up"></i>Подобається
+                <span class="like-counter">
+                    @{if (!@Model.LikesCount.Equals(0))
+                    {@Html.Raw(likesCount)
+                    }}
+            </span>
+        </a>
+    </div>
+
+    <form style="display: none" action="/tales/@Model.Path/like" data-ajax="true" method="POST" class="like-form">
+        <input type="submit" class="like-submit" />
+    </form>
+
+        <div class="entry-content">@Html.Raw(@Model.ShortDescription ?? "")</div>
+    </div><!-- .post-right -->
+</article><!-- .post -->

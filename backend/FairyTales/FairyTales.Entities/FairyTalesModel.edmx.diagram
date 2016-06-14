@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="80c6118bb26141cdbe0e94be72d1e9c6" Name="Diagram1">
+        <EntityTypeShape EntityType="DBFairytaleModel.C__MigrationHistory" Width="1.5" PointX="10.75" PointY="1.75" />
+        <EntityTypeShape EntityType="DBFairytaleModel.AspNetRole" Width="1.5" PointX="3.75" PointY="9" />
+        <EntityTypeShape EntityType="DBFairytaleModel.AspNetUserClaim" Width="1.5" PointX="8.25" PointY="7.5" />
+        <EntityTypeShape EntityType="DBFairytaleModel.AspNetUserLogin" Width="1.5" PointX="8.25" PointY="10.25" />
+        <EntityTypeShape EntityType="DBFairytaleModel.AspNetUser" Width="1.5" PointX="6" PointY="8" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Author" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Category" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Tag" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Tale" Width="1.5" PointX="3" PointY="2.625" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Tale_Tag" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="DBFairytaleModel.Type" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="DBFairytaleModel.User_Tale" Width="1.5" PointX="8.25" PointY="3.5" />
+        <AssociationConnector Association="DBFairytaleModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" />
+        <AssociationConnector Association="DBFairytaleModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DBFairytaleModel.FK_User_Tale_AspNetUsers" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Author" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Category" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Tag_Tag" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Readed_Tale_Tale" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Tag_Tale" />
+        <AssociationConnector Association="DBFairytaleModel.FK_Tale_Type" />
+        <AssociationConnector Association="DBFairytaleModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,50 @@
+﻿@model List<FairyTales.Entities.Tag>
+
+@{
+    ViewBag.Title = "Теги";
+    Layout = "../Shared/_AdminPanelLayout.cshtml";
+}
+
+<div id="rev-content">
+    <div id="rev-body">
+        <div class="wrap">
+            @if (Model.Count == 0)
+            {
+                <h1>На даному сайтів не знайдено жодного тегу.</h1>
+            }
+            else
+            {
+                <h1>Теги</h1>
+
+                <table class="posts" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="manage-column id">ID</th>
+                            <th scope="col" class="manage-column tag-name">Назва тегу</th>
+                            <th scope="col" class="manage-column edit">Змінити</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col" class="manage-column id">ID</th>
+                            <th scope="col" class="manage-column tag-name">Назва тегу</th>
+                            <th scope="col" class="manage-column edit">Змінити</th>
+                        </tr>
+                    </tfoot>
+                    <tbody id="list">
+                        @foreach (var tag in Model)
+                        {
+                            <tr id="/tags/@tag.Tag_ID">
+                                <td class="tag-id">@tag.Tag_ID</td>
+                                <td class="tag-name"><a href="/search?text=@tag.Name&category=tag" target="_blank">@tag.Name</a></td>
+                                <td class="edit-tag">
+                                    <a style="display: block;" href="/adminpanel/edittag/@tag.Tag_ID">Редагувати</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div><!-- .wrap -->
+    </div><!-- #rev-body -->
+</div><!-- #rev-content -->

@@ -1,0 +1,88 @@
+﻿@using FairyTales.Models.Pagination
+@model PaginationManager
+
+
+@if (Model != null && Model.PageCount != 0)
+{
+
+    <script type="text/javascript">
+
+        function pagClick(page) {
+            document.form0.elements['Page'].value = page;
+            document.form0.submit();
+        }
+    </script>
+
+    <div id="pagination">
+        <ul>
+            <li class="control-button">
+                @Html.Partial("_PaginationPart", new PaginationElement() { CustomText = "Назад", Page = Model.CurrentPage - 1, IsDisabled = Model.CurrentPage == 1 })
+            </li>
+            <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = 1, CurrentPage = Model.CurrentPage })</li>
+            @if (Model.CurrentPage <= 2)
+            {
+                if (Model.PageCount >= 2)
+                {
+                    <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = 2, CurrentPage = Model.CurrentPage })</li>
+                    if (Model.PageCount > 2)
+                    {
+                        <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = 3, CurrentPage = Model.CurrentPage })</li>
+                    }
+                    if (Model.PageCount > 3)
+                    {
+                        <li><span>...</span></li>
+
+                        <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = Model.PageCount, CurrentPage = Model.CurrentPage })</li>
+                    }
+                }
+            }
+            else
+            {
+                if (Model.PageCount == 3)
+                {
+                    <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = 2, CurrentPage = Model.CurrentPage })</li>
+                    <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = 3, CurrentPage = Model.CurrentPage })</li>
+                }
+                else
+                {
+                    if (Model.CurrentPage + 1 >= Model.PageCount)
+                    {
+                        <li><span>...</span></li>
+                        <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = Model.PageCount - 2, CurrentPage = Model.CurrentPage })</li>
+                        <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = Model.PageCount - 1, CurrentPage = Model.CurrentPage })</li>
+                        <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = Model.PageCount, CurrentPage = Model.CurrentPage })</li>
+                    }
+                    else
+                    {
+
+                        if (Model.PageCount == 4)
+                        {
+                            <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = 2, CurrentPage = Model.CurrentPage })</li>
+                            <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = 3, CurrentPage = Model.CurrentPage })</li>
+                        }
+                        else
+                        {
+                            if (Model.PageCount != 5)
+                            {
+                                <li><span>...</span></li>
+                            }
+                            <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = Model.CurrentPage - 1, CurrentPage = Model.CurrentPage })</li>
+                            <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = Model.CurrentPage, CurrentPage = Model.CurrentPage })</li>
+                            <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = Model.CurrentPage + 1, CurrentPage = Model.CurrentPage })</li>
+                            if (Model.PageCount != 5)
+                            {
+                                <li><span>...</span></li>
+                            }
+                        }
+                        <li class="control-button">@Html.Partial("_PaginationPart", new PaginationElement() { Page = Model.PageCount, CurrentPage = Model.CurrentPage })</li>
+                    }
+                }
+            }
+
+            <li class="control-button">
+                @Html.Partial("_PaginationPart", new PaginationElement() { CustomText = "Вперед", Page = Model.CurrentPage + 1, IsDisabled = Model.CurrentPage == Model.PageCount })
+            </li>
+        </ul>
+    </div>
+    <!-- #pagination -->
+}

@@ -1,0 +1,247 @@
+﻿@model FairyTales.Models.AdminPanel
+
+@{
+    ViewBag.Title = "Головна";
+    Layout = "../Shared/_AdminPanelLayout.cshtml";
+}
+
+<div id="rev-content">
+    <div id="rev-body">
+        <div class="wrap">
+
+            <script>
+            $(document).ready(function() {
+                $('h1').fadeIn(600);
+                $('.row:first-child').delay(100).fadeIn(600);
+                $('#tabs').delay(200).fadeIn(600);
+                $('#right-sidebar').delay(300).fadeIn(600);
+            });
+            </script>
+
+            @{
+                var categories = Model.Categories;
+                var talesList = Model.Tales;
+            }
+
+            <h1 style="margin-bottom: 20px; display: none;">
+                <a href="/" title="На головну сторінку" style="text-decoration:none;color: #555;">Mom's Stories</a> › Адмін панель
+            </h1>
+
+            <div id="post">
+                <div id="post-body">
+                    <div id="post-body-content">
+
+                        <div class="row" style="display: none;">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="panel panel-posts panel-stat">
+                                    <div class="panel-heading">
+                                        <div class="stat">
+                                            <div class="top-row">
+                                                <div class="col-xs-4">
+                                                    <img src="~/images/is-post.png" alt="Posts icon" />
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <small class="stat-label">Казки</small>
+                                                    <a href="/adminpanel/tales" class="count"><h3 class="stat-count">@talesList.Count</h3></a>
+                                                </div>
+                                            </div>
+                                            <div class="mb15"></div>
+                                        </div>
+                                    </div>
+                                </div><!-- .panel-posts -->
+                            </div><!-- .col-sm-6 -->
+
+                            <div class="col-sm-6 col-md-3">
+                                <div class="panel panel-cats panel-stat">
+                                    <div class="panel-heading">
+                                        <div class="stat">
+                                            <div class="top-row">
+                                                <div class="col-xs-4">
+                                                    <img src="~/images/is-cat.png" alt="Cats icon" />
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <small class="stat-label">Категорії</small>
+                                                    <a href="/adminpanel/categories" class="count"><h3 class="stat-count">@categories.Count</h3></a>
+                                                </div>
+                                            </div>
+                                            <div class="mb15"></div>
+                                        </div>
+                                    </div>
+                                </div><!-- .panel-cats -->
+                            </div><!-- .col-sm-6 -->
+
+                            <div class="col-sm-6 col-md-3">
+                                <div class="panel panel-authors panel-stat">
+                                    <div class="panel-heading">
+                                        <div class="stat">
+                                            <div class="top-row">
+                                                <div class="col-xs-4">
+                                                    <img src="~/images/is-user.png" alt="Authors icon" />
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <small class="stat-label">Автори</small>
+                                                    <a href="/adminpanel/authors" class="count"><h3 class="stat-count">@ViewBag.Authors.Count</h3></a>
+                                                </div>
+                                            </div>
+                                            <div class="mb15"></div>
+                                        </div>
+                                    </div>
+                                </div><!-- .panel-authors -->
+                            </div><!-- .col-sm-6 -->
+
+                            <div class="col-sm-6 col-md-3">
+                                <div class="panel panel-comments panel-stat">
+                                    <div class="panel-heading">
+                                        <div class="stat">
+                                            <div class="top-row">
+                                                <div class="col-xs-4">
+                                                    <img src="~/images/is-comment.png" alt="Tags icon" />
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <small class="stat-label">Теги</small>
+                                                    <a href="/adminpanel/tags" class="count"><h3 class="stat-count">@ViewBag.Tags.Count</h3></a>
+                                                </div>
+                                            </div>
+                                            <div class="mb15"></div>
+                                        </div>
+                                    </div>
+                                </div><!-- .panel-comments -->
+                            </div><!-- .col-sm-6 -->
+
+                        </div><!-- .row -->
+
+                        <script>
+								$(document).ready(function(){
+									var tabContainers = $('.tab-content > div');
+									tabContainers.hide().filter(':first').show();
+
+									$('ul.nav-tabs li a').click(function(){
+										tabContainers.hide();
+										tabContainers.filter(this.hash).fadeIn();
+
+										$('ul.nav-tabs a').parent('li').removeClass('active');
+										$(this).parent('li').addClass('active');
+
+										return false;
+									}).filter(':first').click();
+
+									function pressNextTab() {
+
+										if ( $('ul.nav-tabs li.active').hasClass('last') ) {
+											$('ul.nav-tabs li:first').find('a').trigger('click');
+										} else {
+											$('ul.nav-tabs li.active').next('li').find('a').trigger('click');
+										}
+									}
+
+									$('ul.nav-tabs li:last').addClass('last');
+									var int = setInterval(pressNextTab, 7000);
+								});
+                        </script>
+
+                        <div id="tabs" class="row" style="display: none;">
+                            <h2 class="row-title">Список останніх казок</h2>
+
+                            <ul class="nav nav-tabs">
+                                @for (var i = 0; i < categories.Count && i < 6; i++)
+                                {
+                                    if (categories[i].Tales.Count == 0) { continue; }
+                                    <li@{
+                                           if (i == 0)
+                                           {
+                                               @Html.Raw(" class=\"active\"")
+                                           }
+                                       }>
+                                        <a href="#category_@categories[i].Category_ID"><strong>@categories[i].Name</strong></a>
+                                        </li>
+    }
+                        </ul><!-- .nav-tabs -->
+
+                        <div class="tab-content mb30">
+                            @for (var i = 0; i < categories.Count && i < 6; i++)
+                            {
+                                if (categories[i].Tales.Count == 0) { continue; }
+                                <div class="tab-panel@{
+                                    if (i == 0)
+                                    {
+                                                             @Html.Raw("active")
+                                                             ;
+                                                         }
+                                                     }" id="category_@categories[i].Category_ID">
+                                    <div class="table-responsive">
+                                        <table class="table mb30">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Назва</th>
+                                                    <th>Дата</th>
+                                                    <th>Автор</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    var tales = Model.Tales.Where(tale => tale.Category.Category_ID == categories[i].Category_ID).ToList();
+                                                }
+                                                @foreach (var tale in tales)
+                                                {
+                                                    <tr>
+                                                        <td><a href="/adminpanel/edittale/@tale.Id" title="Редагувати казку">@tale.Id</a></td>
+                                                        <td><a href="/tales/@tale.Path" target="_blank">@tale.Name</a></td>
+                                                        <td>@tale.Date.ToString(@"D")</td>
+                                                            <td><a href="/search?text=@tale.Author.LastName @tale.Author.FirstName&category=author" target="_blank">@tale.Author.LastName @tale.Author.FirstName</a></td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div><!-- .table-responsive -->
+                                </div>
+                                <!-- .tab-panel -->
+                                                    }
+                        </div><!-- .tab-content -->
+                    </div><!-- .row -->
+                </div><!-- #post-body-content -->
+
+                <div id="right-sidebar" style="display: none;">
+                    <div id="side-wrap">
+
+                        <div id="cat-list">
+                            <h3 class="area-title">Список категорій</h3>
+                            <div class="inside">
+                                <table class="table mb30">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Назва</th>
+                                            <th>Кількість</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var category in categories)
+                                        {
+                                            <tr>
+                                                <td><a href="/adminpanel/editcategory/@category.Category_ID" title="Редагувати">@category.Category_ID</a></td>
+                                                <td><a href="/library/lastadded?category=@category.Category_ID" target="_blank">@category.Name</a></td>
+                                                <td>@category.Tales.Count</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Назва</th>
+                                            <th>Кількість</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div><!-- .inside -->
+                        </div><!-- #submitdiv -->
+
+                    </div><!-- #side-wrap -->
+                </div><!-- #right-sidebar -->
+
+            </div><!-- #post-body -->
+        </div><!-- #post -->
+
+    </div><!-- .wrap -->
+</div><!-- #rev-body -->
+</div><!-- #rev-content -->

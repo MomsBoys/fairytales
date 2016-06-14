@@ -1,0 +1,22 @@
+﻿@model FairyTales.Models.Pagination.PaginationElement
+
+    <a href="#"
+       @if (Model.IsDisabled)
+       {
+           @: class="disabled" 
+       }
+       @if (Model.CurrentPage == Model.Page)
+       {
+           @: class="current"
+       }
+       onclick="pagClick(@Model.Page);">
+        @if (!String.IsNullOrWhiteSpace(Model.CustomText))
+        {
+            @Model.CustomText
+        }
+        else
+        {
+            @Model.Page
+        }
+    </a>
+

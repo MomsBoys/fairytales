@@ -1,0 +1,67 @@
+﻿@using FairyTales.Models
+@model List<FairyTales.Models.FairyTale>
+
+@{
+    ViewBag.Title = "Казки";
+    Layout = "../Shared/_AdminPanelLayout.cshtml";
+}
+
+<div id="rev-content">
+    <div id="rev-body">
+        <div class="wrap">
+            @if (ViewBag.ResponseResult != null)
+            {
+                @Html.Partial("_OperationResult", (ResponseType)ViewBag.ResponseResult)
+            }
+
+            @if (Model.Count == 0)
+            {
+                <h1>На даному сайтів не знайдено жодної казки.</h1>
+            }
+            else
+            {
+                <h1>Список казок</h1>
+
+                <table class="posts" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="manage-column id">ID</th>
+                        <th scope="col" class="manage-column title">Назва</th>
+                        <th scope="col" class="manage-column cat">Категорія</th>
+                        <th scope="col" class="manage-column author">Автор</th>
+                        <th scope="col" class="manage-column edit">Змінити</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th scope="col" class="manage-column id">ID</th>
+                        <th scope="col" class="manage-column title">Назва</th>
+                        <th scope="col" class="manage-column cat">Категорія</th>
+                        <th scope="col" class="manage-column author">Автор</th>
+                        <th scope="col" class="manage-column edit">Змінити</th>
+                    </tr>
+                    </tfoot>
+                    <tbody id="list">
+
+                    @foreach (var tale in Model)
+                    {
+                        <tr id="/tales/@tale.Path">
+                            <td class="post-id">@tale.Id</td>
+                            <td class="post-title">
+                                <a class="row-title" href="/tales/@tale.Path" target="_blank">@tale.Name</a>
+                            </td>
+                            <td class="post-cat"><a href="/library/lastadded?category=@tale.Category.Category_ID" target="_blank">@tale.Category.Name</a></td>
+                            <td class="post-author">
+                                <a href="/search?text=@Html.Raw(string.Format("{0} {1}", @tale.Author.LastName, @tale.Author.FirstName))&category=author" target="_blank">@Html.Raw(string.Format("{0} {1}", @tale.Author.LastName, @tale.Author.FirstName))</a>
+                            </td>
+                            <td class="edit-post">
+                                <a style="display: block;" href="/adminpanel/edittale/@tale.Id">Редагувати</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody><!-- #list -->
+                </table><!-- .posts -->
+            }
+        </div><!-- .wrap -->
+    </div><!-- #rev-body -->
+</div><!-- #rev-content -->

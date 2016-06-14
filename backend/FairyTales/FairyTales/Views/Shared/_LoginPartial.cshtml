@@ -1,0 +1,31 @@
+﻿@using FairyTales.Models
+@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    var currentUser = DbManager.CurrentUser(User.Identity.GetUserId());
+
+    <div id="login">
+
+        @if (currentUser.IsAdmin)
+        {
+            <a class="adminpanel" href="/adminpanel">Адмін панель</a>
+        }
+
+        Привіт,
+        @if (Request.Cookies["first_name"] != null)
+        {
+            @Request.Cookies["first_name"].Value
+        }!
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Вихід</a>
+        }
+
+    </div>
+}
+else
+{
+    <a href="#0" class="cd-signin" id="login">Вхід</a>
+}

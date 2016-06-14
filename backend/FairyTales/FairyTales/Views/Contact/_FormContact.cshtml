@@ -1,0 +1,51 @@
+﻿@model FairyTales.Models.EmailModel
+
+
+    <div class="contact-form">
+        <form id="rev_contact_form" method="post" action="/Contact/Sender" data-ajax="true" data-ajax-mode="replace" data-ajax-update=".contact-wrap">
+            @Html.ValidationSummary(true)
+            <div class="row">
+                <div class="row-half">
+                    <div class="field">
+                        <label for="sender_name">Ім'я</label>
+                        <input type="text" class="text name_field" name="SenderName" id="sender_name" placeholder="Ваше імя" value=@Model.SenderName>
+                    </div>
+                </div>
+                <div class="row-half right">
+                    <div class="field">
+                        <label for="sender_email">Електронна пошта<span class="required">обов'язково</span></label>
+                        <input type="text" class="text requiredField email" name="SenderEmail" id="sender_email" placeholder="Для контакту з Вами" value=@Model.SenderEmail>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field message-field">
+                    <label for="message_title">Заголовок повідомлення<span class="required">обов'язково</span></label>
+                    <input type="text" class="text title_field requiredField" name="MessageTitle" id="message_title" placeholder="Те, про що хочете запитати" value=@Model.MessageTitle>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field textarea-field">
+                    <label for="message_text">Напишіть Ваше повідомлення нижче<span class="required">обов'язково</span></label>
+                    <textarea class="textarea message_field requiredField" name="MessageText" id="message_text" placeholder="Ваше запитання тут">@Model.MessageText</textarea>
+                </div>
+            </div>
+            <div>
+                <p style="font-size: 100%; color: darkred">@ViewBag.ErrorMessage</p>
+            </div>
+            <div class="row">
+                <div class="row-half">
+                    <div class="field">
+                        <input type="submit" id="form_submit" name="rev_submit" value="Відправити повідомлення" class="button">
+                    </div>
+                </div>
+                <div class="row-half right">
+                    <div class="field">
+                        <div class="g-recaptcha" data-size="normal" data-sitekey="6Lei4iETAAAAAAjVCoYjofaSPPOy8UX9yP4V-D7q"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </div><!-- .contact-form -->
+

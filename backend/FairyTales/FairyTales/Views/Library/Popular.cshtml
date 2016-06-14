@@ -1,0 +1,86 @@
+﻿  
+@using FairyTales.Entities
+@using FairyTales.Models.Pagination
+@using Type = FairyTales.Entities.Type
+@model List<FairyTales.Models.FairyTale>
+
+@{
+    ViewBag.Title = "Популярні";
+}
+@section scripts{
+    <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/css/filter-style.css"> <!-- Resource style -->
+    <script src="~/Scripts/filter-main.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.mixitup.min.js"></script><!-- Resource jQuery -->
+}
+
+<div id="filter">
+    <main class="cd-main-content">
+        <div class="cd-tab-filter-wrapper">
+            <div class="cd-tab-filter">
+                <ul class="cd-filters">
+                    <li class="placeholder">
+                        <a data-type="all" href="#0">Останні додані</a> <!-- selected option on mobile -->
+                    </li>
+                    <li class="filter"><a href="/Library/LastAdded" data-type="all">Останні додані</a></li>
+                    <li class="filter" data-filter=".color-1"><a class="selected" href="/Library/Popular" data-type="color-1">Популярні</a></li>
+                    <li class="filter" data-filter=".color-2"><a href="/Library/Recommended" data-type="color-2">Рекомендовані</a></li>
+                    <li class="filter" data-filter=".color-2"><a href="/Library/RecentReaded" data-type="color-2">Прочитані</a></li>
+                    <li class="filter" data-filter=".color-3"><a href="/Library/Favourite" data-type="color-3">Улюблені</a></li>
+                </ul> <!-- cd-filters -->
+            </div> <!-- cd-tab-filter -->
+        </div> <!-- cd-tab-filter-wrapper -->
+        <div class="cd-filter">
+            <form action="/Library/Popular" id="form0" name="form0" method="get">
+                <input type="hidden" id="Page" name="Page" value="1" />
+                <div class="cd-filter-block">
+                    <h4>Види казок</h4>
+                    <ul class="cd-filter-content cd-filters list">
+                        @foreach (Category item in ViewBag.Categories)
+                        {
+                            <li>
+                                <input class="filter" data-filter=@String.Format(".check{0}", item.Category_ID) type="checkbox" id="@String.Format("categoryFilter{0}", item.Category_ID)" name="Category" value="@item.Category_ID"
+                                       @if (ViewBag.FilterCategories != null && ViewBag.FilterCategories.Contains(item.Category_ID)) { @: checked="checked"
+                                                                                                                                                         } />
+                                <label class="checkbox-label" for="@String.Format("categoryFilter{0}",item.Category_ID)">@item.Name</label>
+                            </li>
+                        }
+                    </ul> <!-- cd-filter-content -->
+                </div> <!-- cd-filter-block -->
+                <div class="cd-filter-block">
+                    <h4>Типи казок</h4>
+                    <ul class="cd-filter-content cd-filters list">
+                        @foreach (Type item in ViewBag.Types)
+                        {
+                            <li>
+                                <input class="filter" data-filter=@String.Format(".check{0}", item.Type_ID) type="checkbox" id="@String.Format("typeFilter{0}", item.Type_ID)" name="Type" value="@item.Type_ID"
+                                       @if (ViewBag.FilterTypes != null && ViewBag.FilterTypes.Contains(item.Type_ID)) { @: checked="checked"
+                                                                                                                                                         } />
+                                <label class="checkbox-label" for="@String.Format("typeFilter{0}",item.Type_ID)">@item.Name</label>
+                            </li>
+                        }
+                    </ul> <!-- cd-filter-content -->
+                    <input id="filter-submit" type="submit" value="Застосувати"/>
+                    <a id="filter-reset" href="javascript:void();">Скинути фільтр</a>
+                </div> <!-- cd-filter-block -->
+            </form>
+            <a href="#0" class="cd-close">Закрити</a>
+        </div> <!-- cd-filter -->
+        <a href="#0" class="cd-filter-trigger">Фільтри</a>
+    </main> <!-- cd-main-content -->
+</div><!-- #filter -->
+
+<div id="Content">
+     
+
+
+    <div class="container" id="container">
+        @Html.Partial("Filter", Model)
+        @Html.Partial("_Pagination", (PaginationManager)ViewBag.Pagination)
+        <p id="back-top">
+            <a href="#top"><span></span></a>
+        </p><!-- #back-top -->
+    </div><!-- .container -->
+</div><!-- #Content -->

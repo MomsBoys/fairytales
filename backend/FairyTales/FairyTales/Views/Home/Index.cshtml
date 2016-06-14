@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Головна";
+}
+@model FairyTales.Models.MainPageData
+    <script type="text/javascript" src="~/Scripts/homeslider.js"></script>
+    <div id="Content">
+        <div id="slider">
+            <div class="slider-container">
+                <div class="page_container">
+                    <div id="slider-info" class="slider-info">
+                        @foreach (var tale in Model.PopularTales)
+                        {
+                            <div class="slide">
+                                <h2>
+                                    <a href="/tales/@tale.Path">@tale.Name</a>
+                                </h2>
+                                <div class="image">
+                                    <img src="@tale.Cover" alt ="@tale.Name" />
+                                </div>
+                            </div>
+                        } 
+                        <div class="is-nav">
+                            <ul class="slider-direction-nav">
+                                <li><a href="#" class="is-prev">Назад</a></li>
+                                <li><a href="#" class="is-next">Вперед</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- #slider -->
+        <div class="container"> 
+            <section id="primary">
+                <div class="content">
+                    <h1 class="content-title">
+                        <a href="/library/lastadded">Останні додані</a>
+                    </h1>
+                @foreach (var tale in Model.LatestTales)
+                {
+                    @Html.Partial("_ShortTaleView", tale)
+                } 
+                </div><!-- .content -->
+            </section><!-- #primary -->
+            <p id="back-top">
+                <a href="#top"><span></span></a>
+            </p><!-- #back-top -->
+        </div><!-- .container -->
+    </div><!-- #Content -->
+<script type="text/javascript">
+	$("#slider-info").immersive_slider({
+		animation: "slide",
+		cssBlur: true
+	});
+</script>

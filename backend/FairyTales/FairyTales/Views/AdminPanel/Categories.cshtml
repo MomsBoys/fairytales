@@ -1,0 +1,52 @@
+﻿@model List<FairyTales.Entities.Category>
+
+@{
+    ViewBag.Title = "Категорії";
+    Layout = "../Shared/_AdminPanelLayout.cshtml";
+}
+
+<div id="rev-content">
+    <div id="rev-body">
+        <div class="wrap">
+            @if (Model.Count == 0)
+            {
+                <h1>На даному сайтів не знайдено жодної категорії.</h1>
+            }
+            else
+            {
+                <h1>Категорії</h1>
+
+                <table class="posts" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="manage-column id">ID</th>
+                            <th scope="col" class="manage-column category-name">Назва категорії</th>
+                            <th scope="col" class="manage-column edit">Змінити</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col" class="manage-column id">ID</th>
+                            <th scope="col" class="manage-column category-name">Назва категорії</th>
+                            <th scope="col" class="manage-column edit">Змінити</th>
+                        </tr>
+                    </tfoot>
+                    <tbody id="list">
+                        @foreach (var category in Model)
+                        {
+                            <tr id="/categories/@category.Category_ID">
+                                <td class="category-id">@category.Category_ID</td>
+                                <td class="category-name">
+                                    <a href="/library/lastadded?category=@category.Category_ID" target="_blank">@category.Name</a>
+                                </td>
+                                <td class="edit-category">
+                                    <a style="display: block;" href="/adminpanel/editcategory/@category.Category_ID">Редагувати</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div><!-- .wrap -->
+    </div><!-- #rev-body -->
+</div><!-- #rev-content -->

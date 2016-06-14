@@ -1,0 +1,97 @@
+﻿﻿@using FairyTales.Controllers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Mom's Stories</title>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png"/>
+    <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png"/>
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+<div id="Wrapper">
+
+    <div id="Header" role="banner" >
+        <div class="container cd-main-header animate-search">
+            <div id="logo">
+                
+                <a href="/" title="Mom's Stories">
+                    <img src="~/images/logo.png" alt="Mom's Stories"/>
+                </a>
+            </div><!-- #logo -->
+            @Html.Partial("_LoginPartial")
+
+            <nav id="menu" class="cd-main-nav-wrapper">
+                <a href="#search" class="cd-search-trigger cd-text-replace">Пошук</a>
+                <ul class="menu cd-main-nav">
+                    <li><a href="/">Головна</a></li>
+                    <li @if (@ViewBag.isLibrary != null && @ViewBag.isLibrary) { @: class="current-menu-item"
+                                                }
+                                                ><a href="/library/lastadded">Бібліотека</a></li>
+
+                    <li><a href="/contact">Контакти</a></li>
+                </ul>
+
+            </nav><!-- #menu -->
+
+            <a href="#" class="responsive-menu-toggle cd-nav-trigger"><i class="fa fa-reorder"></i></a>
+        </div><!-- .container -->
+    </div><!-- #Header -->
+
+    <div id="search" class="cd-main-search">
+        <form id="search-form" action="/Search/Index" method="get">
+            <input id="searchField" type="text" placeholder="Пошук..." name="text">
+
+            <div class="cd-select">
+                <select name="category">
+                    <option value="all">По всьому</option>
+                    <option value="name">По назві</option>
+                    <option value="author">По автору</option>
+                    <option value="tag">По тегам</option>
+                </select>
+                <span class="selected-value">По всьому</span>
+            </div>
+        </form>
+        
+        <a href="#" class="search cd-text-replace" onclick='submitSearchForm()'>Пошук</a>
+        <a href="#0" class="close cd-text-replace">Закрити</a>
+    </div> <!-- .cd-main-search -->
+
+        <!-- Login Area -->
+        <div class="cd-user-modal">
+            <div class="cd-user-modal-container">
+                <ul class="cd-switcher">
+                    <li><a href="#0" class="is-selected">Увійти</a></li>
+                    <li><a href="#1">Зареєструватися</a></li>
+                </ul>
+
+                <div id="cd-login">
+                    @Html.Partial("_SignInPartial", new FairyTales.Models.LoginViewModel())
+                </div>
+
+                <div id="cd-signup">
+                    @Html.Partial("_SignUpPartial", new FairyTales.Models.RegisterViewModel())
+                </div>
+
+                <a href="#0" class="cd-close-form">Close</a>
+            </div>
+        </div>
+        <!-- /Login Area -->
+        
+        @RenderBody()    
+</div>
+    <div class="cd-cover-layer"></div> <!-- cover main content when search form is open -->
+
+    <script type="text/javascript">
+
+        function submitSearchForm() {
+            if (document.getElementById('searchField').value == '')
+                return false;
+            $('#search-form').submit();
+        }
+    </script>
+</body>
+</html>
