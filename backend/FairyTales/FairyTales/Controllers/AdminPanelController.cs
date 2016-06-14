@@ -216,20 +216,24 @@ namespace FairyTales.Controllers
             }
 
             // Update Audio
-            if (tale.AudioPath.Contains("://"))
+            if (tale.AudioPath != null)
             {
-                byte[] data;
-                using (var client = new WebClient())
+                if (tale.AudioPath.Contains("://"))
                 {
-                    data = client.DownloadData(tale.AudioPath);
-                }
+                    byte[] data;
+                    using (var client = new WebClient())
+                    {
+                        data = client.DownloadData(tale.AudioPath);
+                    }
 
-                System.IO.File.WriteAllBytes(HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3",
-                    data);
-            }
-            else
-            {
-                System.IO.File.Copy(tale.AudioPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+                    System.IO.File.WriteAllBytes(HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3",
+                        data);
+                }
+                else
+                {
+                    System.IO.File.Copy(tale.AudioPath,
+                        HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+                }
             }
 
             var operationResult = DbManager.EditExistingTale(tale);
