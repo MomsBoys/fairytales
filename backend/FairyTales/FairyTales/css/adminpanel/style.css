@@ -1252,5 +1252,6 @@ h1 {
 }
 
 .tale {
-    width: auto !important;
+    width: 60% !important;
+    min-width: 500px !important;
 }
