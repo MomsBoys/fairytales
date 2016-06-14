@@ -824,6 +824,38 @@ a.responsive-menu-toggle {
     border-color: transparent #5DA1B1 transparent transparent;
 }
 
+h2.error {
+    font-family: Arial, sans-serif;
+    font-size: 22em;
+    font-weight: 700;
+    text-align: center;
+    color: #314D68;
+    padding: 0;
+}
+
+.pagenot-text {
+    text-align: center;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+}
+
+.pagenot-text p {
+    position: absolute;
+    top: 125px;
+    left: 0;
+    font-size: 19px;
+    text-align: center;
+    background: #f7f7f7;
+    width: 100%;
+    padding: 5px 0;
+}
+
+.errorpage p {
+    font-size: 25px;
+    text-align: center;
+}
+
 /* -------------------
 	3.1 - Slider
 -------------------- */
@@ -2271,6 +2303,10 @@ a.responsive-menu-toggle {
 	.player {
 		width: 92%;
 	}
+
+    h2.error {
+        font-size: 16em;
+    }
 }
 
 /* 2.6 - Mobile Portrait Size to Mobile Landscape Size */
@@ -2367,6 +2403,23 @@ a.responsive-menu-toggle {
 	.player {
 		width: 90%;
 	}
+
+    h2.error {
+        font-size: 10em;
+    }
+
+    #Content.haserror {
+        margin-top: 0;
+    }
+
+    .pagenot-text {
+        height: 100px;
+    }
+
+    .pagenot-text p {
+        font-size: 20px;
+        top: 130px;
+    }
 }
 
 .cd-main-header::before {

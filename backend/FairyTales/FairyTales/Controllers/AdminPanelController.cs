@@ -9,6 +9,7 @@ using System.Web.WebPages;
 using FairyTales.Entities;
 using FairyTales.Models;
 using Microsoft.AspNet.Identity;
+using Type = FairyTales.Entities.Type;
 
 namespace FairyTales.Controllers
 {
@@ -36,7 +37,8 @@ namespace FairyTales.Controllers
 
             return View(_adminPanel);
         }
-        
+
+        #region Tales 
         // GET: Tales List
         public ActionResult Tales()
         {
@@ -113,7 +115,7 @@ namespace FairyTales.Controllers
             if (tale.AudioPath != null)
                 if (!tale.AudioPath.IsEmpty())
                     System.IO.File.Copy(tale.AudioPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
-            
+
             var operationResult = DbManager.AddNewTale(tale);
             ViewBag.ResponseResult = operationResult;
 
@@ -126,7 +128,7 @@ namespace FairyTales.Controllers
 
         private static bool TaleHasEmptyFields(FairyTale tale)
         {
-            return tale.Name.IsEmpty() || 
+            return tale.Name.IsEmpty() ||
                 tale.Path.IsEmpty() ||
                 tale.TextPath.IsEmpty() ||
                 tale.ShortDescription.IsEmpty() ||
@@ -192,7 +194,7 @@ namespace FairyTales.Controllers
                 ViewBag.ResponseResult = ResponseType.Error;
                 return RedirectToAction("Tales");
             }
-            
+
             // Use existing folder
             talePath = talePath.Remove(0, 2);
             var fileStream = new FileStream(HostingEnvironment.ApplicationPhysicalPath + talePath + "/text.txt", FileMode.OpenOrCreate, FileAccess.Write);
@@ -248,7 +250,9 @@ namespace FairyTales.Controllers
             ModelState.Clear();
             return View("AddTale", new FairyTale());
         }
+        #endregion // Tales
 
+        #region Authors
         // GET: Authors List
         public ActionResult Authors()
         {
@@ -326,7 +330,9 @@ namespace FairyTales.Controllers
 
             return View("AddAuthor", new Author());
         }
+        #endregion // Authors
 
+        #region Categories
         // GET: Categories List
         public ActionResult Categories()
         {
@@ -345,7 +351,7 @@ namespace FairyTales.Controllers
                 return PartialView("Error");
 
             GetDefaultViewBag();
-            
+
             return View(new Category());
         }
 
@@ -364,7 +370,7 @@ namespace FairyTales.Controllers
             if (operationResult == ResponseType.EmptyValues ||
                 operationResult == ResponseType.Exists)
                 return View("AddCategory", category);
-            
+
             ModelState.Clear();
             return View("AddCategory", new Category());
         }
@@ -376,7 +382,7 @@ namespace FairyTales.Controllers
                 return PartialView("Error");
 
             var category = _adminPanel.Categories.FirstOrDefault(innerCategory => innerCategory.Category_ID == id);
-            
+
             if (category == null)
                 return PartialView("Error");
 
@@ -399,14 +405,95 @@ namespace FairyTales.Controllers
 
             var operationResult = category.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.EditExistingCategory(category);
             ViewBag.ResponseResult = operationResult;
-            
+
             if (operationResult == ResponseType.EmptyValues || operationResult == ResponseType.Error)
                 return View("EditCategory", category);
 
             ModelState.Clear();
             return View("AddCategory", new Category());
         }
+        #endregion // Categories
 
+        #region Types
+        // GET: Types List
+        public ActionResult Types()
+        {
+            if (!IsAdminUser())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View(_adminPanel.Types);
+        }
+
+        // GET: Add Type
+        public ActionResult AddType()
+        {
+            if (!IsAdminUser())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            return View(new Type());
+        }
+
+        // POST: Add Type
+        [HttpPost]
+        public ActionResult AddType(Type type)
+        {
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            var operationResult = type.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.AddNewType(type);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.EmptyValues ||
+                operationResult == ResponseType.Exists)
+                return View("AddType", type);
+
+            ModelState.Clear();
+            return View("AddType", new Type());
+        }
+
+        // GET: Edit Type
+        public ActionResult EditType(int id)
+        {
+            if (!IsAdminUser())
+                return PartialView("Error");
+
+            var type = _adminPanel.Types.FirstOrDefault(innerType => innerType.Type_ID == id);
+
+            GetDefaultViewBag();
+
+            return View(type);
+        }
+
+        // POST: Edit Type
+        [HttpPost]
+        public ActionResult EditType(Type type)
+        {
+            if (!IsAdminUser() || !Request.Form.AllKeys.Any())
+                return PartialView("Error");
+
+            GetDefaultViewBag();
+
+            type.Type_ID = Convert.ToInt32(Request.Form["type_id"]);
+            type.Name = Request.Form["type_name"];
+
+            var operationResult = type.Name.IsEmpty() ? ResponseType.EmptyValues : DbManager.EditExistingType(type);
+            ViewBag.ResponseResult = operationResult;
+
+            if (operationResult == ResponseType.EmptyValues || operationResult == ResponseType.Error)
+                return View("EditType", type);
+
+            ModelState.Clear();
+            return View("AddType", new Type());
+        }
+        #endregion // Types
+
+        #region Tags
         // GET: Tags List
         public ActionResult Tags()
         {
@@ -483,7 +570,9 @@ namespace FairyTales.Controllers
             ModelState.Clear();
             return View("AddTag", new Tag());
         }
+        #endregion // Tags
 
+        #region Users
         // GET: Users List
         public ActionResult Users()
         {
@@ -536,6 +625,7 @@ namespace FairyTales.Controllers
             ModelState.Clear();
             return RedirectToAction("Users");
         }
+        #endregion // Users
 
         #region Additional Methods
         private void GetDefaultViewBag()
@@ -544,6 +634,7 @@ namespace FairyTales.Controllers
             ViewBag.Categories = _adminPanel.Categories;
             ViewBag.Tags = _adminPanel.Tags;
             ViewBag.Authors = _adminPanel.Authors;
+            ViewBag.Types = _adminPanel.Types;
         }
         #endregion // Additional Methods
     }

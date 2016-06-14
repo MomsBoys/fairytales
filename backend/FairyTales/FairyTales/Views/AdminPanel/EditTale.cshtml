@@ -119,9 +119,14 @@
                                     <div class="inside">
                                         <div class="cat-id">
                                             @{
-                                                var typesList = new List<Type>(ViewBag.Types).Select(type => new SelectListItem { Text = type.Name }).ToList();
+                                                var typesList = new List<Type>(ViewBag.Types).Select(type => new SelectListItem {Text = type.Name}).ToList();
                                             }
                                             @Html.DropDownListFor(model => model.TypeInput, typesList)
+                                        </div>
+                                        <div class="desc">
+                                            <p>
+                                                Список типів можна побачити перейшовши по адресу: <a href="/adminpanel/types">Типи</a>.
+                                            </p>
                                         </div>
                                     </div><!-- .inside -->
                                 </div>

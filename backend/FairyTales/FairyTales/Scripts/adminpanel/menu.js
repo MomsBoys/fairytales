@@ -27,6 +27,10 @@ jQuery(function($) {
 			$("#adminmenu li.nav-authors").addClass("current-menu-item");
 		}
 
+		if (pgurl.toLowerCase().indexOf("/adminpanel/edittype/") >= 0) {
+		    $("#adminmenu li.nav-types").addClass("current-menu-item");
+		}
+
 		if (pgurl.toLowerCase().indexOf("/adminpanel/edittag/") >= 0) {
 		    $("#adminmenu li.nav-tags").addClass("current-menu-item");
 		}
