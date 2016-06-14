@@ -76,6 +76,7 @@ namespace FairyTales.Controllers
                 return View("AddTale", tale);
             }
 
+            tale.Name = tale.Name.Trim();
             var talePath = string.Format("~/Content/Data/{0}", tale.Name);
             var isFolderExists = Directory.Exists(Server.MapPath(talePath));
 
@@ -109,8 +110,9 @@ namespace FairyTales.Controllers
             }
 
             // Add Audio
-            if (!tale.AudioPath.IsEmpty())
-                System.IO.File.Copy(tale.AudioPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+            if (tale.AudioPath != null)
+                if (!tale.AudioPath.IsEmpty())
+                    System.IO.File.Copy(tale.AudioPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
             
             var operationResult = DbManager.AddNewTale(tale);
             ViewBag.ResponseResult = operationResult;
@@ -216,20 +218,24 @@ namespace FairyTales.Controllers
             }
 
             // Update Audio
-            if (tale.AudioPath.Contains("://"))
+            if (tale.AudioPath != null)
             {
-                byte[] data;
-                using (var client = new WebClient())
+                if (tale.AudioPath.Contains("://"))
                 {
-                    data = client.DownloadData(tale.AudioPath);
-                }
+                    byte[] data;
+                    using (var client = new WebClient())
+                    {
+                        data = client.DownloadData(tale.AudioPath);
+                    }
 
-                System.IO.File.WriteAllBytes(HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3",
-                    data);
-            }
-            else
-            {
-                System.IO.File.Copy(tale.AudioPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+                    System.IO.File.WriteAllBytes(HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3",
+                        data);
+                }
+                else
+                {
+                    System.IO.File.Copy(tale.AudioPath,
+                        HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+                }
             }
 
             var operationResult = DbManager.EditExistingTale(tale);

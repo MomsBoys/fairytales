@@ -98,4 +98,8 @@ $(document).ready(function () {
             });
         }
     }
+
+    $(".article .player").next().css({
+        marginTop: "90px"
+    });
 });

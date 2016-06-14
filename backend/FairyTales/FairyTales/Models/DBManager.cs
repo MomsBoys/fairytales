@@ -737,8 +737,13 @@ namespace FairyTales.Models
                 currentTale.Text = "text.txt";
                 currentTale.Tale_Tag = new List<Tale_Tag>();
 
-                if (!tale.AudioPath.IsEmpty())
-                    currentTale.Audio = "audio.mp3";
+                if (tale.AudioPath != null)
+                {
+                    if (!tale.AudioPath.IsEmpty())
+                        currentTale.Audio = "audio.mp3";
+                }
+                else
+                    currentTale.Audio = null;
 
                 if (tale.SelectedTags != null)
                 {

@@ -1702,9 +1702,13 @@ a.responsive-menu-toggle {
  *
  */
 
-.article .entry-content {
+/*.article .entry-content {
 	margin-top: 90px;
-}
+}*/
+
+/*.article .player {
+    margin-top: 90px;
+}*/
 
 .player {
 	width: 47%;
