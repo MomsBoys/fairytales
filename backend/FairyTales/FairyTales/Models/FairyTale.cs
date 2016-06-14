@@ -23,6 +23,9 @@ namespace FairyTales.Models
         {
             get
             {
+                if (Name == null || _text == null)
+                    return string.Empty;
+
                 return
                     File.ReadAllText(
                         System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Data/" + Name + "/" + _text),

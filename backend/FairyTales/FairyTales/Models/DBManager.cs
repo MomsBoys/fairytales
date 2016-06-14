@@ -421,7 +421,7 @@ namespace FairyTales.Models
                 tags.Count(c => recommendedTales[0].Tale_Tag.Any(a => a.Tag_ID == c.TagId)) == 0)
             {
                 // нема співпадінь по тегам - недостатньо казок в улюблених (або в базу додано), або теги погано написані (чи взагалі відсутні)
-                //забиваємо все популярними казками
+                // забиваємо все популярними казками
                 recommendedTales =
                     recommendedTales.Where(r => tales.All(a => a.Tale_ID != r.Tale_ID))
                         .OrderByDescending(t => t.User_Tale.Count(u => u.IsFavorite))
@@ -437,192 +437,8 @@ namespace FairyTales.Models
         }
 
         #region Admin Panel
-        public static ResponseType AddNewCategory(Category category)
-        {
-            try
-            {
-                var dbContext = new DBFairytaleEntities();
 
-                var isCategoryExists = dbContext.Categories.Any(
-                    innerCategory => innerCategory.Name.Equals(category.Name)
-                );
-
-                if (isCategoryExists)
-                    return ResponseType.Exists;
-
-                category.Category_ID = dbContext.Categories.Max(innerCategory => innerCategory.Category_ID) + 1;
-                category.Tales = new List<Tale>();
-                
-                dbContext.Categories.Add(category);
-                dbContext.SaveChanges();
-
-                return ResponseType.Success;
-            }
-            catch
-            {
-                Console.WriteLine(@"AddNewCategoryWithName-Exception");
-                return ResponseType.Error;
-            }
-        }
-
-        public static ResponseType EditExistingCategory(Category category)
-        {
-            try
-            {
-                var dbContext = new DBFairytaleEntities();
-
-                var currentCategory = dbContext.Categories.FirstOrDefault(
-                    innerCategory => innerCategory.Category_ID == category.Category_ID
-                );
-
-                if (currentCategory == null)
-                    return ResponseType.Error;
-
-                currentCategory.Name = category.Name;
-                dbContext.SaveChanges();
-                return ResponseType.Updated;
-            }
-            catch
-            {
-                Console.WriteLine(@"EditExistingCategory-Exception");
-                return ResponseType.Error;
-            }
-        }
-
-        public static ResponseType AddNewAuthor(Author author)
-        {
-            try
-            {
-                var dbContext = new DBFairytaleEntities();
-
-                var isAuthorExists = dbContext.Authors.Any(
-                    innerAuthor => innerAuthor.FirstName.Equals(author.FirstName) && innerAuthor.LastName.Equals(author.LastName)
-                );
-
-                if (isAuthorExists)
-                    return ResponseType.Exists;
-
-                author.Author_ID = dbContext.Authors.Max(innerAuthor => innerAuthor.Author_ID) + 1;
-                author.Tales = new List<Tale>();
-                
-                dbContext.Authors.Add(author);
-                dbContext.SaveChanges();
-
-                return ResponseType.Success;
-            }
-            catch
-            {
-                Console.WriteLine(@"AddNewAuthor-Exception");
-                return ResponseType.Error;
-            }
-        }
-
-        public static ResponseType EditExistingAuthor(Author author)
-        {
-            try
-            {
-                var dbContext = new DBFairytaleEntities();
-
-                var currentAuthor = dbContext.Authors.FirstOrDefault(
-                    innerCategory => innerCategory.Author_ID == author.Author_ID
-                );
-
-                if (currentAuthor == null)
-                    return ResponseType.Error;
-
-                currentAuthor.FirstName = author.FirstName;
-                currentAuthor.LastName = author.LastName;
-                dbContext.SaveChanges();
-
-                return ResponseType.Updated;
-            }
-            catch
-            {
-                Console.WriteLine(@"EditExistingAuthor-Exception");
-                return ResponseType.Error;
-            }
-        }
-
-        public static ResponseType AddNewTag(Tag tag)
-        {
-            try
-            {
-                var dbContext = new DBFairytaleEntities();
-
-                var isTagExists = dbContext.Tags.Any(
-                    innerTag => innerTag.Name.Equals(tag.Name)
-                );
-
-                if (isTagExists)
-                    return ResponseType.Exists;
-
-                tag.Tag_ID = dbContext.Tags.Max(innerTag => innerTag.Tag_ID) + 1;
-
-                dbContext.Tags.Add(tag);
-                dbContext.SaveChanges();
-
-                return ResponseType.Success;
-            }
-            catch
-            {
-                Console.WriteLine(@"AddNewTag-Exception");
-                return ResponseType.Error;
-            }
-        }
-
-        public static ResponseType EditExistingTag(Tag tag)
-        {
-            try
-            {
-                var dbContext = new DBFairytaleEntities();
-
-                var currentTag = dbContext.Tags.FirstOrDefault(
-                    innerTag => innerTag.Tag_ID == tag.Tag_ID
-                );
-
-                if (currentTag == null)
-                    return ResponseType.Error;
-
-                currentTag.Name = tag.Name;
-                dbContext.SaveChanges();
-
-                return ResponseType.Updated;
-            }
-            catch
-            {
-                Console.WriteLine(@"EditExistingTag-Exception");
-                return ResponseType.Error;
-            }
-        }
-
-        public static ResponseType EditExistingUser(AspNetUser user)
-        {
-            try
-            {
-                var dbContext = new DBFairytaleEntities();
-
-                var currentUser = dbContext.AspNetUsers.FirstOrDefault(
-                    innerUser => innerUser.Id == user.Id
-                );
-
-                if (currentUser == null)
-                    return ResponseType.Error;
-
-                currentUser.FirstName = user.FirstName;
-                currentUser.SecondName = user.SecondName;
-                currentUser.IsAdmin = user.IsAdmin;
-
-                dbContext.SaveChanges();
-
-                return ResponseType.Updated;
-            }
-            catch
-            {
-                Console.WriteLine(@"EditExistingUser-Exception");
-                return ResponseType.Error;
-            }
-        }
-
+        #region Add / Edit Tale
         public static ResponseType AddNewTale(FairyTale tale)
         {
             try
@@ -735,6 +551,10 @@ namespace FairyTales.Models
                 currentTale.Name = tale.Name;
                 currentTale.Cover = "img.jpg";
                 currentTale.Text = "text.txt";
+
+                if (currentTale.Tale_Tag != null)
+                    dbContext.Tale_Tag.RemoveRange(currentTale.Tale_Tag);
+
                 currentTale.Tale_Tag = new List<Tale_Tag>();
 
                 if (tale.AudioPath != null)
@@ -765,7 +585,7 @@ namespace FairyTales.Models
                         }
                     }
                 }
-                
+
                 dbContext.SaveChanges();
 
                 return ResponseType.Updated;
@@ -776,6 +596,256 @@ namespace FairyTales.Models
                 return ResponseType.Error;
             }
         }
+        #endregion // Add / Edit Tale
+
+        #region Add / Edit Category
+        public static ResponseType AddNewCategory(Category category)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isCategoryExists = dbContext.Categories.Any(
+                    innerCategory => innerCategory.Name.Equals(category.Name)
+                );
+
+                if (isCategoryExists)
+                    return ResponseType.Exists;
+
+                category.Category_ID = dbContext.Categories.Max(innerCategory => innerCategory.Category_ID) + 1;
+                category.Tales = new List<Tale>();
+
+                dbContext.Categories.Add(category);
+                dbContext.SaveChanges();
+
+                return ResponseType.Success;
+            }
+            catch
+            {
+                Console.WriteLine(@"AddNewCategory-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType EditExistingCategory(Category category)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentCategory = dbContext.Categories.FirstOrDefault(
+                    innerCategory => innerCategory.Category_ID == category.Category_ID
+                );
+
+                if (currentCategory == null)
+                    return ResponseType.Error;
+
+                currentCategory.Name = category.Name;
+                dbContext.SaveChanges();
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingCategory-Exception");
+                return ResponseType.Error;
+            }
+        }
+        #endregion // Add / Edit Category
+
+        #region Add / Edit Type
+        public static ResponseType AddNewType(Type type)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isTypeExists = dbContext.Types.Any(
+                    innerType => innerType.Name.Equals(type.Name)
+                );
+
+                if (isTypeExists)
+                    return ResponseType.Exists;
+
+                type.Type_ID = dbContext.Types.Max(innerType => innerType.Type_ID) + 1;
+
+                dbContext.Types.Add(type);
+                dbContext.SaveChanges();
+
+                return ResponseType.Success;
+            }
+            catch
+            {
+                Console.WriteLine(@"AddNewType-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType EditExistingType(Type type)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentType = dbContext.Types.FirstOrDefault(
+                    innerType => innerType.Type_ID == type.Type_ID
+                );
+
+                if (currentType == null)
+                    return ResponseType.Error;
+
+                currentType.Name = type.Name;
+                dbContext.SaveChanges();
+
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingType-Exception");
+                return ResponseType.Error;
+            }
+        }
+        #endregion // Add / Edit Type
+
+        #region Add / Edit Author
+        public static ResponseType AddNewAuthor(Author author)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isAuthorExists = dbContext.Authors.Any(
+                    innerAuthor => innerAuthor.FirstName.Equals(author.FirstName) && innerAuthor.LastName.Equals(author.LastName)
+                );
+
+                if (isAuthorExists)
+                    return ResponseType.Exists;
+
+                author.Author_ID = dbContext.Authors.Max(innerAuthor => innerAuthor.Author_ID) + 1;
+                author.Tales = new List<Tale>();
+
+                dbContext.Authors.Add(author);
+                dbContext.SaveChanges();
+
+                return ResponseType.Success;
+            }
+            catch
+            {
+                Console.WriteLine(@"AddNewAuthor-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType EditExistingAuthor(Author author)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentAuthor = dbContext.Authors.FirstOrDefault(
+                    innerCategory => innerCategory.Author_ID == author.Author_ID
+                );
+
+                if (currentAuthor == null)
+                    return ResponseType.Error;
+
+                currentAuthor.FirstName = author.FirstName;
+                currentAuthor.LastName = author.LastName;
+                dbContext.SaveChanges();
+
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingAuthor-Exception");
+                return ResponseType.Error;
+            }
+        }
+        #endregion // Add / Edit Author
+
+        #region Add / Edit Tag
+        public static ResponseType AddNewTag(Tag tag)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var isTagExists = dbContext.Tags.Any(
+                    innerTag => innerTag.Name.Equals(tag.Name)
+                );
+
+                if (isTagExists)
+                    return ResponseType.Exists;
+
+                tag.Tag_ID = dbContext.Tags.Max(innerTag => innerTag.Tag_ID) + 1;
+
+                dbContext.Tags.Add(tag);
+                dbContext.SaveChanges();
+
+                return ResponseType.Success;
+            }
+            catch
+            {
+                Console.WriteLine(@"AddNewTag-Exception");
+                return ResponseType.Error;
+            }
+        }
+
+        public static ResponseType EditExistingTag(Tag tag)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentTag = dbContext.Tags.FirstOrDefault(
+                    innerTag => innerTag.Tag_ID == tag.Tag_ID
+                );
+
+                if (currentTag == null)
+                    return ResponseType.Error;
+
+                currentTag.Name = tag.Name;
+                dbContext.SaveChanges();
+
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingTag-Exception");
+                return ResponseType.Error;
+            }
+        }
+        #endregion // Add Edit Tag
+
+        #region Edit User
+        public static ResponseType EditExistingUser(AspNetUser user)
+        {
+            try
+            {
+                var dbContext = new DBFairytaleEntities();
+
+                var currentUser = dbContext.AspNetUsers.FirstOrDefault(
+                    innerUser => innerUser.Id == user.Id
+                );
+
+                if (currentUser == null)
+                    return ResponseType.Error;
+
+                currentUser.FirstName = user.FirstName;
+                currentUser.SecondName = user.SecondName;
+                currentUser.IsAdmin = user.IsAdmin;
+
+                dbContext.SaveChanges();
+
+                return ResponseType.Updated;
+            }
+            catch
+            {
+                Console.WriteLine(@"EditExistingUser-Exception");
+                return ResponseType.Error;
+            }
+        }
+        #endregion // Edit User
+        
         #endregion // Admin Panel
     }
 }

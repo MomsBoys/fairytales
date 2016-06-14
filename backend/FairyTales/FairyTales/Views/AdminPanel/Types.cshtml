@@ -1,0 +1,50 @@
+﻿@model List<FairyTales.Entities.Type>
+
+@{
+    ViewBag.Title = "Типи";
+    Layout = "../Shared/_AdminPanelLayout.cshtml";
+}
+
+<div id="rev-content">
+    <div id="rev-body">
+        <div class="wrap">
+            @if (Model.Count == 0)
+            {
+                <h1>На даному сайтів не знайдено жодного типу.</h1>
+            }
+            else
+            {
+                <h1>Типи</h1>
+
+                <table class="posts" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="manage-column id">ID</th>
+                            <th scope="col" class="manage-column type-name">Назва типу</th>
+                            <th scope="col" class="manage-column edit">Змінити</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col" class="manage-column id">ID</th>
+                            <th scope="col" class="manage-column type-name">Назва типу</th>
+                            <th scope="col" class="manage-column edit">Змінити</th>
+                        </tr>
+                    </tfoot>
+                    <tbody id="list">
+                        @foreach (var type in Model)
+                        {
+                            <tr id="/types/@type.Type_ID">
+                                <td class="type-id">@type.Type_ID</td>
+                                <td class="type-name"><a href="/library/lastadded?Page=1&Type=@type.Type_ID" target="_blank">@type.Name</a></td>
+                                <td class="edit-type">
+                                    <a style="display: block;" href="/adminpanel/edittype/@type.Type_ID">Редагувати</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div><!-- .wrap -->
+    </div><!-- #rev-body -->
+</div><!-- #rev-content -->

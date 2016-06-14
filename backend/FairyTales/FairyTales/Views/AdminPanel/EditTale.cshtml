@@ -37,7 +37,7 @@
 
                             <div id="contentdiv" class="postarea">
                                 <div id="content-wrap">
-                                    @Html.TextArea("TextPath", @Model.Text, new { placeHolder = "Введіть будь ласка інформацію", @class = "editor-area", id = "content" })
+                                    @Html.TextArea("TextPath", @Model.TextPath, new { placeHolder = "Введіть будь ласка інформацію", @class = "editor-area", id = "content" })
                                 </div><!-- #content-wrap -->
                             </div><!-- #contentdiv -->
 
@@ -119,9 +119,14 @@
                                     <div class="inside">
                                         <div class="cat-id">
                                             @{
-                                                var typesList = new List<Type>(ViewBag.Types).Select(type => new SelectListItem { Text = type.Name }).ToList();
+                                                var typesList = new List<Type>(ViewBag.Types).Select(type => new SelectListItem {Text = type.Name}).ToList();
                                             }
                                             @Html.DropDownListFor(model => model.TypeInput, typesList)
+                                        </div>
+                                        <div class="desc">
+                                            <p>
+                                                Список типів можна побачити перейшовши по адресу: <a href="/adminpanel/types">Типи</a>.
+                                            </p>
                                         </div>
                                     </div><!-- .inside -->
                                 </div>
@@ -132,7 +137,7 @@
                                             @{
                                                 var tagsList = new List<Tag>(ViewBag.Tags).Select(tag => new SelectListItem { Text = tag.Name }).ToList();
                                             }
-                                            @Html.DropDownListFor(model => model.SelectedTags, tagsList, new { multiple = "true", style = "height: 300px" })
+                                            @Html.ListBoxFor(model => model.SelectedTags, tagsList, new {style = "height: 300px"})
                                         </div>
                                         <div class="desc">
                                             <p>

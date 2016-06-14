@@ -1,9 +1,28 @@
-﻿@model HandleErrorInfo
-
-@{
-    ViewBag.Title = "Error";
-}
-
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
+﻿﻿@using FairyTales.Controllers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Помилка - Mom's Stories</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="shortcut icon" href="~/images/favicon.png" />
+    <link rel="apple-touch-icon" href="~/images/apple-icon-touch.png" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="Wrapper">
+        <div id="Content" class="haserror">
+            <div class="container">
+                <section id="primary">
+                    <div class="content errorpage" style="margin: 150px auto;">
+                        <h2 class="error">404</h2>
+                        <div class="pagenot-text"><p>Нажаль, нічого не знайдено</p></div>
+                        <p class="error">Можливо Ви не вірно заповнили параметри пошуку, або ввели не доступний адрес. Будь ласка попробуйте ще раз або перейдіть на <a href="/">головну сторінку</a>.</p>
+                    </div><!-- .content -->
+                </section><!-- #primary -->
+            </div><!-- .container -->
+        </div><!-- #Content -->
+    </div>
+</body>
+</html>
