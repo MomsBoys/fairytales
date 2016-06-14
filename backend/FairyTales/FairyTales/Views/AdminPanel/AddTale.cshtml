@@ -131,7 +131,7 @@
                                         @{
                                             var tagsList = new List<Tag>(ViewBag.Tags).Select(tag=> new SelectListItem { Text = tag.Name }).ToList();
                                         }
-                                        @Html.DropDownListFor(model => model.SelectedTags, tagsList, new { multiple = "true", style = "height: 300px" })
+                                        @Html.ListBoxFor(model => model.SelectedTags, tagsList, new { style = "height: 300px" })
                                     </div>
                                     <div class="desc">
                                         <p>

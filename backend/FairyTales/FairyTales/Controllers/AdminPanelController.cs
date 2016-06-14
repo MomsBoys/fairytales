@@ -150,6 +150,7 @@ namespace FairyTales.Controllers
             fairyTale.AuthorInput = string.Format("{0} {1}", fairyTale.Author.LastName, fairyTale.Author.FirstName);
             fairyTale.CategoryInput = fairyTale.Category.Name;
             fairyTale.TypeInput = fairyTale.Type.Name;
+            fairyTale.TextPath = fairyTale.Text;
 
             var allTags = _adminPanel.Tags;
             var selectedTagsNames = new List<string>();

@@ -735,6 +735,10 @@ namespace FairyTales.Models
                 currentTale.Name = tale.Name;
                 currentTale.Cover = "img.jpg";
                 currentTale.Text = "text.txt";
+
+                if (currentTale.Tale_Tag != null)
+                    dbContext.Tale_Tag.RemoveRange(currentTale.Tale_Tag);
+
                 currentTale.Tale_Tag = new List<Tale_Tag>();
 
                 if (tale.AudioPath != null)
