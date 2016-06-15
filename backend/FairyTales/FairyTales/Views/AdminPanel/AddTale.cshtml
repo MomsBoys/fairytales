@@ -87,7 +87,7 @@
                                 <div class="inside">
                                     <div class="cat-id">
                                         @{
-                                            var authorsList = new List<Author>(ViewBag.Authors).Select(author => new SelectListItem {Text = string.Format("{0} {1}", author.LastName, author.FirstName)}).ToList();
+                                            var authorsList = new List<Author>(ViewBag.Authors).Select(author => new SelectListItem {Text = string.Format("{0} {1}", author.LastName, author.FirstName).Trim()}).ToList();
                                         }
                                         @Html.DropDownListFor(model => model.AuthorInput, authorsList)
                                     </div>

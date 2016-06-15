@@ -458,7 +458,7 @@ body {
 #seodiv input {
 	font-size: 16px;
 	line-height: 22px;
-	width: 440px;
+	width: 430px;
 	background: #FBFBFB;
 	padding: 4px 6px 4px 4px;
 	outline: 0;
@@ -472,7 +472,7 @@ body {
 }
 
 #article_link {
-	width: 486px;
+	width: 476px;
 }
 
 #contentdiv,
@@ -1252,6 +1252,12 @@ h1 {
 }
 
 .tale {
-    width: 60% !important;
+    width: 640px !important;
     min-width: 500px !important;
+}
+
+@media only screen and (max-width: 1270px) {
+    .tale {
+        width: 500px !important;
+    }
 }

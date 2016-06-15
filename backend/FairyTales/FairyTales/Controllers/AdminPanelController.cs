@@ -113,8 +113,24 @@ namespace FairyTales.Controllers
 
             // Add Audio
             if (tale.AudioPath != null)
-                if (!tale.AudioPath.IsEmpty())
-                    System.IO.File.Copy(tale.AudioPath, HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+            {
+                if (tale.AudioPath.Contains("://"))
+                {
+                    byte[] data;
+                    using (var client = new WebClient())
+                    {
+                        data = client.DownloadData(tale.AudioPath);
+                    }
+
+                    System.IO.File.WriteAllBytes(HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3",
+                        data);
+                }
+                else
+                {
+                    System.IO.File.Copy(tale.AudioPath,
+                        HostingEnvironment.ApplicationPhysicalPath + talePath + "/audio.mp3");
+                }
+            }
 
             var operationResult = DbManager.AddNewTale(tale);
             ViewBag.ResponseResult = operationResult;
@@ -149,7 +165,7 @@ namespace FairyTales.Controllers
             if (fairyTale == null)
                 return PartialView("Error");
 
-            fairyTale.AuthorInput = string.Format("{0} {1}", fairyTale.Author.LastName, fairyTale.Author.FirstName);
+            fairyTale.AuthorInput = string.Format("{0} {1}", fairyTale.Author.LastName, fairyTale.Author.FirstName).Trim();
             fairyTale.CategoryInput = fairyTale.Category.Name;
             fairyTale.TypeInput = fairyTale.Type.Name;
             fairyTale.TextPath = fairyTale.Text;
